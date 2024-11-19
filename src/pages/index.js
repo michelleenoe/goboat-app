@@ -2,12 +2,12 @@ import Image from "next/image";
 import localFont from "next/font/local";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "./fonts/Faro-BoldLucky.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "./fonts/Faro-RegularLucky.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -20,7 +20,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
-          src="/next.svg"
+          src="/favicon.svg"
           alt="Next.js logo"
           width={180}
           height={38}
