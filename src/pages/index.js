@@ -20,7 +20,7 @@ export default function Component() {
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+      setIsMobile(window.innerWidth < 768) 
     }
 
     checkIsMobile()
@@ -37,12 +37,12 @@ export default function Component() {
       {!isMobile ? (
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Please view on mobile</h1>
-          <p className="text-lg mb-4">This app is created for mobile devices.</p>
+          <p className="text-lg mb-4">This app is optimized for mobile devices.</p>
         </div>
       ) : (
         <div className="w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-4">Welcome to GoBoat</h1>
-          <p className="text-lg mb-4">This is the mobile version of GoBoat app.</p>
+          <h1 className="text-2xl font-bold mb-4">Welcome to Our App</h1>
+          <p className="text-lg mb-4">This is the mobile version of our app.</p>
         </div>
       )}
     </div>
