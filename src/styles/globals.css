@@ -5,7 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --mediumBlue: #3F6CA1;
+    --font-faro-bold: "Faro Bold", sans-serif;
+    --font-faro-regular: "Faro Regular", sans-serif;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
