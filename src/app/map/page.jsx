@@ -10,15 +10,14 @@ export default function MapPage() {
   const map = useRef(null);
   const [route, setRoute] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-  const userMarker = useRef(null); // Ref til brugerens markør
+  const userMarker = useRef(null); 
 
-  // Hent "én times ruten" fra Supabase
   useEffect(() => {
     const fetchRoute = async () => {
       const { data, error } = await supabase
         .from("routes")
         .select("*")
-        .eq("name", "1 hour"); // Filtrer på rutens navn
+        .eq("name", "1 hour"); 
 
       if (error) {
         console.error("Fejl ved hentning af rute:", error);
@@ -30,19 +29,18 @@ export default function MapPage() {
     fetchRoute();
   }, []);
 
-  // Initialiser Mapbox, og tilføj ruten
   useEffect(() => {
     if (map.current || !route) return;
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: route[0], // Startpunkt for ruten
+      center: route[0], 
       zoom: 13,
     });
 
     map.current.on("load", () => {
-      // Tilføj ruten til kortet
+      
       map.current.addSource("route", {
         type: "geojson",
         data: {
@@ -70,7 +68,7 @@ export default function MapPage() {
     });
   }, [route]);
 
-  // Følg brugerens position i realtid
+
   useEffect(() => {
     if (!navigator.geolocation) {
       alert("Geolocation er ikke understøttet af denne browser.");
@@ -112,7 +110,7 @@ export default function MapPage() {
     <div>
       <div
         ref={mapContainer}
-        className="h-[40vh] w-full sm:h-[30vh] md:h-[80vh] lg:h-[90vh]"
+        className="h-[50vh] w-full md:h-[80vh]"
       />
     </div>
   );
