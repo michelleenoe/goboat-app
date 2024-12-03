@@ -29,7 +29,7 @@ export default function Component() {
         ) : (
           <div className="w-full max-w-md">
             <h1 className="text-2xl font-light mb-4">Welcome to Our App</h1>
-            <p className="text-lg mb-4">
+            <p className="text-lg font-bold mb-4">
               This is the mobile version of our app.
             </p>
           </div>
