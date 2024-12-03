@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Faro";
+  font-weight: 300; /* Light */
+  src: url("/src/app/Faro-LightLucky.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Faro";
+  font-weight: 400; /* Regular */
+  src: url("/src/app/Faro-RegularLucky.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Faro";
+  font-weight: 600; /* SemiBold */
+  src: url("/src/app/Faro-SemiBoldLucky.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Faro";
+  font-weight: 700; /* Bold */
+  src: url("/src/app/Faro-BoldLucky.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Faro";
+  font-weight: 800; /* Display */
+  src: url("/src/app/Faro-DisplayLucky.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Faro";
+  font-variation-settings: "wght";
+  src: url("/src/app/Faro-Variable.woff") format("woff");
+}
