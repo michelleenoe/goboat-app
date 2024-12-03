@@ -1,8 +1,5 @@
 "use client";
 import { useState } from "react";
-import Screen1 from "../components/Onboarding/Screen1";
-import Screen2 from "../components/Onboarding/Screen2";
-import Screen3 from "../components/Onboarding/Screen3";
 import { useRouter } from "next/navigation";
 
 const OnboardingPage = () => {
@@ -13,24 +10,33 @@ const OnboardingPage = () => {
     if (currentScreen < 3) {
       setCurrentScreen(currentScreen + 1);
     } else {
-      router.push("/dashboard");
+      localStorage.setItem("onboardingComplete", "true");
+      router.push("/");
     }
   };
 
-  const renderScreen = () => {
-    switch (currentScreen) {
-      case 1:
-        return <Screen1 onNext={nextScreen} />;
-      case 2:
-        return <Screen2 onNext={nextScreen} />;
-      case 3:
-        return <Screen3 onNext={nextScreen} />;
-      default:
-        return null;
-    }
-  };
-
-  return <div>{renderScreen()}</div>;
+  return (
+    <div>
+      {currentScreen === 1 && (
+        <div>
+          <h1>Welcome to Screen 1</h1>
+          <button onClick={nextScreen}>Next</button>
+        </div>
+      )}
+      {currentScreen === 2 && (
+        <div>
+          <h1>Welcome to Screen 2</h1>
+          <button onClick={nextScreen}>Next</button>
+        </div>
+      )}
+      {currentScreen === 3 && (
+        <div>
+          <h1>Welcome to Screen 3</h1>
+          <button onClick={nextScreen}>Finish</button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default OnboardingPage;
