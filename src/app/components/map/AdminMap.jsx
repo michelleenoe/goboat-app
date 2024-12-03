@@ -15,8 +15,7 @@ export default function AdminMap() {
   
     useEffect(() => {
       if (map.current) return;
-  
-      // Initialiser Mapbox
+
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/streets-v11",
@@ -24,7 +23,7 @@ export default function AdminMap() {
         zoom: 13,
       });
   
-      // Tilføj Mapbox Draw
+
       const drawControl = new MapboxDraw({
         displayControlsDefault: false, 
         controls: {
@@ -36,9 +35,9 @@ export default function AdminMap() {
       map.current.addControl(drawControl);
       setDraw(drawControl);
   
-      // Håndter oprettelse af nye ruter
+   
       map.current.on("draw.create", (e) => {
-        const route = e.features[0].geometry.coordinates; // Hent rute-koordinater
+        const route = e.features[0].geometry.coordinates; 
         setDrawnRoute(route);
       });
     }, []);
@@ -55,7 +54,6 @@ export default function AdminMap() {
         return;
       }
   
-      // Gem ruten i Supabase
       const { data, error } = await supabase.from("routes").insert([
         { name: routeName, coordinates: drawnRoute },
       ]);
@@ -65,8 +63,8 @@ export default function AdminMap() {
         alert("Kunne ikke gemme ruten.");
       } else {
         alert(`Ruten "${routeName}" er blevet gemt!`);
-        setDrawnRoute(null); // Nulstil tegningen
-        draw.deleteAll(); // Fjern tegningen fra kortet
+        setDrawnRoute(null); 
+        draw.deleteAll(); 
       }
     };
   
