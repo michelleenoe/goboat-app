@@ -3,13 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #f5f6f7;
   --foreground: #171717;
-  --mediumBlue: #3F6CA1;
-    --font-faro-bold: "Faro Bold", sans-serif;
-    --font-faro-regular: "Faro Regular", sans-serif;
+  --mediumBlue: #3f6ca1;
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
