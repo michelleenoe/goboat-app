@@ -1,9 +1,10 @@
 Mangler: 
 
-Links i footer 
+- Links i footer 
+- færdiggøre onboarding ift. navigation frem og tilbage --> kun indlæses én gang 
+- (LocalStorage + copy er ikke i brug endnu på main)
 
-
-Storage + copy er ikke i brug endnu på main 
+Hvis du vil tilgå onboarding så er det localhost:3000/onboarding (man kan ikke gå frem eller tilbage på main)
 
 
 
