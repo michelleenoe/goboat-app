@@ -1,30 +1,4 @@
-type CopyType = {
-    welcome: string;
-    chooseLanguage: string;
-    language: {
-      danish: string;
-      english: string;
-    };
-    timer: {
-      title: string;
-      oneHour: string;
-      twoHours: string;
-      threeHours: string;
-    };
-    reminders: {
-      title: string;
-      point1: string;
-      point2: string;
-      point3: string;
-      finalMessage: string;
-    };
-    cards: {
-      title: string;
-    }
-
-  };
-  
-  export const copy: Record<string, CopyType> = {
+  export const copy = {
     en: {
       welcome: "Welcome!",
       chooseLanguage: "Choose Your Language",
