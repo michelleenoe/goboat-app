@@ -108,10 +108,8 @@ export default function MapPage() {
 
   return (
     <div>
-      <div
-        ref={mapContainer}
-        className="h-[50vh] w-full md:h-[80vh]"
-      />
+              <div ref={mapContainer} style={{ height: "80vh", width: "100%" }} />
+
     </div>
   );
 }
