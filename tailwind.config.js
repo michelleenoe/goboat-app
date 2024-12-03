@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Faro', ...fontFamily.sans],
+          sans: ['var(--font-faro-regular)', ...fontFamily.sans],     
       },
       colors: {
         white: "var(--color-white)",
@@ -17,6 +17,7 @@ module.exports = {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
         error: "var(--color-error)",
+        mediumBlue: "var(--color-medium-blue)", 
       },
     },
   },
