@@ -1,42 +1,25 @@
 "use client";
+
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Screen1 from "../components/onboarding/Screen1";
+import Screen2 from "../components/onboarding/Screen2";
+import Screen3 from "../components/onboarding/Screen3";
 
-const OnboardingPage = () => {
+export default function Onboarding() {
   const [currentScreen, setCurrentScreen] = useState(1);
-  const router = useRouter();
 
-  const nextScreen = () => {
-    if (currentScreen < 3) {
-      setCurrentScreen(currentScreen + 1);
-    } else {
-      localStorage.setItem("onboardingComplete", "true");
-      router.push("/");
-    }
-  };
+  const nextScreen = () => setCurrentScreen((prev) => Math.min(prev + 1, 3));
+  const previousScreen = () => setCurrentScreen((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div>
-      {currentScreen === 1 && (
-        <div>
-          <h1>Welcome to Screen 1</h1>
-          <button onClick={nextScreen}>Next</button>
-        </div>
-      )}
+    <>
+      {currentScreen === 1 && <Screen1 onNext={nextScreen} />}
       {currentScreen === 2 && (
-        <div>
-          <h1>Welcome to Screen 2</h1>
-          <button onClick={nextScreen}>Next</button>
-        </div>
+        <Screen2 onBack={previousScreen} onNext={nextScreen} />
       )}
       {currentScreen === 3 && (
-        <div>
-          <h1>Welcome to Screen 3</h1>
-          <button onClick={nextScreen}>Finish</button>
-        </div>
+        <Screen3 onBack={previousScreen} onComplete={() => alert("Completed!")} />
       )}
-    </div>
+    </>
   );
-};
-
-export default OnboardingPage;
+}
