@@ -1,16 +1,4 @@
 "use client";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/Faro-BoldLucky.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/Faro-RegularLucky.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 import { useState, useEffect } from "react";
 
