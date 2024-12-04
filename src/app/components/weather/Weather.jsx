@@ -10,26 +10,26 @@ const Weather = ({ city = "Copenhagen" }) => {
 
   const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch weather data");
-        }
-        const data = await response.json();
-        setWeatherData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+//   useEffect(() => {
+//     const fetchWeather = async () => {
+//       try {
+//         setLoading(true);
+//         const response = await fetch(
+//           `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+//         );
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch weather data");
+//         }
+//         const data = await response.json();
+//         setWeatherData(data);
+//       } catch (err) {
+//         setError(err.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchWeather();
+//     fetchWeather();
   }, [city, apiKey]);
 
   if (loading) {
