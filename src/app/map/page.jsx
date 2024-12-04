@@ -1,9 +1,9 @@
 "use client";
-import './styles.css'
+import './styles.css';
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabaseClient";
 import mapboxgl from "mapbox-gl";
-
+import RouteSelection from "../../app/components/map/RouteSelection"; 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function MapPage() {
@@ -107,7 +107,7 @@ export default function MapPage() {
       map.current.on("load", () => {
         console.log("Map loaded successfully");
 
-        // Tilføj geolokation, men skjul standardknappen fra Mapbox
+ 
         geolocateControlRef.current = new mapboxgl.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
@@ -118,7 +118,6 @@ export default function MapPage() {
 
         map.current.addControl(geolocateControlRef.current, "bottom-right");
 
-        // Skjul den oprindelige Mapbox geolokationsknap
         const mapboxGeolocateButton = document.querySelector('.mapboxgl-ctrl-geolocate');
         if (mapboxGeolocateButton) {
           mapboxGeolocateButton.style.display = 'none';
@@ -137,6 +136,7 @@ export default function MapPage() {
     }
   };
 
+
   const getRouteName = useCallback(
     (routeId) => {
       const route = availableRoutes.find((route) => route.id === routeId);
@@ -144,6 +144,7 @@ export default function MapPage() {
     },
     [availableRoutes]
   );
+
 
   const selectedRouteName = useMemo(() => getRouteName(selectedRouteId), [selectedRouteId, getRouteName]);
 
@@ -162,7 +163,7 @@ export default function MapPage() {
     <div className="relative">
       <div ref={mapContainer} style={{ height: "80vh", width: "100%" }} />
       <div className="absolute top-2 right-4 z-30 flex flex-col items-center space-y-2">
-        {/* Icon button to toggle route selection */}
+  
         <button
           onClick={() => setShowRouteSelect(!showRouteSelect)}
           className="bg-white p-3 rounded-full shadow-md flex items-center space-x-2"
@@ -177,7 +178,6 @@ export default function MapPage() {
           {selectedRouteId && <span>{selectedRouteName}</span>}
         </button>
 
-        {/* Custom Geolocation Button */}
         <button
           onClick={handleGeolocateClick}
           className="bg-white p-3 rounded-full shadow-md"
@@ -190,7 +190,7 @@ export default function MapPage() {
           />
         </button>
 
-        {/* Button to toggle Satellite View */}
+  
         <button
           onClick={toggleMapStyle}
           className="bg-white p-3 rounded-full shadow-md"
@@ -200,45 +200,13 @@ export default function MapPage() {
           </svg>
         </button>
 
-        {/* Route selection list */}
         {showRouteSelect && (
-          <div className="absolute right-0 mt-0.5 w-64 bg-white rounded-lg shadow-lg p-4 z-40">
-            <h2 className="text-lg font-regular mb-2">Routes</h2>
-            {availableRoutes.length === 0 && (
-              <div className="p-2">No routes available</div>
-            )}
-            {availableRoutes.map((route) => (
-              <div
-                key={route.id}
-                onClick={() => handleRouteSelect(route.id)}
-                className={`p-2 rounded-lg flex justify-between items-center ${
-                  selectedRouteId === route.id ? "bg-grey2 font-regular" : ""
-                }`}
-              >
-                <div>{getRouteName(route.id)}</div>
-                <span
-                  className={`rounded-full w-6 h-6 flex items-center justify-center ${
-                    selectedRouteId === route.id ? "bg-goboatYellow" : "bg-grey1"
-                  }`}
-                >
-                  {selectedRouteId === route.id && (
-                    <span
-                      style={{
-                        backgroundImage:
-                          "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><path d='M20 6 9 17l-5-5'/></svg>\")",
-                        backgroundSize: "16px",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center center",
-                        width: "16px",
-                        height: "16px",
-                        display: "inline-block"
-                      }}
-                    />
-                  )}
-                </span>
-              </div>
-            ))}
-          </div>
+          <RouteSelection
+            availableRoutes={availableRoutes}
+            selectedRouteId={selectedRouteId}
+            handleRouteSelect={handleRouteSelect}
+            getRouteName={getRouteName}
+          />
         )}
       </div>
     </div>
