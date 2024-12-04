@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabaseClient";
 import mapboxgl from "mapbox-gl";
 import RouteSelection from "../../app/components/map/RouteSelection"; 
+import GeoLocate from "../../app/components/map/GeoLocate";
+
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function MapPage() {
@@ -31,6 +33,7 @@ export default function MapPage() {
 
     fetchAvailableRoutes();
   }, []);
+
 
   useEffect(() => {
     const fetchRoute = async () => {
@@ -107,7 +110,6 @@ export default function MapPage() {
       map.current.on("load", () => {
         console.log("Map loaded successfully");
 
- 
         geolocateControlRef.current = new mapboxgl.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
@@ -118,9 +120,9 @@ export default function MapPage() {
 
         map.current.addControl(geolocateControlRef.current, "bottom-right");
 
-        const mapboxGeolocateButton = document.querySelector('.mapboxgl-ctrl-geolocate');
-        if (mapboxGeolocateButton) {
-          mapboxGeolocateButton.style.display = 'none';
+        const mapboxGeoLocate = document.querySelector('.mapboxgl-ctrl-geolocate');
+        if (mapboxGeoLocate) {
+          mapboxGeoLocate.style.display = 'none';
         }
       });
     }
@@ -135,8 +137,6 @@ export default function MapPage() {
       setShowSatellite(!showSatellite);
     }
   };
-
-
   const getRouteName = useCallback(
     (routeId) => {
       const route = availableRoutes.find((route) => route.id === routeId);
@@ -145,14 +145,12 @@ export default function MapPage() {
     [availableRoutes]
   );
 
-
   const selectedRouteName = useMemo(() => getRouteName(selectedRouteId), [selectedRouteId, getRouteName]);
 
   const handleRouteSelect = (routeId) => {
     setSelectedRouteId(routeId);
     setShowRouteSelect(false);
   };
-
   const handleGeolocateClick = () => {
     if (geolocateControlRef.current) {
       geolocateControlRef.current.trigger();
@@ -163,7 +161,6 @@ export default function MapPage() {
     <div className="relative">
       <div ref={mapContainer} style={{ height: "80vh", width: "100%" }} />
       <div className="absolute top-2 right-4 z-30 flex flex-col items-center space-y-2">
-  
         <button
           onClick={() => setShowRouteSelect(!showRouteSelect)}
           className="bg-white p-3 rounded-full shadow-md flex items-center space-x-2"
@@ -178,19 +175,7 @@ export default function MapPage() {
           {selectedRouteId && <span>{selectedRouteName}</span>}
         </button>
 
-        <button
-          onClick={handleGeolocateClick}
-          className="bg-white p-3 rounded-full shadow-md"
-        >
-          <img
-            src="/Icons/geo-location.svg"
-            alt="Geolocation"
-            width="18"
-            height="18"
-          />
-        </button>
-
-  
+        <GeoLocate handleGeolocateClick={handleGeolocateClick} />
         <button
           onClick={toggleMapStyle}
           className="bg-white p-3 rounded-full shadow-md"
@@ -199,7 +184,6 @@ export default function MapPage() {
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 7h-2V6h-2v3H9v2h4v3h2v-3h2V9z"></path>
           </svg>
         </button>
-
         {showRouteSelect && (
           <RouteSelection
             availableRoutes={availableRoutes}
