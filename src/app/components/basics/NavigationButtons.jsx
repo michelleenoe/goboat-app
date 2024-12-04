@@ -12,8 +12,8 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
           <Image
             src="/Icons/chevron-left.svg"
             alt="Previous"
-            width={40}
-            height={40}
+            width={30}
+            height={30}
             priority // For hurtigere indlæsning
           />
         </button>
@@ -24,8 +24,8 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
           <Image
             src="/Icons/chevron-right.svg"
             alt="Next"
-            width={40}
-            height={40}
+            width={30}
+            height={30}
             priority // For hurtigere indlæsning
           />
         </button>
