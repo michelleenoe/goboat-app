@@ -5,8 +5,10 @@ import { supabase } from "../lib/supabaseClient";
 import mapboxgl from "mapbox-gl";
 import RouteSelection from "../../app/components/map/RouteSelection"; 
 import GeoLocate from "../../app/components/map/GeoLocate";
+import ToggleMap from "../../app/components/map/ToggleMap";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+
 
 export default function MapPage() {
   const mapContainer = useRef(null);
@@ -17,6 +19,7 @@ export default function MapPage() {
   const [showSatellite, setShowSatellite] = useState(false);
   const [availableRoutes, setAvailableRoutes] = useState([]);
   const [selectedRouteId, setSelectedRouteId] = useState("");
+  const [isSatellite, setIsSatellite] = useState(false);
 
   useEffect(() => {
     const fetchAvailableRoutes = async () => {
@@ -33,7 +36,6 @@ export default function MapPage() {
 
     fetchAvailableRoutes();
   }, []);
-
 
   useEffect(() => {
     const fetchRoute = async () => {
@@ -128,15 +130,17 @@ export default function MapPage() {
     }
   }, []);
 
-  const toggleMapStyle = () => {
+  const toggleMapStyle = useCallback(() => {
     if (map.current) {
       const newStyle = showSatellite
         ? "mapbox://styles/mapbox/streets-v11"
         : "mapbox://styles/mapbox/satellite-streets-v11";
       map.current.setStyle(newStyle);
       setShowSatellite(!showSatellite);
+      setIsSatellite(!isSatellite);
     }
-  };
+  }, [showSatellite, isSatellite]);
+
   const getRouteName = useCallback(
     (routeId) => {
       const route = availableRoutes.find((route) => route.id === routeId);
@@ -147,15 +151,16 @@ export default function MapPage() {
 
   const selectedRouteName = useMemo(() => getRouteName(selectedRouteId), [selectedRouteId, getRouteName]);
 
-  const handleRouteSelect = (routeId) => {
+  const handleRouteSelect = useCallback((routeId) => {
     setSelectedRouteId(routeId);
     setShowRouteSelect(false);
-  };
-  const handleGeolocateClick = () => {
+  }, []);
+
+  const handleGeolocateClick = useCallback(() => {
     if (geolocateControlRef.current) {
       geolocateControlRef.current.trigger();
     }
-  };
+  }, []);
 
   return (
     <div className="relative">
@@ -175,15 +180,11 @@ export default function MapPage() {
           {selectedRouteId && <span>{selectedRouteName}</span>}
         </button>
 
+  
         <GeoLocate handleGeolocateClick={handleGeolocateClick} />
-        <button
-          onClick={toggleMapStyle}
-          className="bg-white p-3 rounded-full shadow-md"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 7h-2V6h-2v3H9v2h4v3h2v-3h2V9z"></path>
-          </svg>
-        </button>
+   
+        <ToggleMap toggleMapStyle={toggleMapStyle} isSatellite={isSatellite} />
+
         {showRouteSelect && (
           <RouteSelection
             availableRoutes={availableRoutes}
