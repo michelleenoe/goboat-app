@@ -4,8 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabaseClient";
 import mapboxgl from "mapbox-gl";
 
-
-mapboxgl.accessToken = "pk.eyJ1IjoibWljaGVsbGVlbm9lIiwiYSI6ImNtNDhrMXVkdzAwaWYyanIxNmRkcG51bHIifQ.1f5E8vgLBAwQTpMKq88znw";
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function MapPage() {
   const mapContainer = useRef(null);
