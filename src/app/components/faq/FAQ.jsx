@@ -11,13 +11,13 @@ const FAQ = ({ mainTitle, questions }) => {
   };
 
   return (
-    <div className="faq-container px-4 py-8 max-w-4xl mx-auto">
+    <div className=" px-4 py-8 max-w-4xl mx-auto">
       <h2 className="text-xl font-bold mb-6">{mainTitle}</h2>
       <div className="space-y-4">
         {questions.map((faq, index) => (
           <div
             key={index}
-            className={`faq-item border rounded-3xl shadow-md ${
+            className={`rounded-3xl shadow-md ${
               activeIndex === index ? "bg-grey2" : "bg-grey1"
             }`}
           >
