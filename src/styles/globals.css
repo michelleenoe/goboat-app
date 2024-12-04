@@ -9,14 +9,18 @@
   --mediumBlue: #3f6ca1;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
+}
+
+main {
+  margin: 1rem;
 }
