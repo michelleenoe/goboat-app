@@ -106,7 +106,7 @@ const Weather = ({ city = "Copenhagen" }) => {
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 relative">
             <Image
-              src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+              src="/illustrations/nr2.svg"
               alt={weather[0].description}
               layout="fill"
               objectFit="contain"
