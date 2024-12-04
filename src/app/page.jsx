@@ -1,17 +1,19 @@
 import { getLanguage } from "../app/lib/storage";
-import { copy } from "../content/copy";
-import TipsCarousel from "../app/components/tips/TipsCarousel";
+import TipsSlider from "./components/tips/TipsSlider";
+import { tipsData, pagetitles } from "../content/tipsData";
 
 export default function DashboardPage() {
   const lang = getLanguage();
-  const text = copy[lang];
+
+  const pageTitle = pagetitles[lang] || pagetitles.en; // Fald tilbage til engelsk
+  const tips = tipsData[lang] || tipsData.en; // Fald tilbage til engelsk
 
   return (
     <div>
+      <h2 className=" text-lg font-semibold">{pageTitle}</h2>
       <div>
-        <TipsCarousel />
+        <TipsSlider tips={tips} />
       </div>
-      <h1 className="text-3xl font-bold">{text.reminders.finalMessage}</h1>
     </div>
   );
 }

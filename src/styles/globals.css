@@ -19,3 +19,7 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+main {
+  margin: 1rem;
+}
