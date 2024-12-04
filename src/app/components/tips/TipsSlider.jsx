@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import TipsCard from "./TipsCard";
 import NavigationButtons from "../basics/NavigationButtons";
 
-const TipsSlider = ({ tips = [] }) => {
+const TipsSlider = ({ mainTitle, tips = [] }) => {
   const sliderRef = useRef(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -32,13 +32,12 @@ const TipsSlider = ({ tips = [] }) => {
     const newIndex = currentIndex + 1;
 
     if (newIndex >= duplicatedTips.length - Math.floor(tips.length)) {
-      // Sømløst skift fra sidste kort til første
       setIsAnimating(true);
       scrollToIndex(newIndex);
       setTimeout(() => {
-        scrollToIndex(centerIndex, true); // Instant scroll til første kopi
+        scrollToIndex(centerIndex, true);
         setIsAnimating(false);
-      }, 300); // Transitionens varighed
+      }, 300);
     } else {
       scrollToIndex(newIndex);
     }
@@ -53,16 +52,11 @@ const TipsSlider = ({ tips = [] }) => {
     const newIndex = currentIndex - 1;
 
     if (newIndex < Math.floor(tips.length)) {
-      // Sømløst skift fra første kort til sidste
       setIsAnimating(true);
-      scrollToIndex(newIndex);
+      scrollToIndex(duplicatedTips.length - Math.floor(tips.length) - 1, true);
       setTimeout(() => {
-        scrollToIndex(
-          duplicatedTips.length - Math.floor(tips.length) - 1,
-          true
-        ); // Instant scroll til sidste kopi
         setIsAnimating(false);
-      }, 300); // Transitionens varighed
+      }, 300);
     } else {
       scrollToIndex(newIndex);
     }
@@ -73,7 +67,8 @@ const TipsSlider = ({ tips = [] }) => {
   }, []);
 
   return (
-    <div className="relative ">
+    <div className="tips-slider-container  max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold mb-6">{mainTitle}</h2>
       <div
         ref={sliderRef}
         className="flex gap-4 overflow-x-auto no-scrollbar p-4 -mx-4 sm:-mx-6"
