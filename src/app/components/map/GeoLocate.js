@@ -10,9 +10,9 @@ export default function GeoLocate({ handleGeolocateClick }) {
     >
       <img
         src="/Icons/geo-location.svg"
-        alt="Geolocation"
-        width="18"
-        height="18"
+        alt="Geolocation icon"
+        width="30"
+        height="30"
       />
     </button>
   );
