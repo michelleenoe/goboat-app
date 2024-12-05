@@ -24,8 +24,8 @@
 
 @font-face {
   font-family: "Faro";
-  font-weight: 800; /* Display */
-  src: url("/src/app/Faro-DisplayLucky.woff") format("woff");
+  src: url("/src/app/FaroDisplayVariable.woff") format("woff");
+  font-weight: 800; /* Bold */
 }
 
 @font-face {
