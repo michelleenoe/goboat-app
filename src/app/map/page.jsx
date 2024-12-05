@@ -1,11 +1,14 @@
 "use client";
-import './styles.css'
+import './styles.css';
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabaseClient";
 import mapboxgl from "mapbox-gl";
+import RouteSelection from "../../app/components/map/RouteSelection"; 
+import GeoLocate from "../../app/components/map/GeoLocate";
+import ToggleMap from "../../app/components/map/ToggleMap";
 
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
-mapboxgl.accessToken = "pk.eyJ1IjoibWljaGVsbGVlbm9lIiwiYSI6ImNtNDhrMXVkdzAwaWYyanIxNmRkcG51bHIifQ.1f5E8vgLBAwQTpMKq88znw";
 
 export default function MapPage() {
   const mapContainer = useRef(null);
@@ -16,6 +19,7 @@ export default function MapPage() {
   const [showSatellite, setShowSatellite] = useState(false);
   const [availableRoutes, setAvailableRoutes] = useState([]);
   const [selectedRouteId, setSelectedRouteId] = useState("");
+  const [isSatellite, setIsSatellite] = useState(false);
 
   useEffect(() => {
     const fetchAvailableRoutes = async () => {
@@ -108,7 +112,6 @@ export default function MapPage() {
       map.current.on("load", () => {
         console.log("Map loaded successfully");
 
-        // Tilføj geolokation, men skjul standardknappen fra Mapbox
         geolocateControlRef.current = new mapboxgl.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
@@ -119,24 +122,24 @@ export default function MapPage() {
 
         map.current.addControl(geolocateControlRef.current, "bottom-right");
 
-        // Skjul den oprindelige Mapbox geolokationsknap
-        const mapboxGeolocateButton = document.querySelector('.mapboxgl-ctrl-geolocate');
-        if (mapboxGeolocateButton) {
-          mapboxGeolocateButton.style.display = 'none';
+        const mapboxGeoLocate = document.querySelector('.mapboxgl-ctrl-geolocate');
+        if (mapboxGeoLocate) {
+          mapboxGeoLocate.style.display = 'none';
         }
       });
     }
   }, []);
 
-  const toggleMapStyle = () => {
+  const toggleMapStyle = useCallback(() => {
     if (map.current) {
       const newStyle = showSatellite
         ? "mapbox://styles/mapbox/streets-v11"
         : "mapbox://styles/mapbox/satellite-streets-v11";
       map.current.setStyle(newStyle);
       setShowSatellite(!showSatellite);
+      setIsSatellite(!isSatellite);
     }
-  };
+  }, [showSatellite, isSatellite]);
 
   const getRouteName = useCallback(
     (routeId) => {
@@ -148,22 +151,21 @@ export default function MapPage() {
 
   const selectedRouteName = useMemo(() => getRouteName(selectedRouteId), [selectedRouteId, getRouteName]);
 
-  const handleRouteSelect = (routeId) => {
+  const handleRouteSelect = useCallback((routeId) => {
     setSelectedRouteId(routeId);
     setShowRouteSelect(false);
-  };
+  }, []);
 
-  const handleGeolocateClick = () => {
+  const handleGeolocateClick = useCallback(() => {
     if (geolocateControlRef.current) {
       geolocateControlRef.current.trigger();
     }
-  };
+  }, []);
 
   return (
     <div className="relative">
       <div ref={mapContainer} style={{ height: "80vh", width: "100%" }} />
       <div className="absolute top-2 right-4 z-30 flex flex-col items-center space-y-2">
-        {/* Icon button to toggle route selection */}
         <button
           onClick={() => setShowRouteSelect(!showRouteSelect)}
           className="bg-white p-3 rounded-full shadow-md flex items-center space-x-2"
@@ -178,68 +180,18 @@ export default function MapPage() {
           {selectedRouteId && <span>{selectedRouteName}</span>}
         </button>
 
-        {/* Custom Geolocation Button */}
-        <button
-          onClick={handleGeolocateClick}
-          className="bg-white p-3 rounded-full shadow-md"
-        >
-          <img
-            src="/Icons/geo-location.svg"
-            alt="Geolocation"
-            width="18"
-            height="18"
-          />
-        </button>
+  
+        <GeoLocate handleGeolocateClick={handleGeolocateClick} />
+   
+        <ToggleMap toggleMapStyle={toggleMapStyle} isSatellite={isSatellite} />
 
-        {/* Button to toggle Satellite View */}
-        <button
-          onClick={toggleMapStyle}
-          className="bg-white p-3 rounded-full shadow-md"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 7h-2V6h-2v3H9v2h4v3h2v-3h2V9z"></path>
-          </svg>
-        </button>
-
-        {/* Route selection list */}
         {showRouteSelect && (
-          <div className="absolute right-0 mt-0.5 w-64 bg-white rounded-lg shadow-lg p-4 z-40">
-            <h2 className="text-lg font-regular mb-2">Routes</h2>
-            {availableRoutes.length === 0 && (
-              <div className="p-2">No routes available</div>
-            )}
-            {availableRoutes.map((route) => (
-              <div
-                key={route.id}
-                onClick={() => handleRouteSelect(route.id)}
-                className={`p-2 rounded-lg flex justify-between items-center ${
-                  selectedRouteId === route.id ? "bg-grey2 font-regular" : ""
-                }`}
-              >
-                <div>{getRouteName(route.id)}</div>
-                <span
-                  className={`rounded-full w-6 h-6 flex items-center justify-center ${
-                    selectedRouteId === route.id ? "bg-goboatYellow" : "bg-grey1"
-                  }`}
-                >
-                  {selectedRouteId === route.id && (
-                    <span
-                      style={{
-                        backgroundImage:
-                          "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><path d='M20 6 9 17l-5-5'/></svg>\")",
-                        backgroundSize: "16px",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center center",
-                        width: "16px",
-                        height: "16px",
-                        display: "inline-block"
-                      }}
-                    />
-                  )}
-                </span>
-              </div>
-            ))}
-          </div>
+          <RouteSelection
+            availableRoutes={availableRoutes}
+            selectedRouteId={selectedRouteId}
+            handleRouteSelect={handleRouteSelect}
+            getRouteName={getRouteName}
+          />
         )}
       </div>
     </div>

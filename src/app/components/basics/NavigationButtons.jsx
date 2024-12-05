@@ -14,7 +14,6 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
             alt="Previous"
             width={30}
             height={30}
-            priority // For hurtigere indlæsning
           />
         </button>
         <button
@@ -26,7 +25,6 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
             alt="Next"
             width={30}
             height={30}
-            priority // For hurtigere indlæsning
           />
         </button>
       </div>

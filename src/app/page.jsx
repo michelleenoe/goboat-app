@@ -1,3 +1,4 @@
+"use client";
 import { getLanguage } from "../app/lib/storage";
 import TipsSlider from "./components/tips/TipsSlider";
 import tipsData from "../content/tipsData";
