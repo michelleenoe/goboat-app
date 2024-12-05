@@ -13,8 +13,8 @@ export default function ScreenOne({ onNext }) {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-800 text-white p-4">
-      <main className="flex-grow flex flex-col items-center justify-center bg-white text-black rounded-lg p-6">
+    <div className="flex flex-col">
+      <main className="flex-grow flex flex-col items-center justify-center rounded-lg">
         <h2 className="text-xl font-bold mb-4">{copy[language].welcome}</h2>
         <p className="text-center mb-8">
           {copy[language].chooseLanguage}
