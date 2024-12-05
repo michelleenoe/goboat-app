@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import ScreenOne from "@/app/components/onboarding/ScreenOne";
-import ScreenTwo from "../components/onboarding/ScreenTwo";
-import ScreenThree from "../components/onboarding/ScreenThree";
+import ScreenTwo from "@/app/components/onboarding/ScreenTwo";
+import ScreenThree from "@/app/components/onboarding/ScreenThree";
 
 export default function Onboarding() {
   const [currentScreen, setCurrentScreen] = useState(1);
