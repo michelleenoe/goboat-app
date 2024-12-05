@@ -1,3 +1,5 @@
+"use client";
+
 export default function Screen2({ onBack, onNext }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-800 text-white p-4">
