@@ -51,12 +51,19 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
     const currentIndex = Math.round(scrollLeft / cardWidth);
     const newIndex = currentIndex - 1;
 
+    // Hvis du går forbi starten
     if (newIndex < Math.floor(tips.length)) {
       setIsAnimating(true);
-      scrollToIndex(duplicatedTips.length - Math.floor(tips.length) - 1, true);
+      // Animer til starten af den første kopi
+      scrollToIndex(newIndex);
       setTimeout(() => {
+        // Spring til slutningen af den sidste kopi uden animation
+        scrollToIndex(
+          duplicatedTips.length - Math.floor(tips.length) - 1,
+          true
+        );
         setIsAnimating(false);
-      }, 300);
+      }, 300); // Matcher scroll-animationens varighed
     } else {
       scrollToIndex(newIndex);
     }
@@ -67,11 +74,11 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
   }, []);
 
   return (
-    <div className="tips-slider-container px-4 py-8 max-w-4xl mx-auto">
-      <h2 className="text-xl font-bold mb-6">{mainTitle}</h2>
+    <div className="tips-slider-container px-4 max-w-4xl mx-auto ">
+      <h2 className="text-xl font-bold mb-4">{mainTitle}</h2>
       <div
         ref={sliderRef}
-        className="relative flex gap-4 overflow-x-auto no-scrollbar p-4 -mx-8 "
+        className="relative flex gap-4 overflow-x-auto no-scrollbar px-4 pb-6 -mx-8 focus:outline-none focus:ring-2 focus:ring-focusOrange"
         style={{
           scrollSnapType: "x mandatory",
         }}

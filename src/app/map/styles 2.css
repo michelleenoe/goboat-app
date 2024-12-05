@@ -1,0 +1,30 @@
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    display:none;
+}
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate:disabled .mapboxgl-ctrl-icon {
+   display:none;
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate.mapboxgl-ctrl-geolocate-active .mapboxgl-ctrl-icon {
+    display:none;
+}
+.mapboxgl-ctrl-geolocate {
+    display:none;
+
+}
+.mapboxgl-ctrl .mapboxgl-ctrl-attrib .mapboxgl-compact
+{
+    display:none;
+}
+.mapboxgl-ctrl-bottom-right
+{
+    display:none;
+}
+
+.mapboxgl-ctrl-bottom-left
+{
+    display:none;
+}

@@ -1,5 +1,6 @@
 const weatherData = {
   en: {
+    mainTitle: "Weather rapport",
     weatherIn: "Weather in",
     humidity: "Humidity",
     wind: "Wind",
@@ -9,6 +10,7 @@ const weatherData = {
     incompleteData: "Weather data is incomplete",
   },
   da: {
+    mainTitle: "Vejr rapport",
     weatherIn: "Vejret i",
     humidity: "Luftfugtighed",
     wind: "Vind",

@@ -204,10 +204,11 @@ const Weather = ({ city = "Copenhagen", lang = "en" }) => {
 
   return (
     <div className="px-4 max-w-4xl mx-auto">
-      <div className="px-4 py-8 rounded-xl shadow-md bg-grey1">
-        <h2 className="text-md font-semibold mb-4">
+      <h2 className="text-xl font-bold mb-4">{t.mainTitle}</h2>
+      <div className="px-4 py-8 rounded-xl shadow-md bg-grey1 border">
+        <p className="text-md font-semibold mb-4">
           {t.weatherIn} {city}
-        </h2>
+        </p>
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 relative">
             <Image

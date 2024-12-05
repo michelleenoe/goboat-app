@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const TipsCard = ({ tip }) => {
   return (
-    <div className="p-4 border bg-grey1 rounded-3xl shadow-md ">
+    <div className="p-4 border bg-grey1 rounded-3xl shadow-md">
       <div className="flex justify-start items-center space-x-4 mb-2">
         <Image
           src={tip.numbericon}

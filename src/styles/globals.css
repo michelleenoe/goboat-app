@@ -22,5 +22,15 @@ body {
 }
 
 main {
-  margin: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #ed6d38;
+  outline-offset: 2px;
 }

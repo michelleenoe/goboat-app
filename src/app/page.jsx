@@ -15,14 +15,14 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <div>
+      <div className="mb-8">
         <Weather city="Copenhagen" apiKey={apiKey} />
       </div>
-      <div>
+      <div className="mb-8">
         <TipsSlider mainTitle={tips.mainTitle} tips={tips.tips} />
       </div>
 
-      <div>
+      <div className="mb-8">
         <FAQ mainTitle={faq.mainTitle} questions={faq.questions} />
       </div>
     </div>

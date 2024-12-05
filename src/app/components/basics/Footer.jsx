@@ -23,6 +23,7 @@ export default function Footer() {
               onClick={openSettings}
               icon="/icons/settings.svg"
               altText="Settings"
+              isActive={isSettingsOpen}
             />
           </div>
         </div>

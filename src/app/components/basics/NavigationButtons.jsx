@@ -4,7 +4,7 @@ import Image from "next/image";
 const NavigationButtons = ({ handlePrev, handleNext }) => {
   return (
     <>
-      <div className="flex justify-end gap-2 mt-4">
+      <div className="flex justify-end gap-2 ">
         <button
           onClick={handlePrev}
           className="flex items-center justify-center w-11 h-11 bg-goboatYellow text-darkBlue rounded-full transition"
