@@ -1,6 +1,6 @@
 "use client";
 
-export default function Screen2({ onBack, onNext }) {
+export default function ScreenTwo({ onBack, onNext }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-800 text-white p-4">
       <main className="flex-grow flex flex-col items-center justify-center bg-white text-black rounded-lg p-6">

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-export default function Screen3({ onBack }) {
+export default function ScreenThree({ onBack }) {
   const router = useRouter();
 
   return (
