@@ -5,7 +5,7 @@ import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { supabase } from "../../lib/supabaseClient";
 
-mapboxgl.accessToken = "pk.eyJ1IjoibWljaGVsbGVlbm9lIiwiYSI6ImNtNDhrMXVkdzAwaWYyanIxNmRkcG51bHIifQ.1f5E8vgLBAwQTpMKq88znw";
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function AdminMap() {
     const mapContainer = useRef(null);
@@ -70,7 +70,7 @@ export default function AdminMap() {
   
     return (
       <div>
-        <div ref={mapContainer} style={{ height: "30vh", width: "50%" }} />
+        <div ref={mapContainer} style={{ height: "90vh", width: "85%" }} />
         <button
           onClick={saveRoute}
           className="bg-blue-500 text-white px-4 py-2 rounded mt-2"

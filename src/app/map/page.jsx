@@ -104,7 +104,7 @@ export default function MapPage() {
     if (typeof window !== "undefined" && !map.current) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
+        style: "mapbox://styles/michelleenoe/cm4bbbqiu01go01r2gsuugz0o",
         center: [12.57856, 55.66952],
         zoom: 13,
       });
