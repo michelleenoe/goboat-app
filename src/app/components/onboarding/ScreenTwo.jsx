@@ -22,7 +22,6 @@ export default function ScreenTwo({ onBack, onNext }) {
             {copy[language].timer.threeHours}
           </button>
         </div>
-
         <div className="flex justify-between mt-8 w-full">
           <button onClick={onBack} className="w-10 h-10 bg-gray-500 rounded-full">
           </button>
