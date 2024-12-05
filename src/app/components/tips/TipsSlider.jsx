@@ -67,11 +67,11 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
   }, []);
 
   return (
-    <div className="tips-slider-container  max-w-4xl mx-auto">
+    <div className="tips-slider-container px-4 py-8 max-w-4xl mx-auto">
       <h2 className="text-xl font-bold mb-6">{mainTitle}</h2>
       <div
         ref={sliderRef}
-        className="flex gap-4 overflow-x-auto no-scrollbar p-4 -mx-4 sm:-mx-6"
+        className="relative flex gap-4 overflow-x-auto no-scrollbar p-4 -mx-8 "
         style={{
           scrollSnapType: "x mandatory",
         }}
