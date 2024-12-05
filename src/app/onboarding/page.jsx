@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Screen from "../components/onboarding/Screen1";
+import Screen from "@/app/components/onboarding/Screen";
 import Screen2 from "../components/onboarding/Screen2";
 import Screen3 from "../components/onboarding/Screen3";
 
