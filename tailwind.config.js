@@ -5,6 +5,9 @@ module.exports = {
   darkMode: "class", // Enable dark mode via class
   theme: {
     extend: {
+      screens: {
+        "928px": "928px", // Brugerdefineret breakpoint
+      },
       fontFamily: {
         sans: ["Faro", ...fontFamily.sans],
       },

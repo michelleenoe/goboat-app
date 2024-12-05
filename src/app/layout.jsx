@@ -6,23 +6,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="da">
       <body className="flex flex-col min-h-screen">
-        <div className="block lg:hidden">
+        <div className="block 928px:hidden">
           <Header />
         </div>
 
         <main className="flex-grow pb-10">
-          <div className="block lg:hidden">
-            {children}
-          </div>
+          <div className="block 928px:hidden">{children}</div>
 
-          <div className="hidden lg:flex min-h-screen items-center justify-center">
+          <div className="hidden 928px:flex min-h-screen items-center justify-center">
             <h1 className="text-2xl font-bold">
               Denne side er kun tilgængelig på mobile enheder
             </h1>
           </div>
         </main>
 
-        <div className="block lg:hidden">
+        <div className="block 928px:hidden">
           <Footer />
         </div>
       </body>
