@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Screen1 from "../components/onboarding/Screen1";
+import Screen from "../components/onboarding/Screen1";
 import Screen2 from "../components/onboarding/Screen2";
 import Screen3 from "../components/onboarding/Screen3";
 
@@ -12,7 +12,7 @@ export default function Onboarding() {
 
   return (
     <>
-      {currentScreen === 1 && <Screen1 onNext={nextScreen} />}
+      {currentScreen === 1 && <Screen onNext={nextScreen} />}
       {currentScreen === 2 && (
         <Screen2 onBack={previousScreen} onNext={nextScreen} />
       )}
