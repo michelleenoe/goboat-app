@@ -5,6 +5,12 @@ module.exports = {
   darkMode: "class", // Enable dark mode via class
   theme: {
     extend: {
+      width: {
+        "366px": "366px",
+      },
+      height: {
+        "204px": "204px",
+      },
       screens: {
         "928px": "928px", // Brugerdefineret breakpoint
       },

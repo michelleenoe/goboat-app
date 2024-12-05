@@ -203,31 +203,33 @@ const Weather = ({ city = "Copenhagen", lang = "en" }) => {
   const { main, weather, wind } = weatherDataState;
 
   return (
-    <div className="px-4 max-w-4xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">{t.mainTitle}</h2>
-      <div className="px-4 py-8 rounded-xl shadow-md bg-grey1 border">
-        <p className="text-md font-semibold mb-4">
-          {t.weatherIn} {city}
-        </p>
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 relative">
-            <Image
-              src="/illustrations/nr2.svg"
-              alt={weather[0].description}
-              fill
-              style={{ objectFit: "contain" }}
-            />
-          </div>
-          <div>
-            <p className="text-md">
-              <strong>{main.temp}°C</strong> ({weather[0].description})
-            </p>
-            <p className="text-sm">
-              {t.humidity}: {main.humidity}%
-            </p>
-            <p className="text-sm">
-              {t.wind}: {wind.speed} m/s
-            </p>
+    <div className="px-4 mx-auto">
+      {/* <h2 className="text-xl font-bold mb-4">{t.mainTitle}</h2> */}
+      <div className="flex items-center justify-center">
+        <div className="w-366px  p-4 border bg-grey1 rounded-3xl shadow-md">
+          <p className="text-md text-center font-semibold mb-4">
+            {t.weatherIn} {city}
+          </p>
+          <div className="flex justify-center items-center gap-10">
+            <div className="w-20 h-20 relative bg-lightBlue rounded-full flex items-center justify-center">
+              <Image
+                src="/illustrations/sun.svg"
+                alt={weather[0].description}
+                fill
+                style={{ objectFit: "contain", padding: "4px" }}
+              />
+            </div>
+            <div>
+              <p className="text-md">
+                <strong>{main.temp}°C</strong> ({weather[0].description})
+              </p>
+              <p className="text-sm">
+                {t.humidity}: {main.humidity}%
+              </p>
+              <p className="text-sm">
+                {t.wind}: {wind.speed} m/s
+              </p>
+            </div>
           </div>
         </div>
       </div>
