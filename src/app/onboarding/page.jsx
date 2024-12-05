@@ -1,9 +1,8 @@
 "use client";
-
 import { useState } from "react";
-import Screen1 from "../../app/components/onboarding/Screen1";
-import Screen2 from "../../app/components/onboarding/Screen2";
-import Screen3 from "../../app/components/onboarding/Screen3";
+import ScreenOne from "@/app/components/onboarding/ScreenOne";
+import ScreenTwo from "@/app/components/onboarding/ScreenTwo";
+import ScreenThree from "@/app/components/onboarding/ScreenThree";
 
 export default function Onboarding() {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -13,12 +12,12 @@ export default function Onboarding() {
 
   return (
     <>
-      {currentScreen === 1 && <Screen1 onNext={nextScreen} />}
+      {currentScreen === 1 && <ScreenOne onNext={nextScreen} />}
       {currentScreen === 2 && (
-        <Screen2 onBack={previousScreen} onNext={nextScreen} />
+        <ScreenTwo onBack={previousScreen} onNext={nextScreen} />
       )}
       {currentScreen === 3 && (
-        <Screen3 onBack={previousScreen} onComplete={() => alert("Completed!")} />
+        <ScreenThree onBack={previousScreen} onComplete={() => alert("Completed!")} />
       )}
     </>
   );

@@ -1,6 +1,4 @@
 Mangler: 
-
-- Links i footer 
 - færdiggøre onboarding ift. navigation frem og tilbage --> kun indlæses én gang 
 - (LocalStorage + copy er ikke i brug endnu på main)
 

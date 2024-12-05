@@ -1,4 +1,5 @@
-export default function Screen1({ onNext }) {
+"use client"
+export default function ScreenOne({ onNext }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-800 text-white p-4">
       <main className="flex-grow flex flex-col items-center justify-center bg-white text-black rounded-lg p-6">
