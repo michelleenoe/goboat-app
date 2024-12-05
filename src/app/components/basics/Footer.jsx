@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import NavButton from "./NavButton";
-import SettingsPopup from "./SettingsPopup";
-import SettingsButton from "./SettingsButton";
+import NavButton from "../basics/NavButton";
+import SettingsPopup from "../basics/SettingsPopUp";
+import SettingsButton from "../basics/SettingsButton";
 
 export default function Footer() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
