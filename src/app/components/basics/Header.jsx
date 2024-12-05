@@ -3,13 +3,13 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="w-full flex justify-left">
-      <div className="py-4 mx-8 ">
+      <div className="py-4 mx-8 mb-5">
         <Image
-          src="/icons/gb-logo.svg"
+          src="http://localhost:3000/icons/gb-logo.svg"
           alt="Logo"
-          width={148} // Adjust the width as needed
-          height={34} // Adjust the height as needed
-          className="h-10"
+          width={200}
+          height={100}
+          style={{ height: "auto", width: "auto" }}
         />
       </div>
     </header>
