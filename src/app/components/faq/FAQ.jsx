@@ -37,8 +37,8 @@ const FAQ = ({ mainTitle, questions }) => {
                 <Image
                   src={
                     activeIndex === index
-                      ? "/icons/minus.svg"
-                      : "/icons/plus.svg"
+                      ? "/Icons/minus.svg"
+                      : "/Icons/plus.svg"
                   }
                   alt={activeIndex === index ? "Collapse" : "Expand"}
                   width={30}

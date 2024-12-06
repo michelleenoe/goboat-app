@@ -19,7 +19,7 @@ export default function RouteItem({ route, isSelected, onSelect, getRouteName })
       >
         {isSelected && (
           <Image
-            src="/icons/check.svg"
+            src="/Icons/check.svg"
             alt="Check icon"
             width={16}
             height={16}
