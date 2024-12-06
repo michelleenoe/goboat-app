@@ -3,24 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #f5f6f7;
-  --foreground: #171717;
-  --mediumBlue: #3f6ca1;
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
 main {
   margin-left: 1rem;
   margin-right: 1rem;
