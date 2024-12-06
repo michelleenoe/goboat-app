@@ -18,7 +18,7 @@ export const RouteIcon = ({ width = 30, height = 30, className = "" }) => (
 );
 export const GeolocateIcon = ({ width = 30, height = 30, className = "" }) => (
   <img
-    src="/icons/map-pin.svg"
+    src="/Icons/map-pin.svg"
     alt="Geolocate Icon"
     width={width}
     height={height}
@@ -28,7 +28,7 @@ export const GeolocateIcon = ({ width = 30, height = 30, className = "" }) => (
 
 export const ToggleMapIcon = ({ width = 30, height = 30, className = "" }) => (
   <img
-    src="/icons/Layer.svg"
+    src="/Icons/Layer.svg"
     alt="Toggle Map Icon"
     width={width}
     height={height}

@@ -25,7 +25,7 @@ const FAQ = ({ mainTitle, questions }) => {
               className="flex justify-between items-center px-4 py-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange
  rounded-3xl"
               onClick={() => toggleAccordion(index)}
-              tabIndex={0} // Gør elementet fokusérbart via tastatur
+              tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") toggleAccordion(index);
               }}
@@ -37,8 +37,8 @@ const FAQ = ({ mainTitle, questions }) => {
                 <Image
                   src={
                     activeIndex === index
-                      ? "/icons/minus.svg"
-                      : "/icons/plus.svg"
+                      ? "/Icons/minus.svg"
+                      : "/Icons/plus.svg"
                   }
                   alt={activeIndex === index ? "Collapse" : "Expand"}
                   width={30}
