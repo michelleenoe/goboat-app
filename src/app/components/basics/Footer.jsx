@@ -16,12 +16,12 @@ export default function Footer() {
       <footer className="mt-10">
         <div className="w-full bg-mediumBlue dark:bg-darkBlue py-4 fixed bottom-0 left-0">
           <div className="flex justify-around items-center ">
-            <NavButton href="/" icon="/icons/home.svg" altText="Home" />
-            <NavButton href="/tools" icon="/icons/tool.svg" altText="Tools" />
-            <NavButton href="/map" icon="/icons/map.svg" altText="Map" />
+            <NavButton href="/" icon="/Icons/home.svg" altText="Home" />
+            <NavButton href="/tools" icon="/Icons/tool.svg" altText="Tools" />
+            <NavButton href="/map" icon="/Icons/map.svg" altText="Map" />
             <SettingsButton
               onClick={openSettings}
-              icon="/icons/settings.svg"
+              icon="/Icons/settings.svg"
               altText="Settings"
               isActive={isSettingsOpen}
             />
