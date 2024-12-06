@@ -1,4 +1,4 @@
-import AdminMap from "../../app/components/map/AdminMap";
+import AdminMap from "../components/map/admin/AdminMap";
 
 export default function AdminMapPage() {
   return (
