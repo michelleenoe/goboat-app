@@ -5,16 +5,19 @@ import tipsData from "../content/tipsData";
 import FAQ from "./components/faq/FAQ";
 import Weather from "./components/weather/Weather";
 import faqData from "../content/faqData";
+import titleData from "../content/titleData";
 
 export default function DashboardPage() {
   const lang = getLanguage();
 
   const tips = tipsData[lang] || tipsData.en; // Fald tilbage til engelsk
   const faq = faqData[lang] || faqData.en; // Fald tilbage til engelsk
+  const title = titleData[lang] || titleData.en; // Fald tilbage til engelsk
   const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
   return (
     <div>
+      <h1 className="sr-only">{title.homeTitle}</h1>
       <div className="mb-8">
         <Weather city="Copenhagen" apiKey={apiKey} />
       </div>
