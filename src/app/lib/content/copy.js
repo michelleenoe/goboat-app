@@ -1,7 +1,8 @@
 export const copy = {
   en: {
-    welcome: "Welcome!",
-    chooseLanguage: "Choose Your Language",
+    welcome: "Welcome to GoBoat!",
+    chooseLanguage:
+      "Select your language to get ready for your trip on the water.",
     language: {
       danish: "Danish",
       english: "English",
@@ -27,11 +28,12 @@ export const copy = {
     },
     cards: {
       title: "5 Quick Tips with GoBoat",
-    }
+    },
   },
   da: {
-    welcome: "Velkommen!",
-    chooseLanguage: "Vælg dit sprog",
+    welcome: "Velkommen til GoBoat!",
+    chooseLanguage:
+      "Vælg dit sprog for at gøre dig klar til din tur på vandet.",
     language: {
       danish: "Dansk",
       english: "Engelsk",
@@ -57,6 +59,6 @@ export const copy = {
     },
     cards: {
       title: "5 hurtige tips med GoBoat",
-    }
+    },
   },
 };

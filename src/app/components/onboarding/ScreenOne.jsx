@@ -1,11 +1,13 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { useLanguage } from "../../lib/context/language";
-import { copy } from "../../lib/content/copy"; 
+import { copy } from "../../lib/content/copy";
+import NavigationButtons from "../basics/NavigationButtons";
+import DefaultButton from "./DefaultButton";
 
 export default function ScreenOne({ onNext }) {
   const { changeLanguage, language } = useLanguage();
-  console.log('Language Context:', { changeLanguage, language });
+  console.log("Language Context:", { changeLanguage, language });
 
   const handleLanguageSelect = (lang) => {
     changeLanguage(lang);
@@ -13,28 +15,26 @@ export default function ScreenOne({ onNext }) {
   };
 
   return (
-    <div className="flex flex-col">
-      <main className="flex-grow flex flex-col items-center justify-center rounded-lg">
-        <h2 className="text-xl font-bold mb-4">{copy[language].welcome}</h2>
-        <p className="text-center mb-8">
-          {copy[language].chooseLanguage}
-        </p>
-        <button
-          className="bg-yellow-400 px-6 py-2 rounded-full mb-4"
-          onClick={() => handleLanguageSelect('da')}
-        >
-          {copy[language].language.danish}
-        </button>
-        <button
-          className="bg-yellow-400 px-6 py-2 rounded-full"
-          onClick={() => handleLanguageSelect('en')}
-        >
-          {copy[language].language.english}
-        </button>
+    <div>
+      <main className="">
+        <div className="flex justify-center items-center ">
+          <div className="flex-grow flex flex-col items-center justify-center rounded-3xl bg-grey1 p-8 max-w-lg w-full">
+            <h1 className="sr-only">Goboat Onboarding Screen number 1</h1>
+            <h2 className="text-xl font-bold mb-4">{copy[language].welcome}</h2>
+            <p className="text-center mb-8">{copy[language].chooseLanguage}</p>
+            <DefaultButton
+              onClick={() => handleLanguageSelect("da")}
+              text={copy[language].language.danish}
+            />
 
-        <div className="flex justify-between mt-8">
-          <button disabled className="w-10 h-10 bg-gray-500 rounded-full"></button>
-          <button onClick={onNext} className="w-10 h-10 bg-yellow-400 rounded-full"></button>
+            <DefaultButton
+              onClick={() => handleLanguageSelect("en")}
+              text={copy[language].language.english}
+            />
+          </div>
+        </div>
+        <div className="flex justify-end mt-8 ">
+          <NavigationButtons />
         </div>
       </main>
     </div>
