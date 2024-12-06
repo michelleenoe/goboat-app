@@ -51,6 +51,7 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
         mapboxInstance.remove();
       }
     };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSatellite]);
 
   useEffect(() => {
