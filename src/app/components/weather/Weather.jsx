@@ -185,50 +185,35 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import weatherData from "@/content/weatherData";
 
-const Weather = ({ city = "Copenhagen", lang = "en" }) => {
-  const fallbackWeatherData = {
-    main: { temp: 10, humidity: 80 },
-    weather: [{ description: "clear sky", icon: "01d" }],
-    wind: { speed: 5 },
-  };
-
-  const [weatherDataState] = useState(fallbackWeatherData);
-
-  const t = weatherData[lang] || weatherData.en;
-
-  const { main, weather, wind } = weatherDataState;
-
+const Weather = ({ city = "Copenhagen", weather }) => {
   return (
     <div className="px-4 mx-auto">
-      {/* <h2 className="text-xl font-bold mb-4">{t.mainTitle}</h2> */}
+      {/* <h3 className="text-xl font-bold mb-4 text-center">
+        {weather.mainTitle}
+      </h3> */}
       <div className="flex items-center justify-center text-typoPrimary">
-        <div className="w-366px  p-4 border bg-grey1 rounded-3xl shadow-md">
+        <div className="w-366px p-4 border bg-grey1 rounded-3xl shadow-md">
           <p className="text-md text-center font-semibold mb-4">
-            {t.weatherIn} {city}
+            {weather.weatherIn} {city}
           </p>
           <div className="flex justify-center items-center gap-10">
             <div className="w-20 h-20 relative bg-lightBlue rounded-full flex items-center justify-center">
               <Image
                 src="/illustrations/sun.svg"
-                alt={weather[0].description}
+                alt="clear sky"
                 fill
                 style={{ objectFit: "contain", padding: "4px" }}
               />
             </div>
             <div>
               <p className="text-md">
-                <strong>{main.temp}°C</strong> ({weather[0].description})
+                <strong>10°C</strong> (clear sky)
               </p>
-              <p className="text-sm">
-                {t.humidity}: {main.humidity}%
-              </p>
-              <p className="text-sm">
-                {t.wind}: {wind.speed} m/s
-              </p>
+              <p className="text-sm">{weather.humidity}: 80%</p>
+              <p className="text-sm">{weather.wind}: 5 m/s</p>
             </div>
           </div>
         </div>
