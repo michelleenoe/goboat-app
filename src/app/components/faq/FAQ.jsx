@@ -22,7 +22,8 @@ const FAQ = ({ mainTitle, questions }) => {
             }`}
           >
             <div
-              className="flex justify-between items-center px-4 py-3 cursor-pointer focus:outline-none focus:ring-2 focus:ring-focusOrange rounded-3xl"
+              className="flex justify-between items-center px-4 py-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange
+ rounded-3xl"
               onClick={() => toggleAccordion(index)}
               tabIndex={0} // Gør elementet fokusérbart via tastatur
               onKeyDown={(e) => {
