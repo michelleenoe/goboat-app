@@ -12,7 +12,7 @@ const FAQ = ({ mainTitle, questions }) => {
 
   return (
     <div className=" px-4 max-w-4xl mx-auto">
-      <h3 className="text-xl font-bold mb-4">{mainTitle}</h3>
+      <h3 className="text-xl font-bold mb-4 ">{mainTitle}</h3>
       <div className="space-y-4">
         {questions.map((faq, index) => (
           <div
@@ -30,7 +30,9 @@ const FAQ = ({ mainTitle, questions }) => {
                 if (e.key === "Enter" || e.key === " ") toggleAccordion(index);
               }}
             >
-              <p className="text-md font-semibold">{faq.title}</p>
+              <p className="text-md font-semibold text-typoPrimary">
+                {faq.title}
+              </p>
               <div className="flex items-center justify-center w-11 h-11 rounded-full bg-transparent">
                 <Image
                   src={

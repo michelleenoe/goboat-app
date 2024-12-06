@@ -21,6 +21,7 @@ module.exports = {
         // Light theme
         typoPrimary: "#1F1F1F",
         typoSecondary: "#44525E",
+        settingsBg: "#959CA3",
         grey1: "#E6E7E8",
         grey2: "#F5F6F7",
         goboatYellow: "#FEDF63",
@@ -35,6 +36,7 @@ module.exports = {
         dark: {
           typoPrimary: "#F5F6F7", // Light grey for text in dark mode
           typoSecondary: "#C4C4C4", // Muted grey for secondary text
+          settingsBg: "#959CA3",
           grey1: "#1F1F1F", // Dark grey
           grey2: "#2C2C2C", // Slightly lighter grey
           goboatYellow: "#E5C54F", // Muted yellow for dark mode

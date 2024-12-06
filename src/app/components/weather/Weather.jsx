@@ -205,7 +205,7 @@ const Weather = ({ city = "Copenhagen", lang = "en" }) => {
   return (
     <div className="px-4 mx-auto">
       {/* <h2 className="text-xl font-bold mb-4">{t.mainTitle}</h2> */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center text-typoPrimary">
         <div className="w-366px  p-4 border bg-grey1 rounded-3xl shadow-md">
           <p className="text-md text-center font-semibold mb-4">
             {t.weatherIn} {city}
