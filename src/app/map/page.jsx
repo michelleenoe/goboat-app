@@ -12,6 +12,7 @@ export default function MapPage() {
   const [showRouteSelect, setShowRouteSelect] = useState(false);
   const [availableRoutes, setAvailableRoutes] = useState([]);
   const [selectedRouteId, setSelectedRouteId] = useState(null);
+  const [geolocationActive, setGeolocationActive] = useState(false);
   const geolocateControlRef = useRef(null);
 
   const toggleMapStyle = useCallback(() => {
@@ -40,20 +41,21 @@ export default function MapPage() {
   const handleGeolocateClick = useCallback(() => {
     if (geolocateControlRef.current) {
       geolocateControlRef.current.trigger();
+      setGeolocationActive(true);
     } else {
       console.error("Geolocate control not set.");
     }
-  }, []);
-
-  const handleRouteSelect = useCallback((routeId) => {
-    setSelectedRouteId(routeId);
-    setShowRouteSelect(false);
   }, []);
 
   const getSelectedRouteName = () => {
     const selectedRoute = availableRoutes.find((route) => route.id === selectedRouteId);
     return selectedRoute ? selectedRoute.name : null;
   };
+
+  const handleRouteSelect = useCallback((routeId) => {
+    setSelectedRouteId(routeId);
+    setShowRouteSelect(false);
+  }, []);
 
   return (
     <div className="relative">
@@ -74,14 +76,20 @@ export default function MapPage() {
 
         <IconButton
           onClick={handleGeolocateClick}
-          icon={<GeolocateIcon />}
+          icon={
+            <GeolocateIcon
+              className={geolocationActive ? "text-warningRed" : "text-gray-400"}
+            />
+          }
           label="Geolocate"
         />
+
         <IconButton
           onClick={toggleMapStyle}
           icon={<ToggleMapIcon />}
           label="Toggle Map Style"
         />
+
         {showRouteSelect && (
           <RouteSelection
             availableRoutes={availableRoutes}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import { supabase } from "../../lib/supabaseClient";
 
@@ -8,51 +8,83 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 export default function MapContainer({ selectedRouteId, isSatellite, geolocateControlRef }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
+  const mapboxglRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!map.current) {
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: isSatellite
-          ? "mapbox://styles/mapbox/satellite-streets-v11"
-          : "mapbox://styles/mapbox/streets-v11",
-        center: [12.57856, 55.66952],
-        zoom: 13,
-      });
+    let mapboxInstance;
 
-      map.current.on("load", () => {
-        console.log("Map loaded successfully");
+    async function loadMap() {
+      if (!map.current) {
+        const { default: mapboxgl } = await import("mapbox-gl");
+        mapboxglRef.current = mapboxgl;
 
-        geolocateControlRef.current = new mapboxgl.GeolocateControl({
-          positionOptions: { enableHighAccuracy: true },
-          trackUserLocation: true,
-          showUserHeading: true,
+        mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+
+        map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: isSatellite
+            ? "mapbox://styles/mapbox/satellite-streets-v11"
+            : "mapbox://styles/mapbox/streets-v11",
+          center: [12.57856, 55.66952],
+          zoom: 13,
         });
 
-        map.current.addControl(geolocateControlRef.current, "bottom-right");
-      });
+        map.current.on("load", () => {
+          console.log("Map loaded successfully");
+
+          geolocateControlRef.current = new mapboxgl.GeolocateControl({
+            positionOptions: { enableHighAccuracy: true },
+            trackUserLocation: true,
+            showUserHeading: true,
+          });
+
+          map.current.addControl(geolocateControlRef.current, "bottom-right");
+        });
+      }
     }
+
+    loadMap();
+
+    return () => {
+      if (mapboxInstance) {
+        mapboxInstance.remove();
+      }
+    };
   }, [isSatellite]);
-    useEffect(() => {
+
+  useEffect(() => {
     if (map.current) {
+      setLoading(true);
       map.current.setStyle(
         isSatellite
           ? "mapbox://styles/mapbox/satellite-streets-v11"
           : "mapbox://styles/mapbox/streets-v11"
       );
+
+      map.current.once("idle", () => {
+        setLoading(false);
+      });
     }
   }, [isSatellite]);
 
   useEffect(() => {
     if (map.current && selectedRouteId) {
+      let isSubscribed = true;
+
       const fetchRoute = async () => {
-        const { data: routeData } = await supabase
+        setLoading(true);
+        const { data: routeData, error } = await supabase
           .from("routes")
           .select("*")
           .eq("id", selectedRouteId)
           .single();
 
-        if (routeData) {
+        if (error) {
+          console.error("Error fetching route:", error);
+        } else if (routeData && isSubscribed) {
+          const mapboxgl = mapboxglRef.current;
+
           if (map.current.getSource("route")) {
             map.current.removeLayer("route");
             map.current.removeSource("route");
@@ -74,7 +106,7 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
             type: "line",
             source: "route",
             layout: { "line-join": "round", "line-cap": "round" },
-            paint: { "line-color": "#3b84f0", "line-width": 5 },
+            paint: { "line-color": "#A1121B", "line-width": 5 },
           });
 
           const bounds = routeData.coordinates.reduce(
@@ -86,11 +118,33 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
           );
           map.current.fitBounds(bounds, { padding: 50 });
         }
+
+        setLoading(false);
       };
 
       fetchRoute();
+
+      return () => {
+        isSubscribed = false;
+      };
     }
   }, [selectedRouteId]);
 
-  return <div ref={mapContainer} style={{ height: "80vh", width: "100%" }} />;
+  return (
+    <div className="relative" style={{ height: "80vh", width: "100%" }}>
+      <div ref={mapContainer} style={{ height: "100%", width: "100%" }} />
+      {loading && (
+        <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 bg-gray-200 flex items-center justify-center">
+          <div
+            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-darkBlue border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+          >
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+              Loading...
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
