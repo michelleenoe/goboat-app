@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 export const RouteIcon = ({ width = 30, height = 30, className = "" }) => (
   <svg
