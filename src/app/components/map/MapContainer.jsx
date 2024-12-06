@@ -23,7 +23,6 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
       map.current.on("load", () => {
         console.log("Map loaded successfully");
 
-        // Set up Geolocate Control
         geolocateControlRef.current = new mapboxgl.GeolocateControl({
           positionOptions: { enableHighAccuracy: true },
           trackUserLocation: true,
@@ -34,9 +33,7 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
       });
     }
   }, [isSatellite]);
-
-  // Update map style when satellite view is toggled
-  useEffect(() => {
+    useEffect(() => {
     if (map.current) {
       map.current.setStyle(
         isSatellite
@@ -46,7 +43,6 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
     }
   }, [isSatellite]);
 
-  // Fetch and display the selected route
   useEffect(() => {
     if (map.current && selectedRouteId) {
       const fetchRoute = async () => {
