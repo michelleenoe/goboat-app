@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import { getReminders } from "../../lib/data/reminders";
@@ -6,6 +6,7 @@ import ReminderList from "./ReminderList";
 import OnboardingButtons from "./OnboardingButtons";
 import AgreeCheckbox from "./AgreeCheckbox";
 import Pagination from "./Pagination";
+import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
 export default function ScreenThree({ onBack }) {
   const { language } = useLanguage();
@@ -16,6 +17,13 @@ export default function ScreenThree({ onBack }) {
   };
 
   const reminders = getReminders(copy, language);
+
+  const { setIsFooterVisible } = useFooterVisibility();
+
+  useEffect(() => {
+    setIsFooterVisible(false); // Skjul Footer
+    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+  }, [setIsFooterVisible]);
 
   return (
     <>

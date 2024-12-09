@@ -7,9 +7,12 @@ import Footer from "@/app/components/basics/Footer";
 import { LanguageProvider, useLanguage } from "@/app/lib/context/language";
 import { ThemeProvider } from "@/app/lib/context/ThemeContext";
 import { LocationProvider } from "@/app/lib/context/LocationContext";
+import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
+import { useFooterVisibility } from "./lib/context/FooterVisibility";
 
 function Content({ children }) {
   const { language } = useLanguage();
+  const { isFooterVisible } = useFooterVisibility();
 
   return (
     <html lang={language}>
@@ -30,9 +33,11 @@ function Content({ children }) {
               </h1>
             </div>
           </main>
-          <div className="block 928px:hidden">
-            <Footer />
-          </div>
+          {isFooterVisible && (
+            <div className="block 928px:hidden">
+              <Footer />
+            </div>
+          )}
         </ThemeProvider>
       </body>
     </html>
@@ -43,7 +48,9 @@ export default function RootLayout({ children }) {
     <LanguageProvider>
       <ThemeProvider>
         <LocationProvider>
-          <Content>{children}</Content>
+          <FooterVisibilityProvider>
+            <Content>{children}</Content>
+          </FooterVisibilityProvider>
         </LocationProvider>
       </ThemeProvider>
     </LanguageProvider>

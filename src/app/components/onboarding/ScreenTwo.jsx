@@ -1,13 +1,21 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import NavigationButtons from "../basics/NavigationButtons";
 import Pagination from "./Pagination";
+import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
 export default function ScreenTwo({ onBack, onNext, onDurationSelect }) {
   const { language } = useLanguage();
+
+  const { setIsFooterVisible } = useFooterVisibility();
+
+  useEffect(() => {
+    setIsFooterVisible(false); // Skjul Footer
+    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+  }, [setIsFooterVisible]);
 
   return (
     <>

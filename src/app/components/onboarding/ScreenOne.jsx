@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
 import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import DefaultButton from "./DefaultButton";
 import OnboardingButtons from "./OnboardingButtons";
 import Pagination from "./Pagination";
+import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
 export default function ScreenOne({ onNext }) {
   const { changeLanguage, language } = useLanguage();
@@ -13,6 +14,12 @@ export default function ScreenOne({ onNext }) {
     changeLanguage(lang);
     onNext(); // Naviger til næste skærm efter valg af sprog
   };
+  const { setIsFooterVisible } = useFooterVisibility();
+
+  useEffect(() => {
+    setIsFooterVisible(false); // Skjul Footer
+    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+  }, [setIsFooterVisible]);
 
   return (
     <>
