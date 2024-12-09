@@ -4,7 +4,11 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import MapContainer from "../components/map/MapContainer";
 import IconButton from "../components/map/IconButton";
 import RouteSelection from "../components/map/routes/RouteSelection";
-import { RouteIcon, GeolocateIcon, ToggleMapIcon } from "../components/map/svgs/SvgIcons";
+import {
+  RouteIcon,
+  GeolocateIcon,
+  ToggleMapIcon,
+} from "../components/map/svgs/SvgIcons";
 import { supabase } from "../lib/supabaseClient";
 
 export default function MapPage() {
@@ -48,7 +52,9 @@ export default function MapPage() {
   }, []);
 
   const getSelectedRouteName = () => {
-    const selectedRoute = availableRoutes.find((route) => route.id === selectedRouteId);
+    const selectedRoute = availableRoutes.find(
+      (route) => route.id === selectedRouteId
+    );
     return selectedRoute ? selectedRoute.name : null;
   };
 
@@ -58,7 +64,7 @@ export default function MapPage() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative  -mx-4">
       <MapContainer
         selectedRouteId={selectedRouteId}
         isSatellite={showSatellite}
@@ -78,7 +84,9 @@ export default function MapPage() {
           onClick={handleGeolocateClick}
           icon={
             <GeolocateIcon
-              className={geolocationActive ? "text-warningRed" : "text-gray-400"}
+              className={
+                geolocationActive ? "text-warningRed" : "text-gray-400"
+              }
             />
           }
           label="Geolocate"
