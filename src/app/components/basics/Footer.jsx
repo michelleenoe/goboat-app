@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import NavButton from "../basics/NavButton";
 import SettingsPopup from "../basics/SettingsPopUp";
@@ -17,7 +16,7 @@ export default function Footer() {
         <div className="w-full bg-mediumBlue dark:bg-darkBlue py-4 fixed bottom-0 left-0">
           <div className="flex justify-around items-center ">
             <NavButton href="/" icon="/Icons/home.svg" altText="Home" />
-            <NavButton href="/tools" icon="/Icons/tool.svg" altText="Tools" />
+            <NavButton href="/error" icon="/Icons/tool.svg" altText="Tools" />
             <NavButton href="/map" icon="/Icons/map.svg" altText="Map" />
             <SettingsButton
               onClick={openSettings}
