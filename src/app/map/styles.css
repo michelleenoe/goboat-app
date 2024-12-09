@@ -28,3 +28,7 @@
 {
     display:none;
 }
+.mapboxgl-user-location-dot,
+.mapboxgl-user-location-dot::before {
+  @apply bg-goboatYellow border-goboatYellow !important;
+}
