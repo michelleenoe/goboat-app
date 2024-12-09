@@ -6,6 +6,7 @@ import Header from "@/app/components/basics/Header";
 import Footer from "@/app/components/basics/Footer";
 import { LanguageProvider, useLanguage } from "@/app/lib/context/language";
 import { ThemeProvider } from "@/app/lib/context/ThemeContext";
+import { LocationProvider } from "@/app/lib/context/LocationContext";
 
 function Content({ children }) {
   const { language } = useLanguage();
@@ -37,11 +38,14 @@ function Content({ children }) {
     </html>
   );
 }
-
 export default function RootLayout({ children }) {
   return (
     <LanguageProvider>
-      <Content>{children}</Content>
+      <ThemeProvider>
+        <LocationProvider>
+          <Content>{children}</Content>
+        </LocationProvider>
+      </ThemeProvider>
     </LanguageProvider>
   );
 }
