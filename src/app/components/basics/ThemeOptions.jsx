@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/app/lib/context/ThemeContext";
 import { RadioButton } from "./RadioButton";
 
 export function ThemeOptions() {

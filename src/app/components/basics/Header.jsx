@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/app/lib/context/ThemeContext";
 
 export default function Header() {
   const { theme } = useTheme();
