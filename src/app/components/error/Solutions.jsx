@@ -17,7 +17,7 @@ export default function Solutions({ selectedError, language }) {
   return (
     <div>
       <h3 className="text-lg font-semibold">Løsninger:</h3>
-      <ul className="list-disc pl-5">{renderSolutions()}</ul>
+      <ul className="list-none pl-5">{renderSolutions()}</ul>
     </div>
   );
 }

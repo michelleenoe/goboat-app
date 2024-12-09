@@ -55,7 +55,7 @@ export default function ErrorPage() {
         onSelect={setSelectedError}
       />
       <div className="flex flex-col items-center justify-center">
-        <h3 className="text-lg font-semibold ">
+        <h3 className="text-lg font-semibold py-2">
           {`${selectedError.e_codes} - ${title}`}
         </h3>
         <div>
