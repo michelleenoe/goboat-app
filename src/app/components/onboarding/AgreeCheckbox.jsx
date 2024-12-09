@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const AgreeCheckbox = ({ label, isChecked, onChange }) => {
   return (
@@ -10,11 +11,21 @@ const AgreeCheckbox = ({ label, isChecked, onChange }) => {
         <input
           type="checkbox"
           id="agree"
-          className="appearance-none w-5 h-5 border-2 bg-settingsBg border-typoSecondary rounded-md checked:bg-goboatYellow  transition cursor-pointer"
+          className="appearance-none w-5 h-5 border-2 bg-settingsBg border-typoSecondary rounded-md checked:bg-goboatYellow hover:bg-yellow-500 transition cursor-pointer"
           onChange={onChange}
           checked={isChecked}
         />
-        <svg
+        <Image
+          src="/Icons/check.svg"
+          alt="Check icon"
+          width={18}
+          height={18}
+          className={`absolute top-0.5 pointer-events-none text-typoSecondary transition ${
+            isChecked ? "opacity-100" : "opacity-0"
+          }`}
+        />
+
+        {/* <svg
           className={`absolute top-0.5 w-5 h-5 pointer-events-none text-typoSecondary transition ${
             isChecked ? "opacity-100" : "opacity-0"
           }`}
@@ -27,7 +38,7 @@ const AgreeCheckbox = ({ label, isChecked, onChange }) => {
             d="M9 11l-2-2-1.414 1.414L9 13.828l8.414-8.414L16 4l-7 7z"
             clipRule="evenodd"
           />
-        </svg>
+        </svg> */}
       </div>
     </div>
   );

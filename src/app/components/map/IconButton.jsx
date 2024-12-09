@@ -5,7 +5,7 @@ export default function IconButton({ onClick, icon, label, children }) {
   return (
     <button
       onClick={onClick}
-      className="bg-white p-3 rounded-full shadow-md flex items-center space-x-2"
+      className="bg-grey2 hover:bg-lightBlue p-3 rounded-full shadow-md flex items-center space-x-2 text-typoPrimary"
       aria-label={label}
     >
       {icon}

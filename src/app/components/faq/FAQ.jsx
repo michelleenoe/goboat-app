@@ -22,7 +22,7 @@ const FAQ = ({ mainTitle, questions }) => {
             }`}
           >
             <div
-              className="flex justify-between items-center px-4 py-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange
+              className="flex justify-between items-center px-4 py-3 cursor-pointer hover:bg-grey2  focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange
  rounded-3xl"
               onClick={() => toggleAccordion(index)}
               tabIndex={0}
