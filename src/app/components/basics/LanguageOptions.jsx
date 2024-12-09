@@ -1,6 +1,6 @@
 import { RadioButton } from "./RadioButton";
 import { useLanguage } from "../../lib/context/language";
-import { copy } from "../../lib/content/copy";
+import { settingsData } from "../../lib/content/settingsData";
 
 export function LanguageOptions() {
   const { language, changeLanguage } = useLanguage();
@@ -8,20 +8,20 @@ export function LanguageOptions() {
   return (
     <div className="flex justify-between items-center mb-6">
       <span className="text-typoPrimary mb-2 block">
-        {copy[language].chooseLanguage}
+        {settingsData[language].language}
       </span>
       <div className="flex space-x-4">
         <RadioButton
           name="language"
           value="en"
-          label={copy[language].language.english}
+          label="English"
           checked={language === "en"}
           onChange={() => changeLanguage("en")}
         />
         <RadioButton
           name="language"
           value="da"
-          label={copy[language].language.danish}
+          label="Dansk"
           checked={language === "da"}
           onChange={() => changeLanguage("da")}
         />
