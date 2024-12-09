@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import errorData from "@/app/lib/content/errorData";
+import { useLanguage } from "../lib/context/language"; // Genbrug sproghåndtering fra gammel kode
 import ErrorDropdown from "../components/error/ErrorDropdown";
 import Solutions from "../components/error/Solutions";
 import VideoHelp from "../components/error/VideoHelp";
@@ -14,9 +14,9 @@ const supabase = createClient(
 );
 
 export default function ErrorPage() {
+  const { language } = useLanguage(); // Henter aktuelt sprog fra konteksten
   const [data, setData] = useState([]);
   const [selectedError, setSelectedError] = useState(null);
-  const [language, setLanguage] = useState("en"); // Standard til dansk, justér efter behov
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +28,7 @@ export default function ErrorPage() {
           console.error("Error fetching data:", error);
         } else {
           setData(errorCodes);
-          setSelectedError(errorCodes[0]); // Sæt den første fejl som standard
+          setSelectedError(errorCodes[0]); // Vælg første fejl som standard
         }
       } catch (err) {
         console.error("Error during data fetching:", err);
@@ -39,11 +39,11 @@ export default function ErrorPage() {
   }, []);
 
   if (!selectedError) {
-    return <div>Indlæser fejloplysninger...</div>; // Vis en loader eller besked
+    return <div>Indlæser fejloplysninger...</div>; // Loader, hvis der ikke er data
   }
 
   const title =
-    language === "da" ? selectedError.da_title : selectedError.eng_title;
+    language === "da" ? selectedError.da_title : selectedError.eng_title; // Dynamisk titel baseret på sprog
 
   return (
     <div className="p-4 space-y-4">
