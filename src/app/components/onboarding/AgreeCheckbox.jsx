@@ -3,14 +3,14 @@ import React from "react";
 const AgreeCheckbox = ({ label, isChecked, onChange }) => {
   return (
     <div className="flex items-center justify-center mt-6">
-      <label htmlFor="agree" className="text-sm">
+      <label htmlFor="agree" className="text-sm cursor-pointer">
         {label}
       </label>
       <div className="flex items-center justify-center relative ml-2">
         <input
           type="checkbox"
           id="agree"
-          className="appearance-none w-5 h-5 border-2 bg-settingsBg border-typoSecondary rounded-md checked:bg-goboatYellow  transition "
+          className="appearance-none w-5 h-5 border-2 bg-settingsBg border-typoSecondary rounded-md checked:bg-goboatYellow  transition cursor-pointer"
           onChange={onChange}
           checked={isChecked}
         />
