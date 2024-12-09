@@ -6,15 +6,13 @@ export default function ErrorDropdown({ data, language, onSelect }) {
 
   return (
     <div className="flex flex-col">
-      <label
-        htmlFor="error-select"
-        className="mb-2 text-sm font-medium text-gray-700"
-      >
-        Find fejlkode:
+      <label htmlFor="error-select" className="text-xl font-bold mb-4">
+        Find Your Error Code
       </label>
       <select
         id="error-select"
-        className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+        tabIndex={0}
+        className="p-4 border rounded-full hover:bg-grey2  focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange"
         onChange={handleSelectChange}
       >
         {data.map((item) => (

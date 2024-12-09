@@ -48,15 +48,22 @@ export default function ErrorPage() {
   return (
     <div className="p-4 space-y-4">
       <h1 className="sr-only">TITLE</h1>
-      <h2 className="text-xl font-bold">{`${selectedError.e_codes} - ${title}`}</h2>
+
       <ErrorDropdown
         data={data}
         language={language}
         onSelect={setSelectedError}
       />
-      <Solutions selectedError={selectedError} language={language} />
-      <VideoHelp selectedError={selectedError} language={language} />
-      <ImageSlider selectedError={selectedError} />
+      <div className="flex flex-col items-center justify-center">
+        <h3 className="text-lg font-semibold ">
+          {`${selectedError.e_codes} - ${title}`}
+        </h3>
+        <div>
+          <Solutions selectedError={selectedError} language={language} />
+          <VideoHelp selectedError={selectedError} language={language} />
+          <ImageSlider selectedError={selectedError} />
+        </div>
+      </div>
     </div>
   );
 }
