@@ -1,11 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React from "react";
 import DefaultButton from "./DefaultButton";
 import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import NavigationButtons from "../basics/NavigationButtons";
-
 export default function ScreenTwo({ onBack, onNext, onDurationSelect }) {
   const { language } = useLanguage();
 
