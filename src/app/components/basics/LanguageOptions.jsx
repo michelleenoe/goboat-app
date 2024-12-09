@@ -8,7 +8,7 @@ export function LanguageOptions() {
     <>
       {/* Language Options */}
       <div className="flex justify-between items-center mb-6">
-        <span className="text-typoPrimary mb-2 block">Language</span>
+        <span className="text-typoPrimary mb-2 block ">Language</span>
         <div className="flex space-x-4">
           <RadioButton
             name="language"

@@ -7,7 +7,7 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
       <div className="flex justify-end gap-2 ">
         <button
           onClick={handlePrev}
-          className="flex items-center justify-center w-11 h-11 bg-goboatYellow text-darkBlue rounded-full transition"
+          className="flex items-center justify-center w-11 h-11 bg-goboatYellow hover:bg-yellow-500 rounded-full transition"
         >
           <Image
             src="/Icons/chevron-left.svg"
@@ -18,7 +18,7 @@ const NavigationButtons = ({ handlePrev, handleNext }) => {
         </button>
         <button
           onClick={handleNext}
-          className="flex items-center justify-center w-11 h-11 bg-goboatYellow text-darkBlue rounded-full transition"
+          className="flex items-center justify-center w-11 h-11 bg-goboatYellow hover:bg-yellow-500 rounded-full transition"
         >
           <Image
             src="/Icons/chevron-right.svg"

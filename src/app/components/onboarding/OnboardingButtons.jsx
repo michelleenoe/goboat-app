@@ -17,7 +17,7 @@ const OnboardingButtons = ({
         {/* Back Button */}
         <button
           onClick={onBack}
-          className={`flex items-center justify-center w-11 h-11 bg-goboatYellow text-darkBlue rounded-full transition ${
+          className={`flex items-center justify-center w-11 h-11 bg-goboatYellow  rounded-full transition ${
             disableBack
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-yellow-500"
@@ -37,10 +37,10 @@ const OnboardingButtons = ({
           onClick={() =>
             isAgreed && (onNext ? onNext() : router.push(nextRoute))
           }
-          className={`flex items-center justify-center w-11 h-11 text-darkBlue rounded-full transition ${
+          className={`flex items-center justify-center w-11 h-11 rounded-full transition ${
             isAgreed
-              ? "bg-goboatYellow"
-              : "bg-gray-300 opacity-40 cursor-not-allowed"
+              ? "bg-goboatYellow hover:bg-yellow-500"
+              : "bg-goboatYellow opacity-40 cursor-not-allowed"
           }`}
           disabled={!isAgreed}
         >
