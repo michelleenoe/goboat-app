@@ -13,14 +13,14 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
 
   useEffect(() => {
     let mapboxInstance;
-
+  
     async function loadMap() {
       if (!map.current) {
         const { default: mapboxgl } = await import("mapbox-gl");
         mapboxglRef.current = mapboxgl;
-
+  
         mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-
+  
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
           style: isSatellite
@@ -29,44 +29,38 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
           center: [12.57856, 55.66952],
           zoom: 13,
         });
-
+  
         map.current.on("load", () => {
           console.log("Map loaded successfully");
-
+  
           geolocateControlRef.current = new mapboxgl.GeolocateControl({
             positionOptions: { enableHighAccuracy: true },
             trackUserLocation: true,
             showUserHeading: true,
           });
-
+  
           map.current.addControl(geolocateControlRef.current, "bottom-right");
+  
+          // Ændring af farven på GPS-lokationsmarkøren
+          geolocateControlRef.current.on("geolocate", () => {
+            const markerElement = document.querySelector(".mapboxgl-user-location");
+            if (markerElement) {
+              markerElement.style.backgroundColor = "var(--tw-color-gb-yellow)"; // Tailwind color
+              markerElement.style.borderColor = "var(--tw-color-gb-yellow)"; // Tailwind color
+            }
+          });
         });
       }
     }
-
+  
     loadMap();
-
+  
     return () => {
       if (mapboxInstance) {
         mapboxInstance.remove();
       }
     };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSatellite]);
-
-  useEffect(() => {
-    if (map.current) {
-      setLoading(true);
-      map.current.setStyle(
-        isSatellite
-          ? "mapbox://styles/mapbox/satellite-streets-v11"
-          : "mapbox://styles/mapbox/streets-v11"
-      );
-
-      map.current.once("idle", () => {
-        setLoading(false);
-      });
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSatellite]);
 
   useEffect(() => {

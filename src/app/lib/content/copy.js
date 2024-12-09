@@ -1,8 +1,7 @@
 export const copy = {
   en: {
-    welcome: "Welcome to GoBoat!",
-    chooseLanguage:
-      "Select your language to get ready for your trip on the water.",
+    welcome: "Welcome!",
+    chooseLanguage: "Choose Your Language",
     language: {
       danish: "Danish",
       english: "English",
@@ -19,21 +18,14 @@ export const copy = {
       point2: "Sail in the middle of the canals",
       point3: "Stay aware and watch out for the harbor bus",
       finalMessage: "GoBoat wishes you a great trip on the water!",
-      agreeConditions: "I have read and understood the conditions",
-    },
-    completion: {
-      title: "You're All Set!",
-      message: "Enjoy your sailing adventure with GoBoat.",
-      button: "Finish",
     },
     cards: {
       title: "5 Quick Tips with GoBoat",
-    },
+    }
   },
   da: {
-    welcome: "Velkommen til GoBoat!",
-    chooseLanguage:
-      "Vælg dit sprog for at gøre dig klar til din tur på vandet.",
+    welcome: "Velkommen!",
+    chooseLanguage: "Vælg dit sprog",
     language: {
       danish: "Dansk",
       english: "Engelsk",
@@ -50,15 +42,9 @@ export const copy = {
       point2: "Sejl i midten af kanalerne",
       point3: "Vær opmærksom og se efter havnebussen",
       finalMessage: "GoBoat ønsker dig en fantastisk tur på vandet!",
-      agreeConditions: "Jeg har læst og forstået betingelserne",
-    },
-    completion: {
-      title: "Du er klar!",
-      message: "Nyd dit sejlæventyr med GoBoat.",
-      button: "Afslut",
     },
     cards: {
-      title: "5 hurtige tips med GoBoat",
-    },
+      title: "5 hurtige med GoBoat",
+    }
   },
 };

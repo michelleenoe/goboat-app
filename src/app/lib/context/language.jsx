@@ -1,9 +1,9 @@
 "use client";
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en'); // Standard sprog
+  const [language, setLanguage] = useState('en');
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
@@ -14,7 +14,7 @@ export const LanguageProvider = ({ children }) => {
 
   const changeLanguage = (lang) => {
     setLanguage(lang);
-    localStorage.setItem('language', lang); // Gem sprog i localStorage
+    localStorage.setItem('language', lang);
   };
 
   return (
