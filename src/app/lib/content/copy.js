@@ -18,10 +18,11 @@ export const copy = {
       point2: "Sail in the middle of the canals",
       point3: "Stay aware and watch out for the harbor bus",
       finalMessage: "GoBoat wishes you a great trip on the water!",
+      confirmationMessage: "I have read and understood the three reminders.",
     },
     cards: {
       title: "5 Quick Tips with GoBoat",
-    }
+    },
   },
   da: {
     welcome: "Velkommen!",
@@ -42,9 +43,10 @@ export const copy = {
       point2: "Sejl i midten af kanalerne",
       point3: "Vær opmærksom og se efter havnebussen",
       finalMessage: "GoBoat ønsker dig en fantastisk tur på vandet!",
+      confirmationMessage: "Jeg har læst og forstået de tre påmindelser",
     },
     cards: {
       title: "5 hurtige med GoBoat",
-    }
+    },
   },
 };
