@@ -47,6 +47,7 @@ export default function ErrorPage() {
 
   return (
     <div className="p-4 space-y-4">
+      <h1 className="sr-only">TITLE</h1>
       <h2 className="text-xl font-bold">{`${selectedError.e_codes} - ${title}`}</h2>
       <ErrorDropdown
         data={data}
