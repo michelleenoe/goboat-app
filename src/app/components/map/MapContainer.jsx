@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import { supabase } from "../../lib/supabaseClient";
 
@@ -10,69 +10,48 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
   const map = useRef(null);
   const mapboxglRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [routeCache, setRouteCache] = useState({});
+  const [routeData, setRouteData] = useState(null);
 
   useEffect(() => {
     async function loadMap() {
-      if (!mapContainer.current || !(mapContainer.current)) {
-        console.error("Map container is invalid or not attached to the DOM.");
-        return;
-      }
-
       if (!map.current) {
-        try {
-          const { default: mapboxgl } = await import("mapbox-gl");
-          mapboxglRef.current = mapboxgl;
+        const { default: mapboxgl } = await import("mapbox-gl");
+        mapboxglRef.current = mapboxgl;
 
-          mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+        mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
-          if (!mapboxgl.supported()) {
-            alert("Your browser does not support Mapbox GL.");
-            return;
+        map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: isSatellite
+            ? "mapbox://styles/mapbox/satellite-streets-v11"
+            : "mapbox://styles/mapbox/streets-v11",
+          center: [12.57856, 55.66952],
+          zoom: 13,
+        });
+
+        map.current.on("load", () => {
+          console.log("Map loaded successfully");
+
+          geolocateControlRef.current = new mapboxgl.GeolocateControl({
+            positionOptions: { enableHighAccuracy: true },
+            trackUserLocation: true,
+            showUserHeading: true,
+          });
+          geolocateControlRef.current.on("geolocate", () => {
+            const markerElement = document.querySelector(".mapboxgl-user-location");
+            if (markerElement) {
+              markerElement.style.backgroundColor = "var(--tw-color-gb-yellow)";
+              markerElement.style.borderColor = "var(--tw-color-gb-yellow)";
+            }
+          });
+          if (routeData) {
+            addRouteToMap(routeData);
           }
-
-          map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: isSatellite
-              ? "mapbox://styles/mapbox/satellite-streets-v11"
-              : "mapbox://styles/mapbox/streets-v11",
-            center: [12.57856, 55.66952],
-            zoom: 13,
-          });
-
-          map.current.on("load", () => {
-            console.log("Map loaded successfully");
-
-            const geolocateControl = new mapboxgl.GeolocateControl({
-              positionOptions: { enableHighAccuracy: true },
-              trackUserLocation: true,
-              showUserHeading: true,
-            });
-
-            map.current.addControl(geolocateControl, "bottom-right");
-            geolocateControlRef.current = geolocateControl;
-
-            geolocateControl.on("geolocate", () => {
-              const markerElement = document.querySelector(".mapboxgl-user-location");
-              if (markerElement) {
-                markerElement.style.backgroundColor = "var(--tw-color-gb-yellow)";
-                markerElement.style.borderColor = "var(--tw-color-gb-yellow)";
-              }
-            });
-          });
-
-          map.current.on("error", (error) => {
-            console.error("Mapbox error:", error);
-          });
-        } catch (error) {
-          console.error("Error loading Mapbox:", error);
-        }
+        });
       }
     }
 
-    if (mapContainer.current) {
-      loadMap();
-    }
+    loadMap();
 
     return () => {
       if (map.current) {
@@ -80,6 +59,36 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
         map.current = null;
       }
     };
+  }, []);
+
+  useEffect(() => {
+    async function updateMapStyle() {
+      if (map.current) {
+        const style = isSatellite
+          ? "mapbox://styles/mapbox/satellite-streets-v11"
+          : "mapbox://styles/mapbox/streets-v11";
+
+        try {
+          map.current.setStyle(style);
+
+          map.current.once("styledata", () => {
+            console.log("Map style updated to:", style);
+            
+            if (geolocateControlRef.current) {
+              map.current.addControl(geolocateControlRef.current, "bottom-right");
+            }
+
+            if (routeData) {
+              addRouteToMap(routeData);
+            }
+          });
+        } catch (error) {
+          console.error("Failed to update map style:", error);
+        }
+      }
+    }
+
+    updateMapStyle();
   }, [isSatellite]);
 
   useEffect(() => {
@@ -89,14 +98,7 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
       const fetchRoute = async () => {
         setLoading(true);
 
-        if (routeCache[selectedRouteId]) {
-          console.log("Using cached route data.");
-          updateMap(routeCache[selectedRouteId]);
-          setLoading(false);
-          return;
-        }
-
-        const { data: routeData, error } = await supabase
+        const { data: fetchedRoute, error } = await supabase
           .from("routes")
           .select("*")
           .eq("id", selectedRouteId)
@@ -104,51 +106,12 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
 
         if (error) {
           console.error("Error fetching route:", error);
-        } else if (routeData && isSubscribed && routeData.coordinates?.length > 0) {
-          setRouteCache((prev) => ({ ...prev, [selectedRouteId]: routeData })); 
-          updateMap(routeData);
-        } else {
-          console.warn("No valid coordinates for the selected route.");
+        } else if (fetchedRoute && isSubscribed) {
+          setRouteData(fetchedRoute);
+          addRouteToMap(fetchedRoute);
         }
 
         setLoading(false);
-      };
-
-      const updateMap = (routeData) => {
-        const mapboxgl = mapboxglRef.current;
-
-        if (map.current.getSource("route")) {
-          map.current.removeLayer("route");
-          map.current.removeSource("route");
-        }
-
-        map.current.addSource("route", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            geometry: {
-              type: "LineString",
-              coordinates: routeData.coordinates,
-            },
-          },
-        });
-
-        map.current.addLayer({
-          id: "route",
-          type: "line",
-          source: "route",
-          layout: { "line-join": "round", "line-cap": "round" },
-          paint: { "line-color": "#A1121B", "line-width": 5 },
-        });
-
-        const bounds = routeData.coordinates.reduce(
-          (bounds, coord) => bounds.extend(coord),
-          new mapboxgl.LngLatBounds(
-            routeData.coordinates[0],
-            routeData.coordinates[0]
-          )
-        );
-        map.current.fitBounds(bounds, { padding: 50 });
       };
 
       fetchRoute();
@@ -157,7 +120,46 @@ export default function MapContainer({ selectedRouteId, isSatellite, geolocateCo
         isSubscribed = false;
       };
     }
-  }, [selectedRouteId, routeCache]);
+  }, [selectedRouteId]);
+
+  const addRouteToMap = (route) => {
+    if (map.current) {
+      const mapboxgl = mapboxglRef.current;
+
+      if (map.current.getSource("route")) {
+        map.current.removeLayer("route");
+        map.current.removeSource("route");
+      }
+
+      map.current.addSource("route", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          geometry: {
+            type: "LineString",
+            coordinates: route.coordinates,
+          },
+        },
+      });
+
+      map.current.addLayer({
+        id: "route",
+        type: "line",
+        source: "route",
+        layout: { "line-join": "round", "line-cap": "round" },
+        paint: { "line-color": "#A1121B", "line-width": 5 },
+      });
+
+      const bounds = route.coordinates.reduce(
+        (bounds, coord) => bounds.extend(coord),
+        new mapboxgl.LngLatBounds(
+          route.coordinates[0],
+          route.coordinates[0]
+        )
+      );
+      map.current.fitBounds(bounds, { padding: 50 });
+    }
+  };
 
   return (
     <div className="relative" style={{ height: "80vh", width: "100%" }}>
