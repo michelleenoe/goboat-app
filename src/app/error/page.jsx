@@ -8,6 +8,7 @@ import TechSolutions from "../components/error/TechSolutions";
 import VideoHelp from "../components/error/VideoHelp";
 import ImageSlider from "../components/error/ImageSlider";
 import errorData from "../lib/content/errorData";
+import Information from "../components/error/Information";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -80,7 +81,8 @@ export default function ErrorPage() {
       </div>
 
       <h3 className="font-semibold mb-2">{errordata.labels.solution}</h3>
-      <div className="mb-6">{renderContent()}</div>
+      <div className="">{renderContent()}</div>
+      <Information></Information>
     </div>
   );
 }
