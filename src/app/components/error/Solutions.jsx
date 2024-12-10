@@ -6,9 +6,7 @@ export default function Solutions({ selectedError, language }) {
       }`;
       return (
         selectedError?.[solutionKey] && (
-          <li key={i}>
-            {i + 1}. {selectedError[solutionKey]}
-          </li>
+          <li key={i}>{selectedError[solutionKey]}</li>
         )
       );
     }).filter(Boolean);
