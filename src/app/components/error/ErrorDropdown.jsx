@@ -47,7 +47,7 @@ export default function ErrorDropdown({ data, language, onSelect }) {
               <ListboxOptions className="absolute text-sm mt-2 w-full bg-grey2  border border-darkBlue rounded-3xl shadow-lg z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange max-h-52 overflow-y-auto scrollbar-hidden">
                 {data.map((item) => (
                   <ListboxOption
-                    tabindex={0}
+                    tabIndex={0}
                     key={item.id}
                     value={item}
                     className={({ active }) =>

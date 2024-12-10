@@ -19,6 +19,7 @@ export default function Header() {
           width={200}
           height={100}
           style={{ width: "auto", height: "auto" }}
+          priority
         />
       </div>
     </header>
