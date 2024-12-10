@@ -15,7 +15,7 @@ const ImageCard = ({ solution, image, numbericon }) => {
         )}
 
         {solution && (
-          <p className="text-typoPrimary text-m font-semibold">{solution}</p>
+          <p className="text-typoPrimary text-sm font-semibold">{solution}</p>
         )}
       </div>
 

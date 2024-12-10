@@ -5,6 +5,7 @@ const errorData = {
       needHelp: "Need help?",
       solution: "Solution:",
       contactSupport: "Contact Support",
+      loading: "Loading Error codes...",
     },
     placeholders: {
       dropdown: "Select an error code",
@@ -24,6 +25,7 @@ const errorData = {
       needHelp: "Har du brug for hjælp?",
       solution: "Løsning:",
       contactSupport: "Kontakt support",
+      loading: "Indlæser fejloplysninger...",
     },
     placeholders: {
       dropdown: "Vælg en fejlkode",

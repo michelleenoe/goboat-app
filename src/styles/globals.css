@@ -16,3 +16,7 @@ select:focus-visible {
   outline: 2px solid #ed6d38;
   outline-offset: 2px;
 }
+
+p {
+  max-width: 300pt;
+}
