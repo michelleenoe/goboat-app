@@ -1,4 +1,3 @@
-"use client";
 import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import { useLanguage } from "../../lib/context/language";
@@ -7,14 +6,24 @@ import NavigationButtons from "../basics/NavigationButtons";
 import Pagination from "./Pagination";
 import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
-export default function ScreenTwo({ onBack, onNext, onDurationSelect }) {
+export default function ScreenTwo({ onBack, onNext }) {
   const { language } = useLanguage();
-
   const { setIsFooterVisible } = useFooterVisibility();
 
+  const resetTimer = (duration) => {
+    const totalTime = parseInt(duration, 10) * 60 * 60;
+    localStorage.setItem("selectedDuration", duration); 
+    localStorage.setItem("remainingTime", totalTime);
+  };
+
+  const handleDurationSelect = (duration) => {
+    resetTimer(duration);
+    onNext();
+  };
+
   useEffect(() => {
-    setIsFooterVisible(false); // Skjul Footer
-    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+    setIsFooterVisible(false);
+    return () => setIsFooterVisible(true);
   }, [setIsFooterVisible]);
 
   return (
@@ -26,9 +35,18 @@ export default function ScreenTwo({ onBack, onNext, onDurationSelect }) {
             {copy[language].timer.title}
           </h2>
           <div className="flex flex-col">
-            <DefaultButton text={copy[language].timer.oneHour} />
-            <DefaultButton text={copy[language].timer.twoHours} />
-            <DefaultButton text={copy[language].timer.threeHours} />
+            <DefaultButton
+              text={copy[language].timer.oneHour}
+              onClick={() => handleDurationSelect(1)}
+            />
+            <DefaultButton
+              text={copy[language].timer.twoHours}
+              onClick={() => handleDurationSelect(2)}
+            />
+            <DefaultButton
+              text={copy[language].timer.threeHours}
+              onClick={() => handleDurationSelect(3)}
+            />
           </div>
         </div>
       </div>

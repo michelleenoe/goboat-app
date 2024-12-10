@@ -12,13 +12,13 @@ export default function ScreenOne({ onNext }) {
 
   const handleLanguageSelect = (lang) => {
     changeLanguage(lang);
-    onNext(); // Naviger til næste skærm efter valg af sprog
+    onNext();
   };
   const { setIsFooterVisible } = useFooterVisibility();
 
   useEffect(() => {
-    setIsFooterVisible(false); // Skjul Footer
-    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+    setIsFooterVisible(false);
+    return () => setIsFooterVisible(true);
   }, [setIsFooterVisible]);
 
   return (

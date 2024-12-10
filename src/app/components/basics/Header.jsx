@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import { useTheme } from "@/app/lib/context/ThemeContext";
+import { usePathname } from "next/navigation";
+import Timer from "@/app/components/onboarding/Timer";
 
 export default function Header() {
   const { theme } = useTheme();
+  const pathname = usePathname();
+  const isOnboarding = pathname.startsWith("/onboarding");
 
   return (
     <header className=" w-52 flex justify-left">
@@ -22,6 +26,12 @@ export default function Header() {
           priority
         />
       </div>
+      {!isOnboarding && (
+        <div className="">
+          <Timer />
+        </div>
+      )}
     </header>
   );
 }
+

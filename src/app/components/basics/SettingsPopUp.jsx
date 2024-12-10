@@ -7,13 +7,14 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/app/lib/context/language";
 import { settingsData } from "../../lib/content/settingsData";
 import { CloseButton } from "./CloseButton";
+import ResetOnboardingButton from "./ResetOnboarding";
 
 export default function SettingsPopup({ isOpen, onClose }) {
   const { locationEnabled, setLocationEnabled } = useLocation();
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
   const [locationData, setLocationData] = useState(null);
-  const { language } = useLanguage(); // Hent det aktuelle sprog
-  const t = settingsData[language]; // Sprogdata baseret på det valgte sprog
+  const { language } = useLanguage();
+  const t = settingsData[language];
 
   useEffect(() => {
     let locationWatchId = null;
@@ -64,10 +65,7 @@ export default function SettingsPopup({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-typoPrimary bg-opacity-50 z-50">
       <div className="bg-grey1 rounded-3xl shadow-lg w-80 p-6 relative">
-        {/* Dynamisk titel */}
         <h2 className="text-xl font-semibold text-center mb-6">{t.title}</h2>
-
-        {/* Dynamisk Lokation */}
         <div className="flex justify-between items-center mb-6">
           <span className="text-typoPrimary">{t.location}</span>
           <Switch
@@ -87,12 +85,11 @@ export default function SettingsPopup({ isOpen, onClose }) {
             />
           </Switch>
         </div>
-
-        {/* Sprog og Tema */}
         <LanguageOptions />
         <ThemeOptions />
-
-        {/* Luk-knap */}
+        <div className="mt-4">
+          <ResetOnboardingButton />
+        </div>
         <CloseButton onClose={onClose} />
       </div>
     </div>
