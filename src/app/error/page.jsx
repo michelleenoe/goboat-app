@@ -56,20 +56,20 @@ export default function ErrorPage() {
     } else if (selectedError[`${language === "da" ? "da" : "en"}_video_url`]) {
       return (
         <div className="mb-8">
-          <VideoHelp selectedError={selectedError} language={language} />;
+          <VideoHelp selectedError={selectedError} language={language} />
         </div>
       );
     } else if (selectedError.img_url) {
       return (
         <div className="mb-8">
-          <ImageSlider selectedError={selectedError} language={language} />;
+          <ImageSlider selectedError={selectedError} language={language} />
         </div>
       );
     } else {
       return (
         <div className="mb-8">
           {" "}
-          <Solutions selectedError={selectedError} language={language} />;
+          <Solutions selectedError={selectedError} language={language} />
         </div>
       );
     }

@@ -20,7 +20,7 @@ const ImageCard = ({ solution, image, numbericon }) => {
       </div>
 
       {image && (
-        <div className="relative w-80 h-64">
+        <div className="relative w-80 h-52">
           <Image
             src={image}
             alt="Card Image"
