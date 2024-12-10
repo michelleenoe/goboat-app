@@ -1,26 +1,132 @@
-import Image from "next/image";
+"use client";
 
-export default function ImageSlider({ selectedError }) {
-  const images = selectedError.img_url ? JSON.parse(selectedError.img_url) : [];
+import React, { useRef, useState, useEffect } from "react";
+import NavigationButtons from "../basics/NavigationButtons";
+import ImageCard from "./ImageCard";
 
-  if (images.length === 0) return null;
+const ImageSlider = ({ mainTitle, selectedError, language }) => {
+  const sliderRef = useRef(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const getSolutionsAndImages = () => {
+    const solutions = Array.from({ length: 5 }, (_, i) => {
+      const solutionKey = `solution${i + 1}_${
+        language === "da" ? "da" : "eng"
+      }`;
+      return selectedError?.[solutionKey] || null;
+    });
+
+    const images = selectedError?.img_url
+      ? JSON.parse(selectedError.img_url)
+      : [];
+
+    // Kombiner løsninger, billeder og ikoner i et array
+    return solutions.map((solution, index) => ({
+      solution,
+      image: images[index] || null,
+      numbericon: `/illustrations/nr${index + 1}.svg`, // Dynamisk ikonsti
+    }));
+  };
+
+  // Filtrerer tomme elementer væk
+  const items = getSolutionsAndImages().filter(
+    (item) => item.solution || item.image
+  );
+  const duplicatedItems = [...items, ...items, ...items];
+  const centerIndex = Math.floor(items.length);
+
+  const scrollToIndex = (index, instant = false) => {
+    if (!sliderRef.current || !sliderRef.current.children[0]) return;
+
+    const cardWidth = sliderRef.current.children[0].offsetWidth;
+    const scrollPosition =
+      index * cardWidth - sliderRef.current.offsetWidth / 2 + cardWidth / 2;
+
+    sliderRef.current.style.scrollBehavior = instant ? "auto" : "smooth";
+    sliderRef.current.scrollTo({
+      left: scrollPosition,
+    });
+  };
+
+  const handleNext = () => {
+    if (!sliderRef.current || isAnimating) return;
+
+    const cardWidth = sliderRef.current.children[0].offsetWidth;
+    const scrollLeft = sliderRef.current.scrollLeft;
+    const currentIndex = Math.round(scrollLeft / cardWidth);
+    const newIndex = currentIndex + 1;
+
+    if (newIndex >= duplicatedItems.length - Math.floor(items.length)) {
+      setIsAnimating(true);
+      scrollToIndex(newIndex);
+      setTimeout(() => {
+        scrollToIndex(centerIndex, true);
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      scrollToIndex(newIndex);
+    }
+  };
+
+  const handlePrev = () => {
+    if (!sliderRef.current || isAnimating) return;
+
+    const cardWidth = sliderRef.current.children[0].offsetWidth;
+    const scrollLeft = sliderRef.current.scrollLeft;
+    const currentIndex = Math.round(scrollLeft / cardWidth);
+    const newIndex = currentIndex - 1;
+
+    if (newIndex < Math.floor(items.length)) {
+      setIsAnimating(true);
+      scrollToIndex(newIndex);
+      setTimeout(() => {
+        scrollToIndex(
+          duplicatedItems.length - Math.floor(items.length) - 1,
+          true
+        );
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      scrollToIndex(newIndex);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedError) {
+      scrollToIndex(centerIndex, true); // Gå til første kort
+    } else {
+      scrollToIndex(centerIndex, true); // Centrér slideren ved første rendering
+    }
+  }, [selectedError, centerIndex]);
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold">Billeder:</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {images.map((img, index) => (
-          <div key={index} className="relative w-full h-64">
-            <Image
-              src={img}
-              alt={`Step ${index + 1}`}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-md shadow-md"
+    <div className="image-slider-container px-4 max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold mb-4">{mainTitle}</h2>
+      <div
+        ref={sliderRef}
+        className="relative flex gap-4 overflow-x-auto no-scrollbar px-4 pb-6 -mx-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange"
+        style={{
+          scrollSnapType: "x mandatory",
+        }}
+      >
+        {duplicatedItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0"
+            style={{ scrollSnapAlign: "center" }}
+          >
+            <ImageCard
+              key={index}
+              {...item}
+              index={index}
+              numbericon={item.numbericon}
             />
           </div>
         ))}
       </div>
+      <NavigationButtons handlePrev={handlePrev} handleNext={handleNext} />
     </div>
   );
-}
+};
+
+export default ImageSlider;
