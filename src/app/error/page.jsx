@@ -78,6 +78,7 @@ export default function ErrorPage() {
   return (
     <div className="">
       <h1 className="sr-only">Error Page</h1>
+      <p className="text-xl font-bold mb-4">Find Your Error Code</p>
 
       <ErrorDropdown
         data={data}
@@ -85,12 +86,13 @@ export default function ErrorPage() {
         onSelect={setSelectedError}
       />
       <div className="flex flex-col items-center justify-center">
-        <h3 className="text-lg font-semibold py-4">
+        <h2 className="font-bold py-4">
           {`${selectedError.e_codes} - ${
             language === "da" ? selectedError.da_title : selectedError.eng_title
           }`}
-        </h3>
+        </h2>
       </div>
+      <h3 className=" font-semibold mb-2">Løsninger:</h3>
 
       <div>
         {selectedError.requires_support ? (
