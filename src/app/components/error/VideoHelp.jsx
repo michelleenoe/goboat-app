@@ -32,7 +32,7 @@ export default function SolutionsWithVideo({ selectedError, language }) {
   };
 
   return (
-    <div className="bg-grey1 p-6 rounded-2xl shadow-lg max-w-xl mx-auto">
+    <div className="bg-grey1 p-6 rounded-2xl shadow-md max-w-xl mx-auto">
       {/* Løsninger */}
       <ul className="list-decimal pl-6 text-sm space-y-2">
         {renderSolutions()}

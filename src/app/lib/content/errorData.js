@@ -3,7 +3,7 @@ const errorData = {
     labels: {
       findErrorCode: "Find Your Error Code",
       needHelp: "Need help?",
-      solution: "Solution:",
+      solution: "Solution",
       contactSupport: "Contact Support",
       loading: "Loading Error codes...",
     },
@@ -23,7 +23,7 @@ const errorData = {
     labels: {
       findErrorCode: "Find din fejlkode",
       needHelp: "Har du brug for hjælp?",
-      solution: "Løsning:",
+      solution: "Løsning",
       contactSupport: "Kontakt support",
       loading: "Indlæser fejloplysninger...",
     },
