@@ -10,7 +10,7 @@ import { useLanguage } from "@/app/lib/context/language";
 
 export default function Header() {
   const { theme } = useTheme();
-  const { language } = useLanguage(); // Dynamisk sprogvalg
+  const { language } = useLanguage();
   const pathname = usePathname();
   const isOnboarding = pathname.startsWith("/onboarding");
 
@@ -19,10 +19,12 @@ export default function Header() {
 
   // Dynamisk baggrundsfarve baseret på tid
   const backgroundColor =
-    timeLeft === 0
-      ? "bg-red-500"
-      : timeLeft <= 900 // 15 minutter
-      ? "bg-yellow-400"
+    timeLeft === null
+      ? "bg-grey1"
+      : timeLeft === 0
+      ? "bg-warningRed"
+      : timeLeft <= 900
+      ? "bg-goboatYellow"
       : "bg-grey1";
 
   return (

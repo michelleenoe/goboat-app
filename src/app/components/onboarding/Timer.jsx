@@ -6,23 +6,34 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
   const [hasCalledTimeUp, setHasCalledTimeUp] = useState(false);
 
   useEffect(() => {
-    const savedTime = localStorage.getItem("remainingTime");
-    if (savedTime) {
-      setTimeLeft(parseInt(savedTime, 10));
+    const savedEndTime = localStorage.getItem("timerEndTime");
+    if (savedEndTime) {
+      const remainingTime = Math.max(
+        Math.floor((new Date(savedEndTime) - new Date()) / 1000),
+        0
+      );
+      setTimeLeft(remainingTime);
+
+      if (remainingTime === 0 && onTimeUp) {
+        setHasCalledTimeUp(true);
+        onTimeUp();
+      }
     } else {
       const duration = localStorage.getItem("selectedDuration");
       if (duration) {
-        const totalTime = parseInt(duration, 10) * 60 * 60;
+        const totalTime = parseInt(duration, 10) * 60 * 60; // Konverter timer til sekunder
+        const endTime = new Date(new Date().getTime() + totalTime * 1000);
+        localStorage.setItem("timerEndTime", endTime.toISOString());
         setTimeLeft(totalTime);
       }
     }
-  }, []);
+  }, [onTimeUp]);
 
   useEffect(() => {
     if (timeLeft === 0 && !hasCalledTimeUp) {
-      setHasCalledTimeUp(true); // Forhinder gentagne kald
+      setHasCalledTimeUp(true);
       if (onTimeUp) {
-        onTimeUp(); // Udløs pop-up
+        onTimeUp();
       }
     }
 
@@ -37,7 +48,7 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
 
   useEffect(() => {
     if (onTimeUpdate) {
-      onTimeUpdate(timeLeft); // Opdater parent-komponenten
+      onTimeUpdate(timeLeft);
     }
   }, [timeLeft, onTimeUpdate]);
 
@@ -53,7 +64,7 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
 
   return (
     <div className="text-lg font-mono font-medium text-center min-w-[100px]">
-      {formatTime(timeLeft)}
+      {timeLeft !== null ? formatTime(timeLeft) : "Loading..."}
     </div>
   );
 }
