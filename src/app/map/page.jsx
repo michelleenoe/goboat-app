@@ -6,8 +6,6 @@ import Image from "next/image";
 import { RouteIcon } from "@/app/components/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
 import "./styles.css";
-import {copy} from "@/app/lib/content/copy";
-
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
@@ -16,8 +14,20 @@ const MapPage = () => {
   const map = useRef(null);
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const { language } = useLanguage(); 
+  const { language } = useLanguage();
 
+  const translations = {
+    en: {
+      "1_time": "1 hour",
+      "2_time": "2 hours",
+      "3_time": "3 hours",
+    },
+    da: {
+      "1_time": "1 time",
+      "2_time": "2 timer",
+      "3_time": "3 timer",
+    },
+  };
 
   const routes = [
     {
@@ -135,7 +145,7 @@ const MapPage = () => {
                 cursor: "pointer",
               }}
             >
-              <span>{copy[language][route.id]}</span>
+              <span>{translations[language][route.id]}</span> 
               <span
                 style={{
                   border: "2px solid #ccc",
