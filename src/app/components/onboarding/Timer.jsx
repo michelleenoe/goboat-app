@@ -14,8 +14,8 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
       );
       setTimeLeft(remainingTime);
 
-      if (remainingTime === 0 && onTimeUp) {
-        setHasCalledTimeUp(true);
+      if (remainingTime === 0 && !hasCalledTimeUp && onTimeUp) {
+        setHasCalledTimeUp(true); // Sikrer, at onTimeUp kun kaldes én gang
         onTimeUp();
       }
     } else {
@@ -27,11 +27,11 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
         setTimeLeft(totalTime);
       }
     }
-  }, [onTimeUp]);
+  }, [onTimeUp, hasCalledTimeUp]);
 
   useEffect(() => {
     if (timeLeft === 0 && !hasCalledTimeUp) {
-      setHasCalledTimeUp(true);
+      setHasCalledTimeUp(true); // Undgå gentagelser
       if (onTimeUp) {
         onTimeUp();
       }
