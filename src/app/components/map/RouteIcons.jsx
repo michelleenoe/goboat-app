@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 
 export const RouteIcon = ({ width = 30, height = 30, className = "" }) => (
   <svg
@@ -16,23 +15,4 @@ export const RouteIcon = ({ width = 30, height = 30, className = "" }) => (
       <path d="M3.1543 21.6309c1.73828 0 3.14453-1.4161 3.14453-3.1543 0-1.7286-1.40625-3.1446-3.14453-3.1446S.00976562 16.748.00976562 18.4766c0 1.7382 1.40625438 3.1543 3.14453438 3.1543ZM14.1504 6.29883c1.748 0 3.1543-1.41602 3.1543-3.1543C17.3047 1.41602 15.8984 0 14.1504 0c-1.7285 0-3.1445 1.41602-3.1445 3.14453 0 1.73828 1.416 3.1543 3.1445 3.1543Zm0-1.53321c-.8984 0-1.6113-.71289-1.6113-1.62109 0-.9082.7226-1.61133 1.6113-1.61133.918 0 1.6211.70313 1.6211 1.61133 0 .9082-.7031 1.62109-1.6211 1.62109Z" strokeWidth="6"></path>
     </g>
   </svg>
-);
-export const GeolocateIcon = ({ width = 30, height = 30, className = "" }) => (
-  <Image
-    src="/Icons/map-pin.svg"
-    alt="Geolocate Icon"
-    width={width}
-    height={height}
-    className={className}
-  />
-);
-
-export const ToggleMapIcon = ({ width = 30, height = 30, className = "" }) => (
-  <Image
-    src="/Icons/Layer.svg"
-    alt="Toggle Map Icon"
-    width={width}
-    height={height}
-    className={className}
-  />
 );

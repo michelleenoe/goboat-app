@@ -1,7 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+
 const ThemeContext = createContext();
+
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("light");
   useEffect(() => {
@@ -20,6 +22,7 @@ export function ThemeProvider({ children }) {
     </ThemeContext.Provider>
   );
 }
+
 export function useTheme() {
   return useContext(ThemeContext);
 }

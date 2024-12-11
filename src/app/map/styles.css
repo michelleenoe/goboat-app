@@ -1,20 +1,5 @@
+@import "https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css";
 
-.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
-    display:none;
-}
-
-
-.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate:disabled .mapboxgl-ctrl-icon {
-   display:none;
-}
-
-.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate.mapboxgl-ctrl-geolocate-active .mapboxgl-ctrl-icon {
-    display:none;
-}
-.mapboxgl-ctrl-geolocate {
-    display:none;
-
-}
 .mapboxgl-ctrl .mapboxgl-ctrl-attrib .mapboxgl-compact
 {
     display:none;
