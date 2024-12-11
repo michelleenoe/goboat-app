@@ -63,7 +63,7 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
   };
 
   return (
-    <div className="text-lg font-mono font-medium text-center min-w-[100px]">
+    <div className="text-lg text-typoPrimary font-mono font-medium text-center min-w-[100px]">
       {timeLeft !== null ? formatTime(timeLeft) : "Loading..."}
     </div>
   );
