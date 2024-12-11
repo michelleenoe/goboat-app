@@ -114,7 +114,7 @@ const MapPage = () => {
             padding: "10px",
             boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
             position: "absolute",
-            top: "60px",
+            top: "10px",
             left: "10px",
             zIndex: 20,
           }}
