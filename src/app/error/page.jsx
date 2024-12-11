@@ -76,8 +76,8 @@ export default function ErrorPage() {
       </div>
 
       <div className="flex flex-col items-center justify-center my-6">
-        <h2 className="font-semibold">{errordata.labels.solution}</h2>
-        <p className="font-bold ">
+        <h2 className="font-semibold mb-2">{errordata.labels.solution}</h2>
+        <p className="font-bold text-darkBlue dark:text-lightBlue">
           {`${selectedError.e_codes} - ${
             language === "da" ? selectedError.da_title : selectedError.eng_title
           }`}
