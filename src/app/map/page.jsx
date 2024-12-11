@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import Image from "next/image";
-import { RouteIcon } from "@/app/components/RouteIcons";
+import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
 import "./styles.css";
 
