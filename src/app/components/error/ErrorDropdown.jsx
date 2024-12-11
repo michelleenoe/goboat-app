@@ -17,13 +17,13 @@ export default function ErrorDropdown({ data, language, onSelect }) {
 
   return (
     <div className="flex flex-col relative">
-      <label htmlFor="error-select" className="text-xl font-bold mb-4">
+      <label htmlFor="error-select" className="text-xl font-bold mb-4 sr-only">
         Find Your Error Code
       </label>
       <Listbox value={selectedError} onChange={handleSelect}>
         {({ open }) => (
           <div className="relative">
-            <ListboxButton className="w-full p-3 border border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange flex justify-between items-center">
+            <ListboxButton className="w-full py-2 pl-6 pr-4 border text-sm  border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange flex justify-between items-center">
               <span>
                 {selectedError.e_codes} -{" "}
                 {language === "da"
@@ -44,7 +44,7 @@ export default function ErrorDropdown({ data, language, onSelect }) {
               </div>
             </ListboxButton>
             {open && (
-              <ListboxOptions className="absolute text-sm mt-2 w-full bg-grey2  border border-darkBlue rounded-3xl shadow-lg z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange max-h-52 overflow-y-auto scrollbar-hidden">
+              <ListboxOptions className="absolute text-sm mt-2 w-full bg-grey2 text-typoPrimary border border-darkBlue rounded-3xl shadow-lg z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange max-h-52 overflow-y-auto scrollbar-hidden">
                 {data.map((item) => (
                   <ListboxOption
                     tabIndex={0}
