@@ -11,7 +11,7 @@ const FAQ = ({ mainTitle, questions }) => {
   };
 
   return (
-    <div className=" px-4 max-w-4xl mx-auto">
+    <div className=" px-4">
       <h3 className="text-xl font-bold mb-4 ">{mainTitle}</h3>
       <div className="space-y-4">
         {questions.map((faq, index) => (

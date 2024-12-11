@@ -16,7 +16,7 @@ export default function ErrorDropdown({ data, language, onSelect }) {
   };
 
   return (
-    <div className="flex flex-col relative">
+    <div className="px-4 flex flex-col relative">
       <Listbox value={selectedError} onChange={handleSelect}>
         {({ open }) => (
           <div className="relative">

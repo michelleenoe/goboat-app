@@ -1,14 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function NavButton({ href, icon, altText }) {
-  const [isActive, setIsActive] = useState(false);
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <Link
       href={href}
-      onClick={() => setIsActive(true)} // Aktiverer knappen
       className={`flex items-center justify-center w-12 h-12 rounded-full ${
         isActive ? "bg-lightBlue" : "bg-grey2 hover:bg-lightBlue"
       }`}
@@ -16,8 +18,8 @@ export default function NavButton({ href, icon, altText }) {
       <Image
         src={icon}
         alt={altText}
-        width={24} // Angiv billedets bredde
-        height={24} // Angiv billedets højde
+        width={24}
+        height={24}
         className="w-8 h-8"
       />
     </Link>

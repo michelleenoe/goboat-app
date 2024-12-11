@@ -64,7 +64,7 @@ export default function ErrorPage() {
   return (
     <div>
       <div>
-        <h1 className="text-xl font-bold mb-6">
+        <h1 className="px-4 text-xl font-bold mb-6">
           {errordata.labels.findErrorCode}
         </h1>
         <label className="sr-only">{errordata.placeholders.dropdown}</label>

@@ -9,7 +9,7 @@ const Information = () => {
   const data = informationData[language] || informationData.en;
 
   return (
-    <div className="py-6">
+    <div className="px-4 py-6">
       <h3 className="text-xl font-bold">Information</h3>
       <div className="space-y-4 p-3">
         <InfoItem
