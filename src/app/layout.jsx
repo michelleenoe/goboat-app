@@ -4,15 +4,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import React, { Suspense } from "react";
 import "../styles/globals.css";
-import Header from "@/app/components/basics/Header";
-import Footer from "@/app/components/basics/Footer";
 import { LanguageProvider, useLanguage } from "@/app/lib/context/language";
 import { ThemeProvider } from "@/app/lib/context/ThemeContext";
 import { LocationProvider } from "@/app/lib/context/LocationContext";
 import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
 import { useFooterVisibility } from "./lib/context/FooterVisibility";
 
-// Dynamisk import af komponenter uden SSR
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
   ssr: false,
 });
