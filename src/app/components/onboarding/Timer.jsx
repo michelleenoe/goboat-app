@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-export default function Timer() {
+export default function Timer({ onTimeUpdate, onTimeUp }) {
   const [timeLeft, setTimeLeft] = useState(null);
+  const [hasCalledTimeUp, setHasCalledTimeUp] = useState(false);
 
   useEffect(() => {
     const savedTime = localStorage.getItem("remainingTime");
@@ -18,32 +19,41 @@ export default function Timer() {
   }, []);
 
   useEffect(() => {
-    if (!timeLeft) return;
+    if (timeLeft === 0 && !hasCalledTimeUp) {
+      setHasCalledTimeUp(true); // Forhinder gentagne kald
+      if (onTimeUp) {
+        onTimeUp(); // Udløs pop-up
+      }
+    }
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 0) {
-          clearInterval(timer);
-          localStorage.removeItem("remainingTime");
-          return 0;
-        }
-        const newTime = prev - 1;
-        localStorage.setItem("remainingTime", newTime);
-        return newTime;
-      });
-    }, 1000);
+    if (timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft((prev) => Math.max(prev - 1, 0));
+      }, 1000);
 
-    return () => clearInterval(timer);
-  }, [timeLeft]);
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft, hasCalledTimeUp, onTimeUp]);
 
-  if (!timeLeft) return null;
+  useEffect(() => {
+    if (onTimeUpdate) {
+      onTimeUpdate(timeLeft); // Opdater parent-komponenten
+    }
+  }, [timeLeft, onTimeUpdate]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+      2,
+      "0"
+    )}:${String(secs).padStart(2, "0")}`;
   };
 
-  return <div className="text-lg font-medium">{formatTime(timeLeft)}</div>;
+  return (
+    <div className="text-lg font-mono font-medium text-center min-w-[100px]">
+      {formatTime(timeLeft)}
+    </div>
+  );
 }
