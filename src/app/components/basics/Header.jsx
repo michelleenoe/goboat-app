@@ -59,7 +59,7 @@ export default function Header() {
 
       {/* Pop-up */}
       {isTimeUp && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 text-typoPrimary bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-grey2 p-6 rounded-3xl shadow-lg text-center">
             <p className="text-lg font-bold mb-4">
               {timerData[language].timeup}
