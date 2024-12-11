@@ -23,24 +23,18 @@ export default function SettingsPopup({ isOpen, onClose }) {
       setIsFetchingLocation(true);
 
       if (navigator.geolocation) {
-        locationWatchId = navigator.geolocation.watchPosition(
-          (position) => {
-            console.log(
-              "User's location:",
-              position.coords.latitude,
-              position.coords.longitude
-            );
-            setLocationData({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            });
-            setIsFetchingLocation(false);
-          },
-          (error) => {
-            console.error("Error getting location:", error);
-            setIsFetchingLocation(false);
-          }
-        );
+        locationWatchId = navigator.geolocation.watchPosition((position) => {
+          console.log(
+            "User's location:",
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          setLocationData({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          setIsFetchingLocation(false);
+        });
       } else {
         console.error("Geolocation is not supported by this browser.");
         setIsFetchingLocation(false);
