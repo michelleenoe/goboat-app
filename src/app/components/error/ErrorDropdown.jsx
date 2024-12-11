@@ -17,9 +17,6 @@ export default function ErrorDropdown({ data, language, onSelect }) {
 
   return (
     <div className="flex flex-col relative">
-      <label htmlFor="error-select" className="text-xl font-bold mb-4 sr-only">
-        Find Your Error Code
-      </label>
       <Listbox value={selectedError} onChange={handleSelect}>
         {({ open }) => (
           <div className="relative">

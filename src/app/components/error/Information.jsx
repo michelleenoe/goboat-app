@@ -1,20 +1,27 @@
+"use client";
 import { useLanguage } from "@/app/lib/context/language";
 import informationData from "@/app/lib/content/information";
+import { useTheme } from "@/app/lib/context/ThemeContext";
 import Image from "next/image";
 
 const Information = () => {
+  const { theme } = useTheme();
   const { language } = useLanguage();
   const data = informationData[language] || informationData.en;
 
   return (
     <div className="py-6">
-      <h2 className="text-xl font-bold">Information</h2>
+      <h3 className="text-xl font-bold">Information</h3>
       <div className="space-y-4 p-3">
         {/* Address */}
         <div className="flex items-start space-x-3">
           <div className="mt-1">
             <Image
-              src="/Icons/map-pin.svg"
+              src={
+                theme === "dark"
+                  ? "/Icons/dark-map-pin.svg"
+                  : "/Icons/map-pin.svg"
+              }
               alt="Address Icon"
               width={20}
               height={20}
@@ -30,7 +37,9 @@ const Information = () => {
         <div className="flex items-start space-x-3">
           <div className="mt-1">
             <Image
-              src="/Icons/phone.svg"
+              src={
+                theme === "dark" ? "/Icons/dark-phone.svg" : "/Icons/phone.svg"
+              }
               alt="Phone Icon"
               width={20}
               height={20}
@@ -46,7 +55,9 @@ const Information = () => {
         <div className="flex items-start space-x-3">
           <div className="mt-1">
             <Image
-              src="/Icons/mail.svg"
+              src={
+                theme === "dark" ? "/Icons/dark-mail.svg" : "/Icons/mail.svg"
+              }
               alt="Email Icon"
               width={20}
               height={20}

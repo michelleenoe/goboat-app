@@ -63,24 +63,27 @@ export default function ErrorPage() {
 
   return (
     <div>
-      <h1 className="sr-only">Error Page</h1>
-      <p className="text-xl font-bold mb-4">{errordata.labels.findErrorCode}</p>
+      <div>
+        <h1 className="text-xl font-bold mb-6">
+          {errordata.labels.findErrorCode}
+        </h1>
+        <label className="sr-only">{errordata.placeholders.dropdown}</label>
+        <ErrorDropdown
+          data={data}
+          language={language}
+          onSelect={setSelectedError}
+        />
+      </div>
 
-      <ErrorDropdown
-        data={data}
-        language={language}
-        onSelect={setSelectedError}
-      />
-
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="font-bold py-4">
+      <div className="flex flex-col items-center justify-center my-6">
+        <h2 className="font-semibold">{errordata.labels.solution}</h2>
+        <p className="font-bold ">
           {`${selectedError.e_codes} - ${
             language === "da" ? selectedError.da_title : selectedError.eng_title
           }`}
-        </h2>
+        </p>
       </div>
 
-      <h3 className="font-semibold mb-2">{errordata.labels.solution}</h3>
       <div className="">{renderContent()}</div>
       <Information></Information>
     </div>

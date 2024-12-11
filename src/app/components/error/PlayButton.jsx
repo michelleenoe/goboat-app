@@ -1,16 +1,3 @@
-// const PlayButton = ({ onClick }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       className="bg-blue-500 text-white px-4 py-2 rounded-full"
-//     >
-//       Play
-//     </button>
-//   );
-// };
-
-// export default PlayButton;
-
 import Image from "next/image";
 
 const PlayButton = ({ onClick }) => {

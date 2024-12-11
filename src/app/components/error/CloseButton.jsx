@@ -1,16 +1,3 @@
-// const CloseButton = ({ onClick }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full"
-//     >
-//       Close
-//     </button>
-//   );
-// };
-
-// export default CloseButton;
-
 import Image from "next/image";
 
 const CloseButton = ({ onClick }) => {
