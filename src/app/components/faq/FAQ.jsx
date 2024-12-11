@@ -47,7 +47,7 @@ const FAQ = ({ mainTitle, questions }) => {
               </div>
             </div>
             {activeIndex === index && (
-              <div className="px-4 py-2 text-typoSecondary">
+              <div className="px-4 pt-2 pb-4 text-typoSecondary">
                 {faq.description}
               </div>
             )}
