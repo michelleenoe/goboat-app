@@ -1,10 +1,9 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import Image from "next/image";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
-import "./styles.css";
+import "./styles.css"
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
@@ -56,7 +55,9 @@ const MapPage = () => {
     const geolocateControl = new mapboxgl.GeolocateControl({
       positionOptions: { enableHighAccuracy: true },
       trackUserLocation: true,
+      showUserHeading: true,
     });
+
     map.current.addControl(geolocateControl, "top-right");
   }, []);
 
@@ -81,43 +82,20 @@ const MapPage = () => {
   };
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "90vh" }}>
-      <div ref={mapContainer} style={{ width: "100%", height: "90%" }}></div>
-      <div
-        style={{
-          position: "absolute",
-          top: "10px",
-          left: "10px",
-          zIndex: 10,
-        }}
-      >
+    <div className="relative" style={{ height: "80vh", width: "100%" }}>
+      <div ref={mapContainer} style={{ height: "100%", width: "100%" }} />
+
+      <div className="absolute top-4 left-4 z-10 flex flex-col gap-4">
         <button
           onClick={() => setIsFilterOpen((prev) => !prev)}
-          style={{
-            padding: "10px",
-            borderRadius: "50%",
-            backgroundColor: "white",
-            boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-            cursor: "pointer",
-          }}
+          className="p-3 rounded-full bg-white shadow-lg flex items-center justify-center"
         >
           <RouteIcon width={24} height={24} />
         </button>
       </div>
+
       {isFilterOpen && (
-        <div
-          className="absolute right-0 mt-0.5 w-64 bg-grey2 rounded-3xl shadow-md p-4 z-40 text-typoPrimary"
-          style={{
-            backgroundColor: "white",
-            borderRadius: "8px",
-            padding: "10px",
-            boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            zIndex: 20,
-          }}
-        >
+        <div className="absolute top-3 left-4 bg-white rounded-lg shadow-lg p-4 z-20 w-64 space-y-4">
           {routes.map((route) => (
             <div
               key={route.id}
@@ -129,42 +107,30 @@ const MapPage = () => {
                   handleRouteSelect(route.id);
                 }
               }}
-              className={`p-2 cursor-pointer rounded-lg flex justify-between items-center hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange ${
-                selectedRoute === route.id ? "bg-grey1 font-regular" : ""
+              className={`p-2 rounded-lg flex justify-between items-center ${
+                selectedRoute === route.id ? "bg-grey2 font-bold" : ""
               }`}
-              style={{
-                marginBottom: "10px",
-                padding: "10px",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor:
-                  selectedRoute === route.id ? "#f0f0f0" : "transparent",
-                cursor: "pointer",
-              }}
             >
-              <span>{translations[language][route.id]}</span> 
+              <span>{translations[language][route.id]}</span>
               <span
-                style={{
-                  border: "2px solid #ccc",
-                  borderRadius: "50%",
-                  width: "24px",
-                  height: "24px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor:
-                    selectedRoute === route.id ? "#ffc107" : "#e0e0e0",
-                }}
+                className={`rounded-full w-6 h-6 flex items-center justify-center ${
+                  selectedRoute === route.id
+                    ? "bg-goboatYellow"
+                    : "bg-grey1"
+                }`}
               >
                 {selectedRoute === route.id && (
-                  <Image
-                    src="/Icons/check.svg"
-                    alt="Check icon"
-                    width={16}
-                    height={16}
-                  />
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 11.586l6.293-6.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                 )}
               </span>
             </div>

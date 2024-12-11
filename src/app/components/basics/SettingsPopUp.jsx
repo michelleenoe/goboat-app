@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/app/lib/context/language";
 import { settingsData } from "../../lib/content/settingsData";
 import { CloseButton } from "./CloseButton";
-import ResetOnboardingButton from "./ResetOnboarding";
 
 export default function SettingsPopup({ isOpen, onClose }) {
   const { locationEnabled, setLocationEnabled } = useLocation();
@@ -81,9 +80,7 @@ export default function SettingsPopup({ isOpen, onClose }) {
         </div>
         <LanguageOptions />
         <ThemeOptions />
-        <div className="mt-4">
-          <ResetOnboardingButton />
-        </div>
+
         <CloseButton onClose={onClose} />
       </div>
     </div>
