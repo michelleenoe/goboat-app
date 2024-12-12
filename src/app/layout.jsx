@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
@@ -10,6 +11,8 @@ import { LocationProvider } from "@/app/lib/context/LocationContext";
 import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
 import { useFooterVisibility } from "./lib/context/FooterVisibility";
 import AppMessage from "./AppMessage";
+import { useRouter } from "next/navigation";
+import {getOnboardingStatus} from "@/app/lib/storage"
 
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
   ssr: false,
@@ -18,14 +21,29 @@ const NoSSRFooter = dynamic(() => import("@/app/components/basics/Footer"), {
   ssr: false,
 });
 
-function Content({ children }) {
-  const { language } = useLanguage();
-  const { isFooterVisible } = useFooterVisibility();
-
-  return (
-    <html lang={language}>
-      <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
-        <ThemeProvider>
+  function Content({ children }) {
+    const { language } = useLanguage();
+    const { isFooterVisible } = useFooterVisibility();
+    const router = useRouter();
+  
+    useEffect(() => {
+      const hasCompletedOnboarding = getOnboardingStatus();
+      const hasShownOnboarding = localStorage.getItem("onboardingShown");
+      const currentPath = window.location.pathname;
+  
+      if (!hasShownOnboarding) {
+        localStorage.setItem("onboardingShown", "true");
+        if (currentPath !== "/onboarding") {
+          router.push("/onboarding");
+        }
+      } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
+        router.push("/");
+      }
+    }, [router]);
+  
+    return (
+      <html lang={language}>
+        <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
           <Suspense fallback={null}>
             <div className="block 928px:hidden">
               <NoSSRHeader />
@@ -35,8 +53,6 @@ function Content({ children }) {
             <div className="block 928px:hidden">
               <Suspense fallback={null}>
                 {children}
-                <SpeedInsights />
-                <Analytics />
               </Suspense>
             </div>
             <div className="hidden 928px:flex min-h-screen items-center justify-center">
@@ -50,22 +66,22 @@ function Content({ children }) {
               </div>
             </Suspense>
           )}
+        </body>
+      </html>
+    );
+  }
+  
+  export default function RootLayout({ children }) {
+    return (
+      <LanguageProvider>
+        <ThemeProvider>
+          <LocationProvider>
+            <FooterVisibilityProvider>
+              <Content>{children}</Content>
+            </FooterVisibilityProvider>
+          </LocationProvider>
         </ThemeProvider>
-      </body>
-    </html>
-  );
-}
-
-export default function RootLayout({ children }) {
-  return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <LocationProvider>
-          <FooterVisibilityProvider>
-            <Content>{children}</Content>
-          </FooterVisibilityProvider>
-        </LocationProvider>
-      </ThemeProvider>
-    </LanguageProvider>
-  );
-}
+      </LanguageProvider>
+    );
+  }
+  

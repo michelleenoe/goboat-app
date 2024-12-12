@@ -1,7 +1,7 @@
 import { messages } from "./lib/content/appData";
 
 const AppMessage = ({ language = "da" }) => {
-  const content = messages[language] || messages["da"]; // Fallback til dansk
+  const content = messages[language] || messages["da"];
 
   return (
     <div>

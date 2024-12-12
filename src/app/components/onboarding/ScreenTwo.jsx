@@ -24,7 +24,6 @@ export default function ScreenTwo({ onBack, onNext }) {
     onNext();
   };
   
-
   useEffect(() => {
     setIsFooterVisible(false);
     return () => setIsFooterVisible(true);
