@@ -1,13 +1,12 @@
+"use client";
 import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
-import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import NavigationButtons from "../basics/NavigationButtons";
 import Pagination from "./Pagination";
 import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
-export default function ScreenTwo({ onBack, onNext }) {
-  const { language } = useLanguage();
+export default function ScreenTwo({ onBack, onNext, language }) {
   const { setIsFooterVisible } = useFooterVisibility();
 
   const resetTimer = (duration) => {
@@ -18,12 +17,12 @@ export default function ScreenTwo({ onBack, onNext }) {
     localStorage.setItem("selectedDuration", duration);
     localStorage.setItem("timerEndTime", endTime.toISOString());
   };
-  
+
   const handleDurationSelect = (duration) => {
     resetTimer(duration);
     onNext();
   };
-  
+
   useEffect(() => {
     setIsFooterVisible(false);
     return () => setIsFooterVisible(true);

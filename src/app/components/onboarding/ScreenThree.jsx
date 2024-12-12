@@ -1,5 +1,5 @@
+"use client";
 import { useState, useEffect } from "react";
-import { useLanguage } from "../../lib/context/language";
 import { copy } from "../../lib/content/copy";
 import { getReminders } from "../../lib/data/reminders";
 import ReminderList from "./ReminderList";
@@ -8,8 +8,7 @@ import AgreeCheckbox from "./AgreeCheckbox";
 import Pagination from "./Pagination";
 import { useFooterVisibility } from "@/app/lib/context/FooterVisibility";
 
-export default function ScreenThree({ onBack }) {
-  const { language } = useLanguage();
+export default function ScreenThree({ onBack, language }) {
   const [isAgreed, setIsAgreed] = useState(false);
 
   const handleAgreeChange = (e) => {
@@ -21,8 +20,8 @@ export default function ScreenThree({ onBack }) {
   const { setIsFooterVisible } = useFooterVisibility();
 
   useEffect(() => {
-    setIsFooterVisible(false); // Skjul Footer
-    return () => setIsFooterVisible(true); // Vis Footer igen ved afmontering
+    setIsFooterVisible(false);
+    return () => setIsFooterVisible(true);
   }, [setIsFooterVisible]);
 
   return (
@@ -38,9 +37,6 @@ export default function ScreenThree({ onBack }) {
             isChecked={isAgreed}
             onChange={handleAgreeChange}
           />
-          {/* <p className="mt-8 font-bold text-center text-typoPrimary">
-            {copy[language].reminders.finalMessage}
-          </p> */}
         </div>
       </div>
       <Pagination currentScreen={2} totalScreens={3} />
