@@ -12,14 +12,18 @@ export default function ScreenTwo({ onBack, onNext }) {
 
   const resetTimer = (duration) => {
     const totalTime = parseInt(duration, 10) * 60 * 60;
-    localStorage.setItem("selectedDuration", duration); 
-    localStorage.setItem("remainingTime", totalTime);
-  };
+    const endTime = new Date(new Date().getTime() + totalTime * 1000);
 
+    localStorage.removeItem("timerEndTime");
+    localStorage.setItem("selectedDuration", duration);
+    localStorage.setItem("timerEndTime", endTime.toISOString());
+  };
+  
   const handleDurationSelect = (duration) => {
     resetTimer(duration);
     onNext();
   };
+  
 
   useEffect(() => {
     setIsFooterVisible(false);

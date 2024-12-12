@@ -7,6 +7,8 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
 
   useEffect(() => {
     const savedEndTime = localStorage.getItem("timerEndTime");
+    const savedDuration = localStorage.getItem("selectedDuration");
+
     if (savedEndTime) {
       const remainingTime = Math.max(
         Math.floor((new Date(savedEndTime) - new Date()) / 1000),
@@ -15,23 +17,21 @@ export default function Timer({ onTimeUpdate, onTimeUp }) {
       setTimeLeft(remainingTime);
 
       if (remainingTime === 0 && !hasCalledTimeUp && onTimeUp) {
-        setHasCalledTimeUp(true); // Sikrer, at onTimeUp kun kaldes én gang
+        setHasCalledTimeUp(true);
         onTimeUp();
       }
-    } else {
-      const duration = localStorage.getItem("selectedDuration");
-      if (duration) {
-        const totalTime = parseInt(duration, 10) * 60 * 60; // Konverter timer til sekunder
-        const endTime = new Date(new Date().getTime() + totalTime * 1000);
-        localStorage.setItem("timerEndTime", endTime.toISOString());
-        setTimeLeft(totalTime);
-      }
+    } else if (savedDuration) {
+      const totalTime = parseInt(savedDuration, 10) * 60 * 60;
+      const endTime = new Date(new Date().getTime() + totalTime * 1000);
+      localStorage.setItem("timerEndTime", endTime.toISOString());
+      setTimeLeft(totalTime);
+      setHasCalledTimeUp(false);
     }
   }, [onTimeUp, hasCalledTimeUp]);
 
   useEffect(() => {
     if (timeLeft === 0 && !hasCalledTimeUp) {
-      setHasCalledTimeUp(true); // Undgå gentagelser
+      setHasCalledTimeUp(true);
       if (onTimeUp) {
         onTimeUp();
       }
