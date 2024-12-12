@@ -4,6 +4,7 @@ import MapContainer from "@/app/components/map/MapContainer";
 import RouteFilter from "@/app/components/map/RouteFilter";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
+import LoadingPage from "../LoadingPage";
 import "./styles.css";
 
 const MapPage = () => {
@@ -11,6 +12,7 @@ const MapPage = () => {
   const map = useRef(null);
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { language } = useLanguage();
 
   const translations = {
@@ -42,6 +44,17 @@ const MapPage = () => {
   ];
 
   useEffect(() => {
+    const initializeMap = async () => {
+      // Simuler en loading-forsinkelse
+      setTimeout(() => {
+        setIsLoading(false); // Kort er nu indlæst
+      }, 2000);
+    };
+
+    initializeMap();
+  }, []);
+
+  useEffect(() => {
     if (!map.current || !selectedRoute) return;
 
     map.current.setFilter("routes-gb", ["==", "route", selectedRoute]);
@@ -58,8 +71,17 @@ const MapPage = () => {
 
   return (
     <div className="relative w-full h-screen">
+      {/* Kort-container skal altid være til stede */}
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
+      {/* Loading-overlay */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-20">
+          <LoadingPage />
+        </div>
+      )}
+
+      {/* Rutevalg-knap */}
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-4">
         <button
           onClick={() => setIsFilterOpen((prev) => !prev)}
@@ -69,6 +91,7 @@ const MapPage = () => {
         </button>
       </div>
 
+      {/* Rutevælgeren */}
       {isFilterOpen && (
         <RouteFilter
           routes={routes}
