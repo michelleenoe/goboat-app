@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/app/lib/context/ThemeContext";
 import { LocationProvider } from "@/app/lib/context/LocationContext";
 import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
 import { useFooterVisibility } from "./lib/context/FooterVisibility";
+import AppMessage from "./AppMessage";
 
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
   ssr: false,
@@ -39,9 +40,7 @@ function Content({ children }) {
               </Suspense>
             </div>
             <div className="hidden 928px:flex min-h-screen items-center justify-center">
-              <h1 className="text-2xl font-bold">
-                Denne side er kun tilgængelig på mobile enheder
-              </h1>
+              <AppMessage language={language} />
             </div>
           </main>
           {isFooterVisible && (
