@@ -5,7 +5,7 @@ import { useTheme } from "@/app/lib/context/ThemeContext";
 import { usePathname } from "next/navigation";
 import Timer from "@/app/components/onboarding/Timer";
 import { useState } from "react";
-import { timerData } from "@/content/timerData";
+import { timerData } from "@/app/lib/content/timerData";
 import { useLanguage } from "@/app/lib/context/language";
 
 export default function Header() {
@@ -17,7 +17,6 @@ export default function Header() {
   const [timeLeft, setTimeLeft] = useState(null);
   const [isTimeUp, setIsTimeUp] = useState(false);
 
-  // Dynamisk baggrundsfarve baseret på tid
   const backgroundColor =
     timeLeft === null
       ? "bg-grey1"
@@ -29,7 +28,6 @@ export default function Header() {
 
   return (
     <header className="relative flex items-center w-full p-4 mb-6">
-      {/* Logo */}
       <div className="max-w-48">
         <Image
           src={
@@ -45,7 +43,6 @@ export default function Header() {
         />
       </div>
 
-      {/* Timer */}
       {!isOnboarding && (
         <div
           className={`absolute right-4 top-1/2 transform -translate-y-1/2 py-3 px-4 rounded-full ${backgroundColor}`}
@@ -57,7 +54,6 @@ export default function Header() {
         </div>
       )}
 
-      {/* Pop-up */}
       {isTimeUp && (
         <div className="fixed inset-0 text-typoPrimary bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-grey1 p-6 rounded-3xl shadow-lg text-center">
@@ -67,7 +63,7 @@ export default function Header() {
             <p className="mb-4">{timerData[language].sailback}</p>
             <div className="flex justify-center items-center">
               <button
-                onClick={() => setIsTimeUp(false)} // Lukker pop-up
+                onClick={() => setIsTimeUp(false)}
                 className="flex justify-center items-center w-12 h-12 rounded-full bg-grey2 hover:bg-lightBlue"
               >
                 <Image
