@@ -9,7 +9,6 @@ import VideoHelp from "../components/error/VideoHelp";
 import ImageSlider from "../components/error/ImageSlider";
 import errorData from "../lib/content/errorData";
 import Information from "../components/error/Information";
-import LoadingPage from "./LoadingPage";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -45,7 +44,7 @@ export default function ErrorPage() {
   }, []);
 
   if (!selectedError) {
-    return <LoadingPage></LoadingPage>;
+    return <div>{errordata.labels.loading}</div>;
   }
 
   const renderContent = () => {
