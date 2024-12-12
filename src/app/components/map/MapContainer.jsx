@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, {useEffect} from "react";
 import mapboxgl from "mapbox-gl";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
-const MapContainer = ({ mapRef, mapContainer, onMapLoad }) => {
+const MapContainer = ({ mapRef, mapContainer, onMapLoad = () => {} }) => {
   useEffect(() => {
     if (mapRef.current) return;
 
@@ -21,9 +21,8 @@ const MapContainer = ({ mapRef, mapContainer, onMapLoad }) => {
       showUserHeading: true,
     });
 
-    mapRef.current.addControl(geolocateControl, "top-right");
-
-    if (onMapLoad) onMapLoad(mapRef.current);
+    mapRef.current.addControl(geolocateControl, "top-left");
+    onMapLoad(mapRef.current);
   }, [mapRef, mapContainer, onMapLoad]);
 
   return (
