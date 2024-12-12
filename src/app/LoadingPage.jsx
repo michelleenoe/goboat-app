@@ -4,6 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 export default function LoadingPage() {
   const { theme } = useTheme();
+
   return (
     <div className="flex items-center justify-center min-h-screen ">
       <div className="text-center">
