@@ -34,7 +34,13 @@ export default function ErrorPage() {
         } else {
           const sortedErrorCodes = errorCodes.sort((a, b) => a.id - b.id);
           setData(sortedErrorCodes);
-          setSelectedError(sortedErrorCodes[0]);
+
+          // Hent valgt fejlkode fra localStorage
+          const savedErrorId = localStorage.getItem("selectedErrorId");
+          const savedError = sortedErrorCodes.find(
+            (error) => error.id === Number(savedErrorId)
+          );
+          setSelectedError(savedError || sortedErrorCodes[0]);
         }
       } catch (err) {
         console.error("Error during data fetching:", err);
@@ -43,6 +49,12 @@ export default function ErrorPage() {
 
     fetchData();
   }, []);
+
+  const handleSelectError = (error) => {
+    setSelectedError(error);
+    // Gem valgt fejlkode i localStorage
+    localStorage.setItem("selectedErrorId", error.id);
+  };
 
   if (!selectedError) {
     return <ErrorLoading />;
@@ -72,7 +84,7 @@ export default function ErrorPage() {
         <ErrorDropdown
           data={data}
           language={language}
-          onSelect={setSelectedError}
+          onSelect={handleSelectError}
         />
       </div>
 

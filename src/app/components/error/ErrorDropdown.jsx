@@ -4,15 +4,29 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function ErrorDropdown({ data, language, onSelect }) {
-  const [selectedError, setSelectedError] = useState(data[0]); // Standardvalgt fejl
+  const [selectedError, setSelectedError] = useState(() => {
+    // Hent den gemte fejlkode fra localStorage eller vælg den første som standard
+    if (typeof window !== "undefined") {
+      const savedErrorId = localStorage.getItem("selectedErrorId");
+      return data.find((item) => item.id === Number(savedErrorId)) || data[0];
+    }
+    return data[0];
+  });
+
+  useEffect(() => {
+    // Opdater localStorage, når den valgte fejlkode ændres
+    if (selectedError) {
+      localStorage.setItem("selectedErrorId", selectedError.id);
+    }
+  }, [selectedError]);
 
   const handleSelect = (error) => {
     setSelectedError(error);
-    onSelect(error);
+    onSelect(error); // Kald parent-komponentens callback
   };
 
   return (
@@ -20,7 +34,7 @@ export default function ErrorDropdown({ data, language, onSelect }) {
       <Listbox value={selectedError} onChange={handleSelect}>
         {({ open }) => (
           <div className="relative">
-            <ListboxButton className="w-full py-2 pl-6 pr-4 border text-sm  border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange flex justify-between items-center">
+            <ListboxButton className="w-full py-2 pl-6 pr-4 border text-sm border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange flex justify-between items-center">
               <span>
                 {selectedError.e_codes} -{" "}
                 {language === "da"
