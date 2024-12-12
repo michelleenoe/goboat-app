@@ -1,7 +1,7 @@
 import React from "react";
 
 const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }) => (
-  <div className="absolute top-3 left-4 bg-white rounded-lg shadow-lg p-4 z-20 w-64 space-y-4">
+  <div className="absolute top-3 left-4 bg-white rounded-lg shadow-lg p-4 z-20 w-64 space-y-4 text-typoPrimary">
     {routes.map((route) => (
       <div
         key={route.id}
@@ -14,7 +14,7 @@ const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }
           }
         }}
         className={`p-2 rounded-lg flex justify-between items-center ${
-          selectedRoute === route.id ? "bg-grey2 font-bold" : ""
+          selectedRoute === route.id ? "bg-grey2 font-bold " : ""
         }`}
       >
         <span>{translations[language][route.id]}</span>
