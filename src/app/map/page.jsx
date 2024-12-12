@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import MapContainer from "@/app/components/map/MapContainer";
-import RouteFilter from "@/app/components/map/RouteFilter";
+import {RouteFilter} from "@/app/components/map/RouteFilter";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
 import LoadingPage from "../LoadingPage";
@@ -17,11 +17,10 @@ const MapPage = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
-    // Simuler kortinitialisering
     const initializeMap = async () => {
       setTimeout(() => {
-        setIsLoading(false); // Skjul LoadingPage, når kortet er indlæst
-      }, 2000); // Simulerer en loading-periode
+        setIsLoading(false);
+      }, 2000);
     };
 
     initializeMap();
@@ -43,20 +42,20 @@ const MapPage = () => {
   }, [selectedRoute]);
 
   if (isLoading) {
-    return <LoadingPage />; // Vis LoadingPage, mens kortet indlæses
+    return <LoadingPage />;
   }
 
   return (
-    <div className="relative w-full h-screen">
-      {/* Kort-container skal altid være til stede */}
+     <div className="relative  -mx-4">
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
-      <div className="absolute top-2 right-3 z-10 flex flex-col gap-4">
+ <div className="absolute top-2 right-4 z-10 flex flex-col items-center space-y-2">
         <button
           onClick={() => setIsFilterOpen((prev) => !prev)}
-          className="p-3 rounded-full bg-white shadow-lg flex items-center gap-2"
+          className="bg-grey2 hover:bg-lightBlue p-3 rounded-full shadow-md flex items-center space-x-2 text-typoPrimary"
         >
-          <RouteIcon width={24} height={24} />
+          <RouteIcon width={24} height={24}/>
+
 
           {selectedRoute && (
             <span className="text-typoPrimary">
@@ -65,8 +64,6 @@ const MapPage = () => {
           )}
         </button>
       </div>
-
-      {/* Rutevælgeren */}
       {isFilterOpen && (
         <RouteFilter
           routes={routes}

@@ -1,6 +1,4 @@
-import React from "react";
-
-const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }) => (
+export const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }) => (
   <div className="absolute top-2 right-3 bg-white rounded-lg shadow-lg p-4 z-20 w-64 space-y-4 text-typoPrimary">
     {routes.map((route) => (
       <div
@@ -13,8 +11,8 @@ const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }
             onSelect(route.id);
           }
         }}
-        className={`p-2 rounded-lg flex justify-between items-center ${
-          selectedRoute === route.id ? "bg-grey2 font-bold " : ""
+        className={`p-2 cursor-pointer rounded-lg flex justify-between items-center hover:bg-grey1 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange ${
+          selectedRoute === route.id ? "bg-grey2 font-bold" : ""
         }`}
       >
         <span>{translations[language][route.id]}</span>
@@ -29,11 +27,7 @@ const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }
               fill="currentColor"
               viewBox="0 0 20 20"
             >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 11.586l6.293-6.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
+              <path d="M16.707 5.293a1 1 0 00-1.414 0L7 13.586 4.707 11.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l9-9a1 1 0 000-1.414z" />
             </svg>
           )}
         </span>
@@ -41,5 +35,3 @@ const RouteFilter = ({ routes, selectedRoute, translations, language, onSelect }
     ))}
   </div>
 );
-
-export default RouteFilter;
