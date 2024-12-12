@@ -13,7 +13,20 @@
 {
     display:none;
 }
-.mapboxgl-user-location-dot,
-.mapboxgl-user-location-dot::before {
-  @apply bg-goboatYellow border-goboatYellow !important;
-}
+
+/* These styles are implemented like this because the Mapbox map doesn't support a "className" prop */
+.mapboxgl-map .mapboxgl-ctrl-group {
+    border-radius: 100px;
+    box-shadow: rgba(50, 50, 93, 0.15) 0px 4px 6px, rgba(0, 0, 0, 0.1) 0px 1px 3px;
+  }
+  
+  .mapboxgl-map .mapboxgl-ctrl-geolocate {
+    height: 46px;
+    width: 46px;
+    padding: 5px;
+  }
+  
+  .mapboxgl-map .mapboxgl-user-location-dot, .mapboxgl-user-location-dot:before {
+    background-color: #ffdf63;
+  }
+  

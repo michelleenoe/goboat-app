@@ -12,7 +12,7 @@ import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
 import { useFooterVisibility } from "./lib/context/FooterVisibility";
 import AppMessage from "./AppMessage";
 import { useRouter } from "next/navigation";
-import {getOnboardingStatus} from "@/app/lib/storage"
+import { getOnboardingStatus } from "@/app/lib/storage";
 
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
   ssr: false,
@@ -21,67 +21,68 @@ const NoSSRFooter = dynamic(() => import("@/app/components/basics/Footer"), {
   ssr: false,
 });
 
-  function Content({ children }) {
-    const { language } = useLanguage();
-    const { isFooterVisible } = useFooterVisibility();
-    const router = useRouter();
-  
-    useEffect(() => {
-      const hasCompletedOnboarding = getOnboardingStatus();
-      const hasShownOnboarding = localStorage.getItem("onboardingShown");
-      const currentPath = window.location.pathname;
-  
-      if (!hasShownOnboarding) {
-        localStorage.setItem("onboardingShown", "true");
-        if (currentPath !== "/onboarding") {
-          router.push("/onboarding");
-        }
-      } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
-        router.push("/");
+function Content({ children }) {
+  const { language } = useLanguage();
+  const { isFooterVisible } = useFooterVisibility();
+  const router = useRouter();
+
+  useEffect(() => {
+    const hasCompletedOnboarding = getOnboardingStatus();
+    const hasShownOnboarding = localStorage.getItem("onboardingShown");
+    const currentPath = window.location.pathname;
+
+    if (!hasShownOnboarding) {
+      localStorage.setItem("onboardingShown", "true");
+      if (currentPath !== "/onboarding") {
+        router.push("/onboarding");
       }
-    }, [router]);
-  
-    return (
-      <html lang={language}>
-        <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
+    } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
+      router.push("/");
+    }
+  }, [router]);
+
+  return (
+    <html lang={language}>
+      <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
+        <Suspense fallback={null}>
+          <div className="block 928px:hidden">
+            <NoSSRHeader />
+          </div>
+        </Suspense>
+        <main className="flex-grow pb-10" key={language}>
+          <div className="block 928px:hidden">
+            <Suspense fallback={null}>
+              {children}
+              <SpeedInsights />
+              <Analytics />
+            </Suspense>
+          </div>
+          <div className="hidden 928px:flex min-h-screen items-center justify-center">
+            <AppMessage language={language} />
+          </div>
+        </main>
+        {isFooterVisible && (
           <Suspense fallback={null}>
             <div className="block 928px:hidden">
-              <NoSSRHeader />
+              <NoSSRFooter />
             </div>
           </Suspense>
-          <main className="flex-grow pb-10" key={language}>
-            <div className="block 928px:hidden">
-              <Suspense fallback={null}>
-                {children}
-              </Suspense>
-            </div>
-            <div className="hidden 928px:flex min-h-screen items-center justify-center">
-              <AppMessage language={language} />
-            </div>
-          </main>
-          {isFooterVisible && (
-            <Suspense fallback={null}>
-              <div className="block 928px:hidden">
-                <NoSSRFooter />
-              </div>
-            </Suspense>
-          )}
-        </body>
-      </html>
-    );
-  }
-  
-  export default function RootLayout({ children }) {
-    return (
-      <LanguageProvider>
-        <ThemeProvider>
-          <LocationProvider>
-            <FooterVisibilityProvider>
-              <Content>{children}</Content>
-            </FooterVisibilityProvider>
-          </LocationProvider>
-        </ThemeProvider>
-      </LanguageProvider>
-    );
-  }
-  
+        )}
+      </body>
+    </html>
+  );
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <LanguageProvider>
+      <ThemeProvider>
+        <LocationProvider>
+          <FooterVisibilityProvider>
+            <Content>{children}</Content>
+          </FooterVisibilityProvider>
+        </LocationProvider>
+      </ThemeProvider>
+    </LanguageProvider>
+  );
+}

@@ -5,6 +5,7 @@ import RouteFilter from "@/app/components/map/RouteFilter";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
 import "./styles.css";
+import { translations, routes } from "@/app/lib/content/mapData";
 
 const MapPage = () => {
   const mapContainer = useRef(null);
@@ -12,34 +13,6 @@ const MapPage = () => {
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { language } = useLanguage();
-
-  const translations = {
-    en: {
-      "1_time": "1 hour",
-      "2_time": "2 hours",
-      "3_time": "3 hours",
-    },
-    da: {
-      "1_time": "1 time",
-      "2_time": "2 timer",
-      "3_time": "3 timer",
-    },
-  };
-
-  const routes = [
-    {
-      id: "1_time",
-      startCoordinates: [12.577701567422764, 55.66846192119138],
-    },
-    {
-      id: "2_time",
-      startCoordinates: [12.57735593045976, 55.66879600859693],
-    },
-    {
-      id: "3_time",
-      startCoordinates: [12.577612604939503, 55.66866683925221],
-    },
-  ];
 
   useEffect(() => {
     if (!map.current || !selectedRoute) return;
@@ -60,14 +33,20 @@ const MapPage = () => {
     <div className="relative w-full h-screen">
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
-      <div className="absolute top-4 left-4 z-10 flex flex-col gap-4">
-        <button
-          onClick={() => setIsFilterOpen((prev) => !prev)}
-          className="p-3 rounded-full bg-white shadow-lg flex items-center justify-center"
-        >
-          <RouteIcon width={24} height={24} />
-        </button>
-      </div>
+      <div className="absolute top-2 right-3 z-10 flex flex-col gap-4">
+  <button
+    onClick={() => setIsFilterOpen((prev) => !prev)}
+    className="p-3 rounded-full bg-white shadow-lg flex items-center gap-2"
+  >
+    <RouteIcon width={24} height={24} />
+
+    {selectedRoute && (
+      <span className="text-typoPrimary">
+        {translations[language][selectedRoute]}
+      </span>
+    )}
+  </button>
+</div>
 
       {isFilterOpen && (
         <RouteFilter
