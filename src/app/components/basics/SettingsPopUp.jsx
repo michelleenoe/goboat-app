@@ -58,7 +58,9 @@ export default function SettingsPopup({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-typoPrimary bg-opacity-50 z-50">
       <div className="bg-grey1 rounded-3xl shadow-lg w-80 p-6 relative">
-        <h2 className="text-xl font-semibold text-center mb-6">{t.title}</h2>
+        <h2 className=" text-typoPrimary text-xl font-semibold text-center mb-6">
+          {t.title}
+        </h2>
         <div className="flex justify-between items-center mb-6">
           <span className="text-typoPrimary">{t.location}</span>
           <Switch
