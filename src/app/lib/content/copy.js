@@ -11,6 +11,9 @@ export const copy = {
       oneHour: "1 Hour",
       twoHours: "2 Hours",
       threeHours: "3 Hours",
+      resetOneHour: "Reset 1 Hour",
+      resetTwoHours: "Reset 2 Hours",
+      resetThreeHours: "Reset 3 Hours",
     },
     reminders: {
       title: "3 Quick reminders:",
@@ -36,6 +39,9 @@ export const copy = {
       oneHour: "1 Time",
       twoHours: "2 Timer",
       threeHours: "3 Timer",
+      resetOneHour: "Nulstil 1 time",
+      resetTwoHours: "Nulstil 2 timer",
+      resetThreeHours: "Nulstil 3 timer",
     },
     reminders: {
       title: "3 Hurtige påmindelser:",

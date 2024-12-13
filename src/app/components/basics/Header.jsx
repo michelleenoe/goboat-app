@@ -5,8 +5,8 @@ import { useTheme } from "@/app/lib/context/ThemeContext";
 import { usePathname } from "next/navigation";
 import Timer from "@/app/components/onboarding/Timer";
 import { useState } from "react";
-import { timerData } from "@/app/lib/content/timerData";
 import { useLanguage } from "@/app/lib/context/language";
+import TimeUpPopUp from "./TimeUpPopUp";
 
 export default function Header() {
   const { theme } = useTheme();
@@ -16,6 +16,15 @@ export default function Header() {
 
   const [timeLeft, setTimeLeft] = useState(null);
   const [isTimeUp, setIsTimeUp] = useState(false);
+
+  const resetTimer = (duration) => {
+    const totalTime = parseInt(duration, 10) * 60 * 60;
+    const endTime = new Date(new Date().getTime() + totalTime * 1000);
+
+    localStorage.setItem("selectedDuration", duration);
+    localStorage.setItem("timerEndTime", endTime.toISOString());
+    setIsTimeUp(false);
+  };
 
   const backgroundColor =
     timeLeft === null
@@ -55,28 +64,11 @@ export default function Header() {
       )}
 
       {isTimeUp && (
-        <div className="fixed inset-0 text-typoPrimary bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-grey1 p-6 rounded-3xl shadow-lg text-center">
-            <p className="text-lg font-bold mb-4">
-              {timerData[language].timeup}
-            </p>
-            <p className="mb-4">{timerData[language].sailback}</p>
-            <div className="flex justify-center items-center">
-              <button
-                onClick={() => setIsTimeUp(false)}
-                className="flex justify-center items-center w-12 h-12 rounded-full bg-grey2 hover:bg-lightBlue"
-              >
-                <Image
-                  src="/Icons/x.svg"
-                  alt="close"
-                  width={24}
-                  height={24}
-                  className="w-8 h-8"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
+        <TimeUpPopUp
+          language={language}
+          resetTimer={resetTimer}
+          closePopUp={() => setIsTimeUp(false)}
+        />
       )}
     </header>
   );
