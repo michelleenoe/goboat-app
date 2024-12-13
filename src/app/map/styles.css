@@ -1,32 +1,34 @@
 @import "https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css";
 
-.mapboxgl-ctrl .mapboxgl-ctrl-attrib .mapboxgl-compact
-{
-    display:none;
+.mapboxgl-ctrl .mapboxgl-ctrl-attrib .mapboxgl-compact {
+  display: none;
 }
-.mapboxgl-ctrl-bottom-right
-{
-    display:none;
+.mapboxgl-ctrl-bottom-right {
+  display: none;
 }
 
-.mapboxgl-ctrl-bottom-left
-{
-    display:none;
+.mapboxgl-ctrl-bottom-left {
+  display: none;
 }
 
 /* These styles are implemented like this because the Mapbox map doesn't support a "className" prop */
 .mapboxgl-map .mapboxgl-ctrl-group {
-    border-radius: 100px;
-    box-shadow: rgba(50, 50, 93, 0.15) 0px 4px 6px, rgba(0, 0, 0, 0.1) 0px 1px 3px;
-  }
-  
-  .mapboxgl-map .mapboxgl-ctrl-geolocate {
-    height: 46px;
-    width: 46px;
-    padding: 5px;
-  }
-  
-  .mapboxgl-map .mapboxgl-user-location-dot, .mapboxgl-user-location-dot:before {
-    background-color: #ffdf63;
-  }
-  
+  border-radius: 100px;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 4px 6px, rgba(0, 0, 0, 0.1) 0px 1px 3px;
+}
+
+.mapboxgl-map .mapboxgl-ctrl-geolocate {
+  height: 46px;
+  width: 46px;
+  padding: 5px;
+}
+
+.mapboxgl-map .mapboxgl-user-location-dot,
+.mapboxgl-user-location-dot:before {
+  background-color: #ffdf63;
+}
+
+.mapboxgl-ctrl-geolocate:focus-visible {
+  outline: 2px solid #ed6d38;
+  outline-offset: 2px;
+}
