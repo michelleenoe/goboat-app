@@ -47,7 +47,7 @@ const MapPage = () => {
 
   return (
     <div className="relative  -mx-4">
-      <h1>Map Page</h1>
+      <h1 className="sr-only">Map Page</h1>
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
       <div className="absolute top-2 right-4 z-10 flex flex-col items-center space-y-2">
