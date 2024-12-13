@@ -11,7 +11,7 @@ const TipsCard = ({ tip }) => {
           width={30}
           height={30}
         />
-        <h3 className=" text-typoPrimary text-m font-semibold">{tip.title}</h3>
+        <p className=" text-typoPrimary text-m font-semibold">{tip.title}</p>
       </div>
       <div className=" text-typoPrimary flex justify-center items-center gap-10">
         <p className="text-sm max-w-40 text-typoPrimary ">{tip.description}</p>

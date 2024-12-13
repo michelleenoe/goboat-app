@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import MapContainer from "@/app/components/map/MapContainer";
-import {RouteFilter} from "@/app/components/map/RouteFilter";
+import { RouteFilter } from "@/app/components/map/RouteFilter";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
 import { useLanguage } from "@/app/lib/context/language";
 import LoadingPage from "../LoadingPage";
@@ -46,16 +46,16 @@ const MapPage = () => {
   }
 
   return (
-     <div className="relative  -mx-4">
+    <div className="relative  -mx-4">
+      <h1>Map Page</h1>
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
- <div className="absolute top-2 right-4 z-10 flex flex-col items-center space-y-2">
+      <div className="absolute top-2 right-4 z-10 flex flex-col items-center space-y-2">
         <button
           onClick={() => setIsFilterOpen((prev) => !prev)}
           className="bg-grey2 hover:bg-lightBlue p-3 rounded-full shadow-md flex items-center space-x-2 text-typoPrimary"
         >
-          <RouteIcon width={24} height={24}/>
-
+          <RouteIcon width={24} height={24} />
 
           {selectedRoute && (
             <span className="text-typoPrimary">

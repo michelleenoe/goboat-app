@@ -13,6 +13,8 @@ import { useFooterVisibility } from "./lib/context/FooterVisibility";
 import AppMessage from "./AppMessage";
 import { useRouter } from "next/navigation";
 import { getOnboardingStatus } from "@/app/lib/storage";
+import Head from "next/head";
+import metaData from "./lib/content/metaData";
 
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
   ssr: false,
@@ -25,6 +27,8 @@ function Content({ children }) {
   const { language } = useLanguage();
   const { isFooterVisible } = useFooterVisibility();
   const router = useRouter();
+
+  const { title, description } = metaData[language] || metaData["en"];
 
   useEffect(() => {
     const hasCompletedOnboarding = getOnboardingStatus();
@@ -42,34 +46,41 @@ function Content({ children }) {
   }, [router]);
 
   return (
-    <html lang={language}>
-      <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
-        <Suspense fallback={null}>
-          <div className="block 928px:hidden">
-            <NoSSRHeader />
-          </div>
-        </Suspense>
-        <main className="flex-grow pb-10" key={language}>
-          <div className="block 928px:hidden">
-            <Suspense fallback={null}>
-              {children}
-              <SpeedInsights />
-              <Analytics />
-            </Suspense>
-          </div>
-          <div className="hidden 928px:flex min-h-screen items-center justify-center">
-            <AppMessage language={language} />
-          </div>
-        </main>
-        {isFooterVisible && (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <html lang={language}>
+        <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
           <Suspense fallback={null}>
             <div className="block 928px:hidden">
-              <NoSSRFooter />
+              <NoSSRHeader />
             </div>
           </Suspense>
-        )}
-      </body>
-    </html>
+          <main className="flex-grow pb-10" key={language}>
+            <div className="block 928px:hidden">
+              <Suspense fallback={null}>
+                {children}
+                <SpeedInsights />
+                <Analytics />
+              </Suspense>
+            </div>
+            <div className="hidden 928px:flex min-h-screen items-center justify-center">
+              <AppMessage language={language} />
+            </div>
+          </main>
+          {isFooterVisible && (
+            <Suspense fallback={null}>
+              <div className="block 928px:hidden">
+                <NoSSRFooter />
+              </div>
+            </Suspense>
+          )}
+        </body>
+      </html>
+    </>
   );
 }
 
