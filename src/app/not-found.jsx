@@ -1,7 +1,7 @@
 "use client";
-import { getLanguage } from "../../lib/data/storage";
 import Link from "next/link";
-import notFoundData from "../../lib/content/notFoundData";
+import notFoundData from "./lib/content/notFoundData";
+import { getLanguage } from "./lib/data/storage";
 
 export default function NotFound() {
   const lang = getLanguage();
