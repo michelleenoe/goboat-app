@@ -1,5 +1,5 @@
 import { RadioButton } from "./RadioButton";
-import { useLanguage } from "../../lib/context/language";
+import { useLanguage } from "../../lib/context/LanguageContext";
 import { settingsData } from "../../lib/content/settingsData";
 
 export function LanguageOptions() {

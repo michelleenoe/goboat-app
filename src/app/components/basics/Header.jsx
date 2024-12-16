@@ -5,7 +5,7 @@ import { useTheme } from "@/app/lib/context/ThemeContext";
 import { usePathname } from "next/navigation";
 import Timer from "@/app/components/onboarding/Timer";
 import { useState } from "react";
-import { useLanguage } from "@/app/lib/context/language";
+import { useLanguage } from "@/app/lib/context/LanguageContext";
 import TimeUpPopUp from "./TimeUpPopUp";
 
 export default function Header() {

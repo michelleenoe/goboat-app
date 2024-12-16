@@ -5,14 +5,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import React, { Suspense } from "react";
 import "../styles/globals.css";
-import { LanguageProvider, useLanguage } from "@/app/lib/context/language";
+import {
+  LanguageProvider,
+  useLanguage,
+} from "@/app/lib/context/LanguageContext";
 import { ThemeProvider } from "@/app/lib/context/ThemeContext";
 import { LocationProvider } from "@/app/lib/context/LocationContext";
 import { FooterVisibilityProvider } from "./lib/context/FooterVisibility";
 import { useFooterVisibility } from "./lib/context/FooterVisibility";
-import AppMessage from "./AppMessage";
+import AppMessage from "./components/message/AppMessage";
 import { useRouter } from "next/navigation";
-import { getOnboardingStatus } from "@/app/lib/storage";
+import { getOnboardingStatus } from "@/app/lib/data/storage";
 import Head from "next/head";
 import metaData from "./lib/content/metaData";
 

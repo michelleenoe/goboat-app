@@ -1,8 +1,8 @@
 "use client";
-import { getLanguage } from "../lib/storage";
+import { getLanguage } from "../lib/data/storage";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { useLanguage } from "../lib/context/language";
+import { useLanguage } from "../lib/context/LanguageContext";
 import ErrorDropdown from "../components/error/ErrorDropdown";
 import TechSolutions from "../components/error/TechSolutions";
 import VideoHelp from "../components/error/VideoHelp";
@@ -18,7 +18,7 @@ const supabase = createClient(
 
 export default function ErrorPage() {
   const lang = getLanguage();
-  const errordata = errorData[lang] || errorData.en; // Brug det rigtige sæt labels baseret på sproget
+  const errordata = errorData[lang] || errorData.en;
   const { language } = useLanguage();
   const [data, setData] = useState([]);
   const [selectedError, setSelectedError] = useState(null);
@@ -35,7 +35,6 @@ export default function ErrorPage() {
           const sortedErrorCodes = errorCodes.sort((a, b) => a.id - b.id);
           setData(sortedErrorCodes);
 
-          // Hent valgt fejlkode fra localStorage
           const savedErrorId = localStorage.getItem("selectedErrorId");
           const savedError = sortedErrorCodes.find(
             (error) => error.id === Number(savedErrorId)
@@ -52,7 +51,6 @@ export default function ErrorPage() {
 
   const handleSelectError = (error) => {
     setSelectedError(error);
-    // Gem valgt fejlkode i localStorage
     localStorage.setItem("selectedErrorId", error.id);
   };
 
@@ -61,9 +59,8 @@ export default function ErrorPage() {
   }
 
   const renderContent = () => {
-    // Dynamisk nøgle for den første løsning baseret på sprog
     const solutionKey = `solution1_${language === "da" ? "da" : "eng"}`;
-    const firstSolution = selectedError[solutionKey]; // Udtræk første løsning
+    const firstSolution = selectedError[solutionKey];
 
     if (selectedError[`${language === "da" ? "da" : "en"}_video_url`]) {
       return <VideoHelp selectedError={selectedError} language={language} />;
@@ -98,7 +95,7 @@ export default function ErrorPage() {
       </div>
 
       <div className="">{renderContent()}</div>
-      <Information></Information>
+      <Information />
     </div>
   );
 }

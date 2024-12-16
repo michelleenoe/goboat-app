@@ -1,4 +1,4 @@
-import { messages } from "./lib/content/appData";
+import { messages } from "../../lib/content/appData";
 
 const AppMessage = ({ language = "da" }) => {
   const content = messages[language] || messages["da"];

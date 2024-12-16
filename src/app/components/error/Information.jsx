@@ -1,6 +1,6 @@
 "use client";
 
-import { useLanguage } from "@/app/lib/context/language";
+import { useLanguage } from "@/app/lib/context/LanguageContext";
 import informationData from "@/app/lib/content/information";
 import InfoItem from "./InfoItem";
 

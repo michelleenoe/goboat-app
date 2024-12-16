@@ -4,7 +4,7 @@ import { Switch } from "@headlessui/react";
 import { LanguageOptions } from "./LanguageOptions";
 import { ThemeOptions } from "./ThemeOptions";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/app/lib/context/language";
+import { useLanguage } from "@/app/lib/context/LanguageContext";
 import { settingsData } from "../../lib/content/settingsData";
 import { CloseButton } from "./CloseButton";
 

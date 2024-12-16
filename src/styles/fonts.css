@@ -1,35 +1,35 @@
 @font-face {
   font-family: "Faro";
   font-weight: 300; /* Light */
-  src: url("/src/app/Faro-LightLucky.woff") format("woff");
+  src: url("/fonts/Faro-LightLucky.woff") format("woff");
 }
 
 @font-face {
   font-family: "Faro";
   font-weight: 400; /* Regular */
-  src: url("/src/app/Faro-RegularLucky.woff") format("woff");
+  src: url("/fonts/Faro-RegularLucky.woff") format("woff");
 }
 
 @font-face {
   font-family: "Faro";
   font-weight: 600; /* SemiBold */
-  src: url("/src/app/Faro-SemiBoldLucky.woff") format("woff");
+  src: url("/fonts/Faro-SemiBoldLucky.woff") format("woff");
 }
 
 @font-face {
   font-family: "Faro";
   font-weight: 700; /* Bold */
-  src: url("/src/app/Faro-BoldLucky.woff") format("woff");
+  src: url("/fonts/Faro-BoldLucky.woff") format("woff");
 }
 
 @font-face {
   font-family: "Faro";
-  src: url("/src/app/FaroDisplayVariable.woff") format("woff");
+  src: url("/fonts/FaroDisplayVariable.woff") format("woff");
   font-weight: 800; /* Bold */
 }
 
 @font-face {
   font-family: "Faro";
   font-variation-settings: "wght";
-  src: url("/src/app/Faro-Variable.woff") format("woff");
+  src: url("/fonts/Faro-Variable.woff") format("woff");
 }

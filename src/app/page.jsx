@@ -1,5 +1,5 @@
 "use client";
-import { getLanguage } from "../app/lib/storage";
+import { getLanguage } from "./lib/data/storage";
 import TipsSlider from "./components/tips/TipsSlider";
 import tipsData from "./lib/content/tipsData";
 import FAQ from "./components/faq/FAQ";

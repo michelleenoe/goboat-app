@@ -3,9 +3,9 @@ import React, { useRef, useState, useEffect } from "react";
 import MapContainer from "@/app/components/map/MapContainer";
 import { RouteFilter } from "@/app/components/map/RouteFilter";
 import { RouteIcon } from "@/app/components/map/RouteIcons";
-import { useLanguage } from "@/app/lib/context/language";
-import LoadingPage from "../LoadingPage";
-import "./styles.css";
+import { useLanguage } from "@/app/lib/context/LanguageContext";
+import LoadingPage from "../components/loading/LoadingPage";
+import "@/styles/mapstyles.css";
 import { translations, routes } from "@/app/lib/content/mapData";
 
 const MapPage = () => {

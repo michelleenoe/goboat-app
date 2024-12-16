@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { copy } from "../../lib/content/copy";
-import { getReminders } from "../../lib/data/reminders";
+import { getReminders } from "@/app/lib/content/reminders";
 import ReminderList from "./ReminderList";
 import OnboardingButtons from "./OnboardingButtons";
 import AgreeCheckbox from "./AgreeCheckbox";

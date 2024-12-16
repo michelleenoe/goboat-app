@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "@/app/lib/context/ThemeContext";
-import { useLanguage } from "@/app/lib/context/language";
+import { useLanguage } from "@/app/lib/context/LanguageContext";
 import { RadioButton } from "./RadioButton";
 import { settingsData } from "../../lib/content/settingsData";
 
