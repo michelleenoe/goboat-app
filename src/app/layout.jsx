@@ -33,17 +33,19 @@ function Content({ children }) {
   const { title, description } = metaData[language] || metaData["en"];
 
   useEffect(() => {
-    const hasCompletedOnboarding = getOnboardingStatus();
-    const hasShownOnboarding = localStorage.getItem("onboardingShown");
-    const currentPath = window.location.pathname;
+    if (typeof window !== "undefined") {
+      const hasCompletedOnboarding = getOnboardingStatus();
+      const hasShownOnboarding = localStorage.getItem("onboardingShown");
+      const currentPath = window.location.pathname;
 
-    if (!hasShownOnboarding) {
-      localStorage.setItem("onboardingShown", "true");
-      if (currentPath !== "/onboarding") {
-        router.push("/onboarding");
+      if (!hasShownOnboarding) {
+        localStorage.setItem("onboardingShown", "true");
+        if (currentPath !== "/onboarding") {
+          router.push("/onboarding");
+        }
+      } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
+        router.push("/");
       }
-    } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
-      router.push("/");
     }
   }, [router]);
 
