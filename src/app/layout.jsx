@@ -33,21 +33,17 @@ function Content({ children }) {
   const { title, description } = metaData[language] || metaData["en"];
 
   useEffect(() => {
-    const isLighthouse = navigator.userAgent.includes("Lighthouse");
+    const hasCompletedOnboarding = getOnboardingStatus();
+    const hasShownOnboarding = localStorage.getItem("onboardingShown");
+    const currentPath = window.location.pathname;
 
-    if (!isLighthouse) {
-      const hasCompletedOnboarding = getOnboardingStatus();
-      const hasShownOnboarding = localStorage.getItem("onboardingShown");
-      const currentPath = window.location.pathname;
-
-      if (!hasShownOnboarding) {
-        localStorage.setItem("onboardingShown", "true");
-        if (currentPath !== "/onboarding") {
-          router.push("/onboarding");
-        }
-      } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
-        router.push("/");
+    if (!hasShownOnboarding) {
+      localStorage.setItem("onboardingShown", "true");
+      if (currentPath !== "/onboarding") {
+        router.push("/onboarding");
       }
+    } else if (hasCompletedOnboarding && currentPath === "/onboarding") {
+      router.push("/");
     }
   }, [router]);
 
