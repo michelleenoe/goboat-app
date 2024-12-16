@@ -16,7 +16,6 @@ import { useFooterVisibility } from "./lib/context/FooterVisibility";
 import AppMessage from "./components/message/AppMessage";
 import { useRouter } from "next/navigation";
 import { getOnboardingStatus } from "@/app/lib/data/storage";
-import Head from "next/head";
 import metaData from "./lib/content/metaData";
 
 const NoSSRHeader = dynamic(() => import("@/app/components/basics/Header"), {
@@ -50,12 +49,12 @@ function Content({ children }) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <html lang={language}>
+        <head>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
         <body className="flex flex-col min-h-screen bg-grey2 text-typoPrimary dark:bg-typoSecondary dark:text-grey1">
           <Suspense fallback={null}>
             <div className="block 928px:hidden">
