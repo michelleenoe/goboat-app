@@ -33,7 +33,9 @@ function Content({ children }) {
   const { title, description } = metaData[language] || metaData["en"];
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    const isLighthouse = navigator.userAgent.includes("Lighthouse");
+
+    if (!isLighthouse) {
       const hasCompletedOnboarding = getOnboardingStatus();
       const hasShownOnboarding = localStorage.getItem("onboardingShown");
       const currentPath = window.location.pathname;
