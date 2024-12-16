@@ -15,15 +15,14 @@ export default function DashboardPage() {
   const tips = tipsData[lang] || tipsData.en;
   const faq = faqData[lang] || faqData.en;
   const title = titleData[lang] || titleData.en;
-  // const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
   const weather = weatherData[lang] || weatherData.en;
 
   return (
     <div>
       <h1 className="hidden">{title.homeTitle}</h1>
       <div className="mb-8">
-        <WeatherContainer city="Copenhagen" weather={weather} />
-        {/* apiKey={apiKey} skal inkluderes i Weathercontainer, når appen går live */}
+        <WeatherContainer city="Copenhagen" weather={weather} apiKey={apiKey} />
       </div>
       <div className="mb-8">
         <TipsSlider mainTitle={tips.mainTitle} tips={tips.tips} />

@@ -29,7 +29,7 @@ const MapContainer = ({ mapRef, mapContainer, onMapLoad = () => {} }) => {
     <div
       ref={mapContainer}
       className="absolute top-0 left-0"
-      style={{ height: "74.7vh", width: "100%" }}
+      style={{ height: "76vh", width: "100%" }}
     />
   );
 };
