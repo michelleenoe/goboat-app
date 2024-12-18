@@ -5,9 +5,9 @@ const AppMessage = ({ language = "da" }) => {
 
   return (
     <div>
-      <h4 className="text-5xl text-center font-bold text-goboatBlue dark:text-lightBlue">
+      <p className="text-5xl text-center font-bold text-goboatBlue dark:text-lightBlue">
         {content.title}
-      </h4>
+      </p>
       <p className="mt-4 text-2xl text-center font-semibold text-typoPrimary dark:text-lightBlue">
         {content.subtitle}
       </p>
