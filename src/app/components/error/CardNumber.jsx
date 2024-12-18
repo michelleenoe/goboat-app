@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const CardNumber = ({ index }) => {
@@ -10,8 +9,8 @@ const CardNumber = ({ index }) => {
       <Image
         src={illustrationPath}
         alt={`Card Number ${index + 1}`}
-        width={48} // Angiv bredde
-        height={48} // Angiv højde
+        width={48}
+        height={48}
         className="object-contain"
       />
     </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Pagination({ currentScreen, totalScreens }) {
   return (
     <div className="flex justify-center items-center space-x-2 mt-4">

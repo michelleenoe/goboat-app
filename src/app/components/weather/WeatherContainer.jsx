@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Weather from "./Weather";
 
 const WeatherContainer = ({ city = "Copenhagen", apiKey, weather }) => {

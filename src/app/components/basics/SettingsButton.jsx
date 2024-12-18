@@ -13,8 +13,8 @@ export default function SettingsButton({ onClick, icon, altText, isActive }) {
       <Image
         src={icon}
         alt={altText}
-        width={24} // Angiv billedets bredde
-        height={24} // Angiv billedets højde
+        width={24}
+        height={24}
         className="w-8 h-8"
       />
     </button>

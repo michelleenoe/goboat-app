@@ -7,8 +7,8 @@ const CloseButton = ({ onClick }) => {
         <Image
           src="/Icons/x.svg"
           alt="close"
-          width={24} // Angiv billedets bredde
-          height={24} // Angiv billedets højde
+          width={24}
+          height={24}
           className="w-8 h-8"
         />
       </div>

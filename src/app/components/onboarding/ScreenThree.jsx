@@ -26,21 +26,29 @@ export default function ScreenThree({ onBack, language }) {
 
   return (
     <>
-      <div className="flex justify-center items-center text-typoPrimary">
-        <div className="flex-grow flex flex-col items-center justify-center rounded-3xl bg-grey1 p-8 max-w-lg h-[350px]">
-          <h2 className="text-xl font-bold mb-4">
-            {copy[language].reminders.title}
-          </h2>
-          <ReminderList items={reminders} />
-          <AgreeCheckbox
-            label={copy[language].reminders.confirmationMessage}
-            isChecked={isAgreed}
-            onChange={handleAgreeChange}
+      <div className="bg-[url('/illustrations/Forside.svg')] bg-cover bg-center min-h-screen -mx-4">
+        <div className="flex justify-center items-center text-typoPrimary">
+          <div className="flex-grow flex flex-col items-center justify-center rounded-3xl bg-grey1 p-8 max-w-lg h-[350px] mx-4">
+            <h2 className="text-xl font-bold mb-4">
+              {copy[language].reminders.title}
+            </h2>
+            <ReminderList items={reminders} />
+            <AgreeCheckbox
+              label={copy[language].reminders.confirmationMessage}
+              isChecked={isAgreed}
+              onChange={handleAgreeChange}
+            />
+          </div>
+        </div>
+        <Pagination currentScreen={2} totalScreens={3} />
+        <div className="mr-4">
+          <OnboardingButtons
+            onBack={onBack}
+            isAgreed={isAgreed}
+            nextRoute="/"
           />
         </div>
       </div>
-      <Pagination currentScreen={2} totalScreens={3} />
-      <OnboardingButtons onBack={onBack} isAgreed={isAgreed} nextRoute="/" />
     </>
   );
 }

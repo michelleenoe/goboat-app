@@ -12,7 +12,6 @@ export default function TimeUpPopUp({ language, resetTimer, closePopUp }) {
         <p className="text-lg font-bold mb-4">{timerData[language].timeup}</p>
         <p className="mb-4">{timerData[language].sailback}</p>
         <div className="flex flex-col items-center">
-          {/* Brug resetTimer-funktion til at nulstille timer */}
           <DefaultButton
             onClick={() => resetTimer(1)}
             text={copy[language].timer.resetOneHour}

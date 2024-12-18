@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import TipsCard from "./TipsCard";
 import NavigationButtons from "../basics/NavigationButtons";
 
