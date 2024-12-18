@@ -1,9 +1,9 @@
 export const copy = {
   en: {
-    welcome: "Welcome!",
-    chooseLanguage: "Choose Your Language",
+    welcome: "Welcome to GoBoat!",
+    chooseLanguage: "Please choose your language to get started:",
     language: {
-      danish: "Danish",
+      danish: "Dansk",
       english: "English",
     },
     timer: {
@@ -28,11 +28,11 @@ export const copy = {
     },
   },
   da: {
-    welcome: "Velkommen!",
-    chooseLanguage: "Vælg dit sprog",
+    welcome: "Velkommen til GoBoat!",
+    chooseLanguage: "Vælg venligst dit sprog for at komme i gang:",
     language: {
       danish: "Dansk",
-      english: "Engelsk",
+      english: "English",
     },
     timer: {
       title: "Hvor længe skal du sejle?",

@@ -24,7 +24,7 @@ export default function ScreenOne({ onNext, setSelectedLanguage }) {
       <div className="bg-[url('/illustrations/Forside.svg')] bg-cover bg-center min-h-screen -mx-4">
         <h1 className="sr-only">Goboat Onboarding Screen number 1</h1>
         <div className="flex justify-center items-center text-typoPrimary">
-          <div className="flex-grow flex flex-col items-center justify-center rounded-3xl bg-grey1 p-8 max-w-lg h-[350px] mx-4">
+          <div className="flex-grow flex flex-col items-center  rounded-3xl bg-grey1 p-8 max-w-lg h-[350px] mx-4">
             <h2 className="text-xl font-bold mb-4">{copy["en"].welcome}</h2>
             <p className="text-center mb-8">{copy["en"].chooseLanguage}</p>
             <DefaultButton
