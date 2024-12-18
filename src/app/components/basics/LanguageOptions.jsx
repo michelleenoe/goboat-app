@@ -6,7 +6,7 @@ export function LanguageOptions() {
   const { language, changeLanguage } = useLanguage();
 
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex justify-between items-center mb-6 ">
       <span className="text-typoPrimary mb-2 block">
         {settingsData[language].language}
       </span>
