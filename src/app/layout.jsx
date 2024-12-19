@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import "../styles/globals.css";
 import {
   LanguageProvider,

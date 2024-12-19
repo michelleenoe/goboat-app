@@ -20,15 +20,13 @@ const ImageSlider = ({ mainTitle, selectedError, language }) => {
       ? JSON.parse(selectedError.img_url)
       : [];
 
-    // Kombiner løsninger, billeder og ikoner i et array
     return solutions.map((solution, index) => ({
       solution,
       image: images[index] || null,
-      numbericon: `/illustrations/nr${index + 1}.svg`, // Dynamisk ikonsti
+      numbericon: `/illustrations/nr${index + 1}.svg`,
     }));
   };
 
-  // Filtrerer tomme elementer væk
   const items = getSolutionsAndImages().filter(
     (item) => item.solution || item.image
   );
@@ -93,9 +91,9 @@ const ImageSlider = ({ mainTitle, selectedError, language }) => {
 
   useEffect(() => {
     if (selectedError) {
-      scrollToIndex(centerIndex, true); // Gå til første kort
+      scrollToIndex(centerIndex, true);
     } else {
-      scrollToIndex(centerIndex, true); // Centrér slideren ved første rendering
+      scrollToIndex(centerIndex, true);
     }
   }, [selectedError, centerIndex]);
 

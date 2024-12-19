@@ -8,7 +8,7 @@ export function ThemeOptions() {
   const { language } = useLanguage();
 
   const handleThemeChange = (newTheme) => {
-    setTheme(newTheme); // Opdater tema globalt
+    setTheme(newTheme);
   };
   const localizedText = settingsData[language];
 
