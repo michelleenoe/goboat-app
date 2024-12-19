@@ -1,6 +1,5 @@
 // CHAT GPT PROMPT: "Hjælp mig med at implementere slideren fra tips her i imageslider, denne gang hvor data er fetchet fra supabase"
 
-// CHAT GPT LOGIK
 "use client";
 
 import { useRef, useState, useEffect } from "react";
