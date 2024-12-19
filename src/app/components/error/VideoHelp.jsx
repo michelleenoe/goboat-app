@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import errorData from "@/app/lib/content/errorData";
-import PlayButton from "./PlayButton"; 
-import CloseButton from "./CloseButton"; 
+import PlayButton from "./PlayButton";
+import CloseButton from "./CloseButton";
 
 export default function SolutionsWithVideo({ selectedError, language }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,10 +47,14 @@ export default function SolutionsWithVideo({ selectedError, language }) {
               <div
                 className="relative overflow-hidden rounded-3xl shadow-md w-80 h-52 cursor-pointer"
                 onClick={() => setIsModalOpen(true)}
+                role="button"
+                aria-label="Open video"
               >
                 <Image
                   src={thumbnailUrl}
-                  alt="Video preview"
+                  alt={`Video thumbnail for ${
+                    selectedError?.error_name || "the solution"
+                  }`}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-lg"
@@ -65,9 +69,16 @@ export default function SolutionsWithVideo({ selectedError, language }) {
         )}
 
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            role="dialog"
+            aria-labelledby="video-title"
+          >
             <div className="bg-grey2 dark:bg-typoSecondary p-4 rounded-3xl shadow-lg w-full max-w-2xl relative">
               <CloseButton onClick={() => setIsModalOpen(false)} />
+              <p id="video-title" className="sr-only">
+                Video Help
+              </p>
               <video
                 src={videoUrl}
                 controls

@@ -54,6 +54,8 @@ const MapPage = () => {
         <button
           onClick={() => setIsFilterOpen((prev) => !prev)}
           className="bg-grey2 hover:bg-lightBlue p-3 rounded-full shadow-md flex items-center space-x-2 text-typoPrimary"
+          aria-expanded={isFilterOpen}
+          aria-label="Toggle route filter"
         >
           <RouteIcon width={24} height={24} />
 

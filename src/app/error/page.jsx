@@ -78,7 +78,9 @@ export default function ErrorPage() {
           <h1 className="px-4 text-xl font-bold mb-6">
             {errordata.labels.findErrorCode}
           </h1>
-          <label className="sr-only">{errordata.placeholders.dropdown}</label>
+          <label id="error-dropdown-label" className="sr-only">
+            {errordata.placeholders.dropdown}
+          </label>
           <ErrorDropdown
             data={data}
             language={language}

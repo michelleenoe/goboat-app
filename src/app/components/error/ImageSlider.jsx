@@ -100,6 +100,7 @@ const ImageSlider = ({ mainTitle, selectedError, language }) => {
   return (
     <div className="image-slider-container px-4 max-w-4xl mx-auto">
       <div
+        id="image-slider"
         ref={sliderRef}
         className="relative flex gap-4 overflow-x-auto no-scrollbar px-4 pb-6 -mx-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange"
         style={{
@@ -121,7 +122,11 @@ const ImageSlider = ({ mainTitle, selectedError, language }) => {
           </div>
         ))}
       </div>
-      <NavigationButtons handlePrev={handlePrev} handleNext={handleNext} />
+      <NavigationButtons
+        aria-controls="image-slider"
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+      />
     </div>
   );
 };

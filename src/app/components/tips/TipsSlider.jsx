@@ -74,6 +74,7 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
     <div className="tips-slider-container px-4 max-w-4xl mx-auto ">
       <h2 className="text-xl font-bold mb-4">{mainTitle}</h2>
       <div
+        id="tips-slider"
         ref={sliderRef}
         className="relative flex gap-4 overflow-x-auto no-scrollbar px-4 pb-6 -mx-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-focusOrange
 "
@@ -91,7 +92,11 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
           </div>
         ))}
       </div>
-      <NavigationButtons handlePrev={handlePrev} handleNext={handleNext} />
+      <NavigationButtons
+        aria-controls="tips-slider"
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+      />
     </div>
   );
 };

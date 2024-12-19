@@ -32,7 +32,10 @@ export default function ErrorDropdown({ data, language, onSelect }) {
       <Listbox value={selectedError} onChange={handleSelect}>
         {({ open }) => (
           <div className="relative">
-            <ListboxButton className="w-full py-2 pl-6 pr-4 border text-sm border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-focusOrange focus-visible:outline-offset-2 flex justify-between items-center">
+            <ListboxButton
+              className="w-full py-2 pl-6 pr-4 border text-sm border-darkBlue rounded-full bg-grey2 text-typoPrimary hover:bg-grey1 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-focusOrange focus-visible:outline-offset-2 flex justify-between items-center"
+              aria-labelledby="error-dropdown-label"
+            >
               <span>
                 {selectedError.e_codes} -{" "}
                 {language === "da"
