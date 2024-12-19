@@ -1,12 +1,11 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    // Hent temaet fra localStorage eller brug "light" som standard
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") || "light";
     }

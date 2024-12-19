@@ -1,8 +1,7 @@
 import Image from "next/image";
 
 const CardNumber = ({ index }) => {
-  // Generer stien til SVG baseret på index
-  const illustrationPath = `/Illustrations/nr${index + 1}.svg`;
+    const illustrationPath = `/Illustrations/nr${index + 1}.svg`;
 
   return (
     <div className="w-12 h-12">

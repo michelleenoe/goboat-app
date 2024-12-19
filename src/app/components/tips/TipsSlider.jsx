@@ -51,19 +51,16 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
     const currentIndex = Math.round(scrollLeft / cardWidth);
     const newIndex = currentIndex - 1;
 
-    // Hvis du går forbi starten
     if (newIndex < Math.floor(tips.length)) {
       setIsAnimating(true);
-      // Animer til starten af den første kopi
       scrollToIndex(newIndex);
       setTimeout(() => {
-        // Spring til slutningen af den sidste kopi uden animation
         scrollToIndex(
           duplicatedTips.length - Math.floor(tips.length) - 1,
           true
         );
         setIsAnimating(false);
-      }, 300); // Matcher scroll-animationens varighed
+      }, 300);
     } else {
       scrollToIndex(newIndex);
     }

@@ -9,7 +9,6 @@ import Image from "next/image";
 
 export default function ErrorDropdown({ data, language, onSelect }) {
   const [selectedError, setSelectedError] = useState(() => {
-    // Hent den gemte fejlkode fra localStorage eller vælg den første som standard
     if (typeof window !== "undefined") {
       const savedErrorId = localStorage.getItem("selectedErrorId");
       return data.find((item) => item.id === Number(savedErrorId)) || data[0];
@@ -18,7 +17,6 @@ export default function ErrorDropdown({ data, language, onSelect }) {
   });
 
   useEffect(() => {
-    // Opdater localStorage, når den valgte fejlkode ændres
     if (selectedError) {
       localStorage.setItem("selectedErrorId", selectedError.id);
     }
@@ -26,7 +24,7 @@ export default function ErrorDropdown({ data, language, onSelect }) {
 
   const handleSelect = (error) => {
     setSelectedError(error);
-    onSelect(error); // Kald parent-komponentens callback
+    onSelect(error);
   };
 
   return (

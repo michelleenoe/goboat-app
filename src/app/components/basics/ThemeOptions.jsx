@@ -1,19 +1,15 @@
-import React from "react";
 import { useTheme } from "@/app/lib/context/ThemeContext";
 import { useLanguage } from "@/app/lib/context/LanguageContext";
 import { RadioButton } from "./RadioButton";
 import { settingsData } from "../../lib/content/settingsData";
 
 export function ThemeOptions() {
-  const { theme, setTheme } = useTheme(); // Brug global ThemeContext
-  const { language } = useLanguage(); // Hent det aktuelle sprog fra konteksten
+  const { theme, setTheme } = useTheme();
+  const { language } = useLanguage();
 
-  // Funktion til at opdatere tema
   const handleThemeChange = (newTheme) => {
-    setTheme(newTheme); // Opdater tema globalt
+    setTheme(newTheme);
   };
-
-  // Hent oversatte tekster baseret på det aktuelle sprog
   const localizedText = settingsData[language];
 
   return (
@@ -21,7 +17,7 @@ export function ThemeOptions() {
       {/* Theme Options */}
       <div className="flex justify-between items-center mb-6">
         <span className="text-typoPrimary dark:text-dark.typoPrimary mb-2 block">
-          {localizedText.theme} {/* Brug oversat tekst til "Theme" */}
+          {localizedText.theme} 
         </span>
         <div className="flex space-x-4">
           {/* Light Theme */}
