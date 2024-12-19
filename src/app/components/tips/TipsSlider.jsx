@@ -71,7 +71,7 @@ const TipsSlider = ({ mainTitle, tips = [] }) => {
 
   useEffect(() => {
     scrollToIndex(centerIndex, true);
-  }, []);
+  }, [centerIndex]);
 
   return (
     <div className="tips-slider-container px-4 max-w-4xl mx-auto ">

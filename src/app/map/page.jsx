@@ -46,7 +46,7 @@ const MapPage = () => {
   }
 
   return (
-    <div className="relative  -mx-4 ">
+    <section className="relative  -mx-4 ">
       <h1 className="sr-only">Map Page</h1>
       <MapContainer mapRef={map} mapContainer={mapContainer} />
 
@@ -76,7 +76,7 @@ const MapPage = () => {
           }}
         />
       )}
-    </div>
+    </section>
   );
 };
 

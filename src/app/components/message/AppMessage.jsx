@@ -4,7 +4,7 @@ const AppMessage = ({ language = "da" }) => {
   const content = messages[language] || messages["da"];
 
   return (
-    <div>
+    <section>
       <p className="text-5xl text-center font-bold text-goboatBlue dark:text-lightBlue">
         {content.title}
       </p>
@@ -14,7 +14,7 @@ const AppMessage = ({ language = "da" }) => {
       <p className="mt-2 text-center text-typoSecondary dark:text-grey2">
         {content.description}
       </p>
-    </div>
+    </section>
   );
 };
 

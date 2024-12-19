@@ -9,7 +9,7 @@ export default function NotFound() {
   const item = notFoundData[lang] || notFoundData.en;
 
   return (
-    <div className="flex flex-col items-center justify-center mt-24 ">
+    <section className="flex flex-col items-center justify-center mt-24 ">
       <h1 className="text-6xl font-bold text-goboatBlue dark:text-lightBlue">
         404
       </h1>
@@ -25,6 +25,6 @@ export default function NotFound() {
       >
         {item.goBack}
       </Link>
-    </div>
+    </section>
   );
 }

@@ -72,30 +72,36 @@ export default function ErrorPage() {
   };
 
   return (
-    <div>
-      <div>
-        <h1 className="px-4 text-xl font-bold mb-6">
-          {errordata.labels.findErrorCode}
-        </h1>
-        <label className="sr-only">{errordata.placeholders.dropdown}</label>
-        <ErrorDropdown
-          data={data}
-          language={language}
-          onSelect={handleSelectError}
-        />
-      </div>
+    <>
+      <section>
+        <div>
+          <h1 className="px-4 text-xl font-bold mb-6">
+            {errordata.labels.findErrorCode}
+          </h1>
+          <label className="sr-only">{errordata.placeholders.dropdown}</label>
+          <ErrorDropdown
+            data={data}
+            language={language}
+            onSelect={handleSelectError}
+          />
+        </div>
 
-      <div className="flex flex-col items-center justify-center my-6">
-        <h2 className="font-semibold mb-2">{errordata.labels.solution}</h2>
-        <p className="font-bold text-darkBlue dark:text-lightBlue">
-          {`${selectedError.e_codes} - ${
-            language === "da" ? selectedError.da_title : selectedError.eng_title
-          }`}
-        </p>
-      </div>
+        <div className="flex flex-col items-center justify-center my-6">
+          <h2 className="font-semibold mb-2">{errordata.labels.solution}</h2>
+          <p className="font-bold text-darkBlue dark:text-lightBlue">
+            {`${selectedError.e_codes} - ${
+              language === "da"
+                ? selectedError.da_title
+                : selectedError.eng_title
+            }`}
+          </p>
+        </div>
 
-      <div className="">{renderContent()}</div>
-      <Information />
-    </div>
+        <div className="">{renderContent()}</div>
+      </section>
+      <section>
+        <Information />
+      </section>
+    </>
   );
 }
