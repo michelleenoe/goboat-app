@@ -1,13 +1,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import errorData from "@/app/lib/content/errorData";
-import PlayButton from "./PlayButton"; // Importer PlayButton
-import CloseButton from "./CloseButton"; // Importer CloseButton
+import PlayButton from "./PlayButton"; 
+import CloseButton from "./CloseButton"; 
 
 export default function SolutionsWithVideo({ selectedError, language }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Hent video URL og thumbnail URL
   const videoUrl = JSON.parse(
     selectedError[`${language === "da" ? "da" : "en"}_video_url`]
   )?.[0];
@@ -15,7 +13,6 @@ export default function SolutionsWithVideo({ selectedError, language }) {
     selectedError[`${language === "da" ? "da" : "en"}_video_thumbnail`]
   )?.[0];
 
-  // Funktion til at generere løsninger
   const renderSolutions = () => {
     return Array.from({ length: 5 }, (_, i) => {
       const solutionKey = `solution${i + 1}_${
@@ -34,12 +31,9 @@ export default function SolutionsWithVideo({ selectedError, language }) {
   return (
     <div className="px-4">
       <div className="bg-grey1 py-6 px-4 rounded-2xl shadow-md max-w-xl mx-auto">
-        {/* Løsninger */}
         <ul className="list-decimal pl-6 text-sm space-y-2">
           {renderSolutions()}
         </ul>
-
-        {/* Video preview */}
 
         {videoUrl && thumbnailUrl && (
           <div className="mt-6">
@@ -70,7 +64,6 @@ export default function SolutionsWithVideo({ selectedError, language }) {
           </div>
         )}
 
-        {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-grey2 dark:bg-typoSecondary p-4 rounded-3xl shadow-lg w-full max-w-2xl relative">
