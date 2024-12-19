@@ -5,15 +5,14 @@ const OnboardingButtons = ({
   onBack,
   onNext,
   nextRoute = "/",
-  isAgreed = true, // Default true, men kan bruges til at styre "Next"-knappen
-  disableBack = false, // Brug denne til at deaktivere "Tilbage"-knappen
+  isAgreed = true,
+  disableBack = false,
 }) => {
   const router = useRouter();
 
   return (
     <div className="flex justify-end mt-8">
       <div className="flex gap-2">
-        {/* Back Button */}
         <button
           onClick={onBack}
           className={`flex items-center justify-center w-11 h-11 bg-goboatYellow  rounded-full transition ${
@@ -30,8 +29,6 @@ const OnboardingButtons = ({
             height={30}
           />
         </button>
-
-        {/* Next Button */}
         <button
           onClick={() =>
             isAgreed && (onNext ? onNext() : router.push(nextRoute))
