@@ -22,13 +22,9 @@ const OnboardingButtons = ({
               : "hover:bg-yellow-500"
           }`}
           disabled={disableBack}
+          aria-label="Go to previous step"
         >
-          <Image
-            src="/Icons/chevron-left.svg"
-            alt="Previous"
-            width={30}
-            height={30}
-          />
+          <Image src="/Icons/chevron-left.svg" alt="" width={30} height={30} />
         </button>
 
         {/* Next Button */}
@@ -42,13 +38,9 @@ const OnboardingButtons = ({
               : "bg-goboatYellow opacity-40 cursor-not-allowed"
           }`}
           disabled={!isAgreed}
+          aria-label="Go to next step"
         >
-          <Image
-            src="/Icons/chevron-right.svg"
-            alt="Next"
-            width={30}
-            height={30}
-          />
+          <Image src="/Icons/chevron-right.svg" alt="" width={30} height={30} />
         </button>
       </div>
     </div>

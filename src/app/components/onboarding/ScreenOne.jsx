@@ -25,19 +25,27 @@ export default function ScreenOne({ onNext, setSelectedLanguage }) {
         <h1 className="sr-only">Goboat Onboarding Screen number 1</h1>
         <div className="flex justify-center items-center text-typoPrimary">
           <div className="flex-grow flex flex-col items-center  rounded-3xl bg-grey1 p-8 max-w-lg h-[350px] mx-4">
-            <h2 className="text-xl font-bold mb-4">{copy["en"].welcome}</h2>
-            <p className="text-center mb-8">{copy["en"].chooseLanguage}</p>
+            <p className="text-xl font-bold mb-4">{copy["en"].welcome}</p>
+            <h2 id="choose-language" className="text-center mb-8">
+              {copy["en"].chooseLanguage}
+            </h2>
             <DefaultButton
               onClick={() => handleLanguageSelect("da")}
               text={copy["en"].language.danish}
+              aria-labelledby="choose-language"
             />
             <DefaultButton
               onClick={() => handleLanguageSelect("en")}
               text={copy["en"].language.english}
+              aria-labelledby="choose-language"
             />
           </div>
         </div>
-        <Pagination currentScreen={0} totalScreens={3} />
+        <Pagination
+          aria-label={`Step 1 of 3`}
+          currentScreen={0}
+          totalScreens={3}
+        />
         <div className="mr-4">
           <OnboardingButtons onNext={onNext} disableBack />
         </div>

@@ -29,11 +29,12 @@ export default function ScreenThree({ onBack, language }) {
       <div className="bg-[url('/illustrations/Forside.svg')] bg-cover bg-center min-h-screen -mx-4">
         <div className="flex justify-center items-center text-typoPrimary">
           <div className="flex-grow flex flex-col items-center  rounded-3xl bg-grey1 p-8 max-w-lg h-[350px] mx-4">
-            <h2 className="text-xl font-bold mb-6">
+            <h2 id="reminders-title" className="text-xl font-bold mb-6">
               {copy[language].reminders.title}
             </h2>
 
-            <ReminderList items={reminders} />
+            <ReminderList aria-labelledby="reminders-title" items={reminders} />
+
             <div className="mt-5">
               <AgreeCheckbox
                 label={copy[language].reminders.confirmationMessage}
@@ -43,7 +44,11 @@ export default function ScreenThree({ onBack, language }) {
             </div>
           </div>
         </div>
-        <Pagination currentScreen={2} totalScreens={3} />
+        <Pagination
+          aria-label={`Step 3 of 3`}
+          currentScreen={2}
+          totalScreens={3}
+        />
         <div className="mr-4">
           <OnboardingButtons
             onBack={onBack}
