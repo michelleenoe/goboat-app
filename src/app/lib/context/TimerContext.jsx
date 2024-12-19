@@ -1,14 +1,16 @@
+//CHAT GPT PROMPT:  "Jeg arbejder i React og ønsker at implementere en timer-funktion, hvor brugeren kan vælge en varighed (i timer), og timeren skal kunne huske både den valgte varighed og den resterende tid, selv efter en opdatering af siden.""
+
+// CHAT GPT LØSNING
 import { createContext, useContext, useState, useEffect } from "react";
 
 const TimerContext = createContext();
 
 export const TimerProvider = ({ children }) => {
-  const [duration, setDuration] = useState("1"); // Default 1 hour
-  const [remainingTime, setRemainingTime] = useState(3600); // Default 1 hour in seconds
+  const [duration, setDuration] = useState("1");
+  const [remainingTime, setRemainingTime] = useState(3600);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Load initial values from localStorage
       const savedDuration = localStorage.getItem("selectedDuration");
       const savedRemainingTime = localStorage.getItem("remainingTime");
 

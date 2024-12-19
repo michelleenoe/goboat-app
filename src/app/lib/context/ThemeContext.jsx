@@ -1,3 +1,6 @@
+// CHAT GPT PROMPT: "Jeg arbejder på en React-applikation, hvor jeg vil implementere dark mode. Jeg ønsker at kunne skifte mellem light og dark themes og gemme brugerens præference i localStorage, så den huskes ved genindlæsning."
+
+// CHAT GPT LØSNING
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";

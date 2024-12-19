@@ -1,3 +1,6 @@
+// CHAT GPT PROMPT: Jeg arbejder på en slider-komponent i React, hvor jeg ønsker følgende funktioner. Slideren skal starte centreret på det første kort, når den indlæses. Slideren skal kunne scrolle infinit uden at hoppe, så brugeren aldrig når en egentlig start eller slut.
+
+// Logikken er CHAT GPT
 "use client";
 
 import { useRef, useState, useEffect } from "react";
