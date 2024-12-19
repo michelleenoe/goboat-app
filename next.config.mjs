@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cqodqcdfgyjiqwolmjhy.supabase.co"],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cqodqcdfgyjiqwolmjhy.supabase.co",
+      },
       {
         protocol: "https",
         hostname: "openweathermap.org",
